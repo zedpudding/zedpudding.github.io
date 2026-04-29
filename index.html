@@ -1,5 +1,871 @@
 <!DOCTYPE html>
-<html>
-<head><title>My Website</title></head>
-<body><h1>Coming Soon</h1></body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zander Vera — Identity Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #0a0a0a;
+  --white: #f5f5f0;
+  --gray: #333330;
+  --mid: #666660;
+  --accent: #e8d5b0;
+}
+
+/* EXACTLY like Chris K: html is fixed, body scrolls via JS */
+html {
+  font-size: 0.694444vw; /* 1rem = ~10px at 1440px */
+  position: fixed;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+body {
+  width: 100%; height: 100%;
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.05rem;
+  text-transform: uppercase;
+  cursor: none;
+  overflow: hidden;
+}
+
+a { text-decoration: none; color: inherit; cursor: none; }
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  z-index: 99999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+/* Default: crosshair */
+.cursor-dot {
+  position: absolute;
+  width: 0.8rem; height: 0.8rem;
+  background: var(--white);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s;
+}
+.cursor-lines {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+.cursor-line {
+  position: absolute;
+  background: var(--white);
+  transition: opacity 0.2s;
+}
+.cl-t { width: 0.15rem; height: 0.5rem; top: -0.9rem; left: -0.075rem; }
+.cl-b { width: 0.15rem; height: 0.5rem; bottom: -0.9rem; left: -0.075rem; }
+.cl-l { height: 0.15rem; width: 0.5rem; left: -0.9rem; top: -0.075rem; }
+.cl-r { height: 0.15rem; width: 0.5rem; right: -0.9rem; top: -0.075rem; }
+/* Hover state: lightning bolt */
+.cursor-bolt {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-5deg);
+  width: 3rem; height: 3.8rem;
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+  filter: drop-shadow(0 0 8px rgba(237,28,36,0.6));
+}
+.cursor.is-hovering .cursor-dot,
+.cursor.is-hovering .cursor-line { opacity: 0; }
+.cursor.is-hovering .cursor-bolt {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+/* PRELOADER — white bg, black text, number bottom-right */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--white);
+  overflow: hidden;
+}
+.preloader-name {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 3rem;
+  color: var(--black);
+  font-size: 12rem;
+  font-weight: 800;
+  letter-spacing: -0.5rem;
+  line-height: 1;
+  overflow: hidden;
+}
+.preloader-name span { display: block; transform: translateY(110%); }
+.preloader-pct {
+  position: fixed;
+  right: 5rem;
+  bottom: 5rem;
+  font-size: 10rem;
+  font-weight: 500;
+  color: var(--black);
+  overflow: hidden;
+  line-height: 1;
+}
+.preloader-pct span { display: inline-block; }
+
+/* SCROLL CONTAINER */
+.scroll-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  will-change: transform;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 5rem;
+  mix-blend-mode: difference;
+}
+.nav-logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.1rem;
+}
+.nav-links { display: flex; gap: 3rem; list-style: none; }
+.nav-links a {
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.05rem;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+
+/* HERO — full viewport, text bottom-left like Chris K */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 5rem 5rem;
+  position: relative;
+}
+
+.hero-tag {
+  font-size: 1.2rem;
+  opacity: 0.4;
+  letter-spacing: 0.15rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+.hero-tag span { display: inline-block; transform: translateY(110%); }
+
+.hero-name {
+  line-height: 0.86;
+  margin-bottom: 5rem;
+}
+.hero-name-line {
+  display: block;
+  font-size: 18.5vw;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.86;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.hero-name-line span { display: inline-block; transform: translateY(110%); }
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.hero-desc {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  letter-spacing: -0.03rem;
+  font-weight: 400;
+  opacity: 0.5;
+  max-width: 28rem;
+  overflow: hidden;
+}
+.hero-desc span { display: block; transform: translateY(110%); }
+
+.hero-scroll-hint {
+  font-size: 1.1rem;
+  opacity: 0.3;
+  letter-spacing: 0.2rem;
+  writing-mode: vertical-rl;
+  font-family: 'Syne Mono', monospace;
+}
+
+/* MARQUEE */
+.marquee-strip {
+  border-top: 0.05rem solid var(--gray);
+  border-bottom: 0.05rem solid var(--gray);
+  overflow: hidden;
+  padding: 1.5rem 0;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-block;
+  animation: marquee 28s linear infinite;
+}
+.marquee-word {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  padding: 0 3rem;
+  opacity: 0.8;
+}
+.marquee-sep {
+  opacity: 0.2;
+  padding: 0;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* SECTION SHARED */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 5rem;
+  border-bottom: 0.05rem solid var(--gray);
+}
+.section-num {
+  font-size: 1.1rem;
+  opacity: 0.3;
+  font-family: 'Syne Mono', monospace;
+  letter-spacing: 0.1rem;
+}
+.section-label {
+  font-size: 1.1rem;
+  opacity: 0.3;
+  letter-spacing: 0.15rem;
+}
+
+/* PROJECTS */
+.projects-section {
+  padding: 5rem;
+}
+.projects-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 5rem;
+}
+.projects-title {
+  font-size: 10rem;
+  font-weight: 800;
+  letter-spacing: -0.4rem;
+  line-height: 0.88;
+}
+.projects-title .outline {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 0.08rem var(--gray);
+}
+.view-all-link {
+  font-size: 1.2rem;
+  opacity: 0.4;
+  letter-spacing: 0.1rem;
+  border-bottom: 0.05rem solid var(--gray);
+  padding-bottom: 0.3rem;
+  transition: opacity 0.2s;
+}
+.view-all-link:hover { opacity: 1; }
+
+/* Project grid: 3 cols */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.project-item {
+  border-radius: 3rem;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+.project-item:hover .project-hover { opacity: 1; }
+.project-thumb {
+  aspect-ratio: 3/4;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  font-weight: 800;
+  letter-spacing: -0.2rem;
+  color: rgba(255,255,255,0.08);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project-item:hover .project-thumb { transform: scale(1.04); }
+.t1 { background: #111; }
+.t2 { background: #1a1408; }
+.t3 { background: #0a0f14; }
+.t4 { background: #140808; }
+.t5 { background: #081410; }
+.t6 { background: #100814; }
+.project-info {
+  padding: 1.5rem 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.project-client {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.05rem;
+}
+.project-type {
+  font-size: 1rem;
+  opacity: 0.3;
+  letter-spacing: 0.1rem;
+  font-family: 'Syne Mono', monospace;
+}
+
+/* ABOUT SECTION */
+.about-section {
+  padding: 8rem 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10rem;
+  align-items: start;
+}
+.about-left {}
+.about-big-text {
+  font-size: 9rem;
+  font-weight: 800;
+  letter-spacing: -0.4rem;
+  line-height: 0.88;
+}
+.about-big-text .outline {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 0.08rem var(--gray);
+}
+.about-big-text .lit { color: var(--accent); }
+
+.about-right { padding-top: 12rem; }
+.about-body {
+  font-size: 1.5rem;
+  line-height: 1.7;
+  letter-spacing: -0.03rem;
+  opacity: 0.55;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  text-transform: none;
+}
+
+.skills-grid {
+  margin-top: 4rem;
+  border-top: 0.05rem solid var(--gray);
+}
+.skill-row {
+  border-radius: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 0.8rem;
+  border-bottom: 0.05rem solid var(--gray);
+  font-size: 1.2rem;
+  letter-spacing: 0.08rem;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+.skill-row:hover { opacity: 1; }
+.skill-num { font-family: 'Syne Mono', monospace; font-size: 1rem; opacity: 0.4; }
+
+/* CLIENTS */
+.clients-section {
+  padding: 0 5rem 8rem;
+}
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.6rem;
+}
+.client-cell {
+  border-radius: 0.8rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  padding: 1.8rem 1rem;
+  border: 0.05rem solid var(--gray);
+  transition: background 0.2s, color 0.2s;
+}
+.client-cell:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+/* CONTACT */
+.contact-section {
+  padding: 8rem 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 0.05rem solid var(--gray);
+}
+.contact-big {
+  font-size: 13rem;
+  font-weight: 800;
+  letter-spacing: -0.6rem;
+  line-height: 0.86;
+}
+.contact-big .outline {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 0.08rem var(--gray);
+}
+.contact-big a { transition: opacity 0.2s; }
+.contact-big a:hover { opacity: 0.6; }
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: right;
+  padding-bottom: 1rem;
+}
+.contact-link {
+  font-size: 1.2rem;
+  opacity: 0.4;
+  letter-spacing: 0.12rem;
+  transition: opacity 0.2s;
+  font-family: 'Syne Mono', monospace;
+}
+.contact-link:hover { opacity: 1; }
+
+/* FOOTER — big name like "CHRIS KALAF a T I S." */
+footer {
+  padding: 3rem 5rem;
+  border-top: 0.05rem solid var(--gray);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-name {
+  font-size: 5rem;
+  font-weight: 800;
+  letter-spacing: 0.1rem;
+  color: var(--gray);
+  line-height: 1;
+  transition: color 0.3s;
+}
+.footer-name:hover { color: var(--white); }
+/* The signature mixed-case like "KALAF a T I S." */
+.footer-name .lo { font-weight: 400; text-transform: lowercase; color: var(--mid); }
+.footer-name .accent { color: var(--accent); }
+
+.footer-right {
+  font-size: 1rem;
+  opacity: 0.25;
+  letter-spacing: 0.1rem;
+  text-align: right;
+  font-family: 'Syne Mono', monospace;
+  line-height: 1.8;
+}
+
+/* Fade-in for sections */
+.will-reveal {
+  opacity: 0;
+  transform: translateY(4rem);
+  transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+}
+.will-reveal.shown { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  html { font-size: 1.8vw; }
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+  .about-section { grid-template-columns: 1fr; gap: 4rem; }
+  .about-right { padding-top: 0; }
+  .clients-grid { grid-template-columns: repeat(3,1fr); }
+  .contact-section { flex-direction: column; align-items: flex-start; gap: 4rem; }
+  .contact-links { text-align: left; }
+  body { cursor: auto; }
+  .cursor { display: none; }
+}
+
+@media (max-width: 600px) {
+  html { font-size: 2.8vw; }
+  .projects-grid { grid-template-columns: 1fr; }
+  nav { padding: 2rem; }
+  .hero { padding: 0 2rem 3rem; }
+  .hero-name-line { font-size: 19vw; letter-spacing: -0.02em; }
+  .projects-section, .about-section, .clients-section, .contact-section { padding: 4rem 2rem; }
+  .clients-grid { grid-template-columns: repeat(2,1fr); }
+  footer { padding: 2rem; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor">
+  <div class="cursor-dot"></div>
+  <div class="cursor-lines">
+    <div class="cursor-line cl-t"></div>
+    <div class="cursor-line cl-b"></div>
+    <div class="cursor-line cl-l"></div>
+    <div class="cursor-line cl-r"></div>
+  </div>
+  <svg class="cursor-bolt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2409.889 3009.536">
+    <polygon points="0 1788.568 1057.819 1788.568 1351.211 3009.536 1503.293 1534.263 445.473 1534.263 1351.211 0 0 1788.568" fill="#a7ad37"/>
+    <polygon points="1351.211 0 890.947 1279.957 1948.766 1279.957 1351.211 3009.536 1503.293 1534.263 445.473 1534.263 1351.211 0" fill="#3d461c"/>
+    <polygon points="1351.211 0 1334.675 1025.652 2409.889 1025.652 1351.211 3009.536 1948.766 1279.957 890.947 1279.957 1351.211 0" fill="#ed1c24"/>
+  </svg>
+</div>
+
+<!-- PRELOADER (white bg, black text, name slides up, number counts) -->
+<div class="preloader" id="preloader">
+  <div class="preloader-name">
+    <span id="pl-first">ZANDER</span>
+    <span id="pl-last">VERA</span>
+  </div>
+  <div class="preloader-pct"><span id="pl-pct">0</span></div>
+</div>
+
+<!-- SCROLL CONTAINER -->
+<div class="scroll-container" id="scrollContainer">
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Z.V.</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-tag"><span>01 / Identity Designer &mdash; Vista, CA</span></p>
+    <div class="hero-name">
+      <span class="hero-name-line"><span>ZANDER</span></span>
+      <span class="hero-name-line"><span>VERA</span></span>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-desc">
+        <span>Identity design &amp; brand strategy</span>
+        <span>for companies who know</span>
+        <span>exactly who they are.</span>
+      </div>
+      <div class="hero-scroll-hint">Scroll</div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span class="marquee-word">Brand Identity</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Naming</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Creative Direction</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Logo Systems</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Brand Books</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">UI &amp; Web</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Campaigns</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Brand Identity</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Naming</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Creative Direction</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Logo Systems</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Brand Books</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">UI &amp; Web</span><span class="marquee-sep"> / </span>
+      <span class="marquee-word">Campaigns</span><span class="marquee-sep"> / </span>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section-header">
+    <span class="section-num">02 //</span>
+    <span class="section-label">Selected Work</span>
+  </div>
+  <section class="projects-section" id="work">
+    <div class="projects-title-row will-reveal">
+      <div class="projects-title">
+        Projects
+        <span class="outline">Projects</span>
+      </div>
+      <a href="https://agency689.com/work" target="_blank" class="view-all-link">View All &rarr;</a>
+    </div>
+    <div class="projects-grid">
+      <div class="project-item will-reveal">
+        <div class="project-thumb t1">SM</div>
+        <div class="project-info">
+          <span class="project-client">Sunset Marquis</span>
+          <span class="project-type">2023</span>
+        </div>
+      </div>
+      <div class="project-item will-reveal">
+        <div class="project-thumb t2">TG</div>
+        <div class="project-info">
+          <span class="project-client">Traveler Guitar</span>
+          <span class="project-type">2022</span>
+        </div>
+      </div>
+      <div class="project-item will-reveal">
+        <div class="project-thumb t3">OX</div>
+        <div class="project-info">
+          <span class="project-client">Oxford Collection</span>
+          <span class="project-type">2022</span>
+        </div>
+      </div>
+      <div class="project-item will-reveal">
+        <div class="project-thumb t4">XB</div>
+        <div class="project-info">
+          <span class="project-client">Xbox</span>
+          <span class="project-type">2021</span>
+        </div>
+      </div>
+      <div class="project-item will-reveal">
+        <div class="project-thumb t5">CCA</div>
+        <div class="project-info">
+          <span class="project-client">Coastal Corridor</span>
+          <span class="project-type">2021</span>
+        </div>
+      </div>
+      <div class="project-item will-reveal">
+        <div class="project-thumb t6">AMD</div>
+        <div class="project-info">
+          <span class="project-client">AMD</span>
+          <span class="project-type">2019</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <div class="section-header">
+    <span class="section-num">03 //</span>
+    <span class="section-label">About</span>
+  </div>
+  <section class="about-section" id="about">
+    <div class="about-left will-reveal">
+      <div class="about-big-text">
+        Multi-
+        <span class="outline">Multi-</span>
+        Disciplinary
+        <span class="outline">Disciplinary</span>
+        <span class="lit">Designer</span>
+      </div>
+    </div>
+    <div class="about-right">
+      <p class="about-body will-reveal">
+        Hello — I'm Zander Vera, identity designer and founder of Agency689, a full-service branding studio based in Southern California. For over 25 years I've helped companies, hotels, restaurants, and creators answer the one question that matters most: <em>who are you?</em>
+      </p>
+      <p class="about-body will-reveal">
+        My work spans naming, logo design, brand strategy, brand books, UI/UX, packaging, and campaigns. I believe identity is the most important thing a brand can own, and I treat it that way.
+      </p>
+      <div class="skills-grid will-reveal">
+        <div class="skill-row"><span>Brand Strategy</span><span class="skill-num">01</span></div>
+        <div class="skill-row"><span>Naming</span><span class="skill-num">02</span></div>
+        <div class="skill-row"><span>Identity Design</span><span class="skill-num">03</span></div>
+        <div class="skill-row"><span>Brand Books</span><span class="skill-num">04</span></div>
+        <div class="skill-row"><span>UI / UX &amp; Web</span><span class="skill-num">05</span></div>
+        <div class="skill-row"><span>Campaigns &amp; Motion</span><span class="skill-num">06</span></div>
+        <div class="skill-row"><span>Packaging</span><span class="skill-num">07</span></div>
+        <div class="skill-row"><span>Art Direction</span><span class="skill-num">08</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <div class="section-header">
+    <span class="section-num">— </span>
+    <span class="section-label">Partial Client List &nbsp;/&nbsp; 25 Years &nbsp;·&nbsp; 100+ Brands</span>
+  </div>
+  <div class="clients-section">
+    <div class="clients-grid will-reveal">
+      <div class="client-cell">AMD</div>
+      <div class="client-cell">Microsoft</div>
+      <div class="client-cell">Xbox</div>
+      <div class="client-cell">Blizzard</div>
+      <div class="client-cell">Sunset Marquis</div>
+      <div class="client-cell">Traveler Guitar</div>
+      <div class="client-cell">Hotel Figueroa</div>
+      <div class="client-cell">Clink Hostels</div>
+      <div class="client-cell">Raleigh Studios</div>
+      <div class="client-cell">Killer Networks</div>
+      <div class="client-cell">ViewSonic</div>
+      <div class="client-cell">Oxford Collection</div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section-header">
+    <span class="section-num">04 //</span>
+    <span class="section-label">Get In Touch</span>
+  </div>
+  <section class="contact-section" id="contact">
+    <div class="contact-big will-reveal">
+      <span class="outline">Let's</span>
+      <a href="mailto:info@agency689.com">Let's</a>
+      <span class="outline">Work.</span>
+      <a href="mailto:info@agency689.com">Work.</a>
+    </div>
+    <div class="contact-links will-reveal">
+      <a href="mailto:info@agency689.com" class="contact-link">info@agency689.com</a>
+      <a href="https://agency689.com" class="contact-link" target="_blank">agency689.com</a>
+      <a href="https://zndrcrtv.com" class="contact-link" target="_blank">zndrcrtv.com</a>
+      <a href="https://instagram.com" class="contact-link" target="_blank">Instagram /</a>
+      <a href="https://linkedin.com" class="contact-link" target="_blank">LinkedIn /</a>
+    </div>
+  </section>
+
+  <!-- FOOTER — "ZAND e R &nbsp; V e R A." like "CHRIS KALAF a T I S." -->
+  <footer>
+    <div class="footer-name">
+      ZAND<span class="lo">e</span>R &nbsp; <span class="accent">V</span><span class="lo">e</span>R<span class="lo">a</span>.
+    </div>
+    <div class="footer-right">
+      &copy; 2026 Zander Vera<br>
+      All rights reserved.
+    </div>
+  </footer>
+
+</div><!-- end scroll-container -->
+
+<!-- GSAP for smooth scroll -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+// ── FIT HERO NAME TO FULL WIDTH ─────────────────────────
+function fitHeroName() {
+  document.querySelectorAll('.hero-name-line').forEach(line => {
+    line.style.fontSize = '10vw'; // reset
+    const ratio = (window.innerWidth - (window.innerWidth * 0.1)) / line.scrollWidth;
+    line.style.fontSize = (10 * ratio) + 'vw';
+  });
+}
+fitHeroName();
+window.addEventListener('resize', fitHeroName);
+const cursor = document.getElementById('cursor');
+let mx = 0, my = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  gsap.to(cursor, { x: mx, y: my, duration: 0.12, ease: 'none' });
+});
+document.querySelectorAll('a, .project-item, .client-cell, .skill-row').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('is-hovering'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('is-hovering'));
+});
+
+// ── PRELOADER ────────────────────────────────────────────
+const preloader = document.getElementById('preloader');
+const plPct = document.getElementById('pl-pct');
+const plFirst = document.getElementById('pl-first');
+const plLast = document.getElementById('pl-last');
+
+// Slide name up from below
+gsap.to([plFirst, plLast], {
+  y: 0, duration: 1, ease: 'power3.out', delay: 0.2, stagger: 0.1
+});
+
+// Count up
+let count = 0;
+const countInterval = setInterval(() => {
+  count += Math.floor(Math.random() * 14) + 3;
+  if (count >= 100) {
+    count = 100;
+    clearInterval(countInterval);
+    // Hide preloader
+    setTimeout(() => {
+      gsap.to(preloader, {
+        yPercent: -100,
+        duration: 0.9,
+        ease: 'power3.inOut',
+        onComplete: () => preloader.style.display = 'none'
+      });
+      // Animate hero in
+      animateHero();
+    }, 400);
+  }
+  plPct.textContent = count;
+}, 55);
+
+// ── HERO ANIMATION ───────────────────────────────────────
+function animateHero() {
+  const tl = gsap.timeline();
+  tl.to('.hero-tag span', { y: 0, duration: 0.8, ease: 'power3.out' })
+    .to('.hero-name-line span', { y: 0, duration: 1, ease: 'power3.out', stagger: 0.08 }, '-=0.5')
+    .to('.hero-desc span', { y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.06 }, '-=0.6')
+    .to('.hero-scroll-hint', { opacity: 0.3, duration: 0.8 }, '-=0.4');
+}
+
+// ── SMOOTH SCROLL (like Chris K) ─────────────────────────
+const scrollContainer = document.getElementById('scrollContainer');
+let currentY = 0, targetY = 0;
+const ease = 0.085;
+
+function getMax() {
+  return scrollContainer.scrollHeight - window.innerHeight;
+}
+
+window.addEventListener('wheel', e => {
+  targetY = Math.max(0, Math.min(getMax(), targetY + e.deltaY));
+}, { passive: true });
+
+// Touch support
+let touchStartY = 0;
+window.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+window.addEventListener('touchmove', e => {
+  const dy = touchStartY - e.touches[0].clientY;
+  touchStartY = e.touches[0].clientY;
+  targetY = Math.max(0, Math.min(getMax(), targetY + dy));
+}, { passive: true });
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function tick() {
+  currentY = lerp(currentY, targetY, ease);
+  if (Math.abs(currentY - targetY) < 0.01) currentY = targetY;
+  gsap.set(scrollContainer, { y: -currentY });
+
+  // Reveal elements on scroll
+  document.querySelectorAll('.will-reveal:not(.shown)').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.88) el.classList.add('shown');
+  });
+
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+// Nav hash links
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const id = link.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (target) {
+      const offset = target.getBoundingClientRect().top + currentY;
+      targetY = Math.max(0, Math.min(getMax(), offset - 80));
+    }
+  });
+});
+</script>
+</body>
 </html>
