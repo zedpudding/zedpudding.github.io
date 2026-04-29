@@ -433,16 +433,27 @@ nav {
 .contact-big {
   font-size: 13rem;
   font-weight: 800;
-  letter-spacing: -0.6rem;
+  letter-spacing: -0.06em;
   line-height: 0.86;
 }
-.contact-big .outline {
+.contact-word {
+  position: relative;
+  display: block;
+}
+.contact-word .outline {
   display: block;
   color: transparent;
   -webkit-text-stroke: 0.08rem var(--gray);
+  position: absolute;
+  top: 0.06em; left: 0.04em;
+  pointer-events: none;
+  white-space: nowrap;
 }
-.contact-big a { transition: opacity 0.2s; }
-.contact-big a:hover { opacity: 0.6; }
+.contact-word a {
+  display: block;
+  transition: opacity 0.2s;
+}
+.contact-word a:hover { opacity: 0.6; }
 
 .contact-links {
   display: flex;
@@ -722,10 +733,14 @@ footer {
   </div>
   <section class="contact-section" id="contact">
     <div class="contact-big will-reveal">
-      <span class="outline">Let's</span>
-      <a href="mailto:info@agency689.com">Let's</a>
-      <span class="outline">Work.</span>
-      <a href="mailto:info@agency689.com">Work.</a>
+      <div class="contact-word">
+        <span class="outline">Let's</span>
+        <a href="mailto:info@agency689.com">Let's</a>
+      </div>
+      <div class="contact-word">
+        <span class="outline">Work.</span>
+        <a href="mailto:info@agency689.com">Work.</a>
+      </div>
     </div>
     <div class="contact-links will-reveal">
       <a href="mailto:info@agency689.com" class="contact-link">info@agency689.com</a>
@@ -739,7 +754,7 @@ footer {
   <!-- FOOTER — "ZAND e R &nbsp; V e R A." like "CHRIS KALAF a T I S." -->
   <footer>
     <div class="footer-name">
-      ZAND<span class="lo">e</span>R &nbsp; <span class="accent">V</span><span class="lo">e</span>R<span class="lo">a</span>.
+      ZANDER VERA.
     </div>
     <div class="footer-right">
       &copy; 2026 Zander Vera<br>
@@ -768,7 +783,7 @@ document.addEventListener('mousemove', e => {
   mx = e.clientX; my = e.clientY;
   gsap.to(cursor, { x: mx, y: my, duration: 0.12, ease: 'none' });
 });
-document.querySelectorAll('a, .project-item, .client-cell, .skill-row').forEach(el => {
+document.querySelectorAll('a, .project-item, .client-cell, .skill-row, .footer-name').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('is-hovering'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('is-hovering'));
 });
