@@ -70,7 +70,8 @@ const SiteFX = (() => {
   // ── SCROLL REVEAL SETUP ────────────────────────────────────
   function initReveal(container = document) {
     if (typeof ScrollTrigger === 'undefined') return;
-    container.querySelectorAll('.will-reveal').forEach(el => {
+    // Skip elements already revealed — avoids duplicate triggers across navigations
+    container.querySelectorAll('.will-reveal:not(.is-visible)').forEach(el => {
       ScrollTrigger.create({
         trigger: el,
         start: 'top 88%',

@@ -84,8 +84,8 @@ if (typeof barba !== 'undefined') {
         gsap.set('#transition-overlay', { xPercent: -100 });
 
         updateNavActive();
-        SiteFX.bindCursorHover(next.container);
-        SiteFX.initReveal(next.container);
+        SiteFX.bindCursorHover(document);
+        SiteFX.initReveal(document);
         SiteFX.emit('page:enter', next);
         SiteFX.setPhase('enter');
       },
