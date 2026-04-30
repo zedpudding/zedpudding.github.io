@@ -4,7 +4,7 @@
 ═══════════════════════════════════════════════════════════ */
 
 // ── GSAP PLUGINS ──────────────────────────────────────────
-gsap.registerPlugin(ScrollTrigger, SplitText, Flip, Observer);
+gsap.registerPlugin(ScrollTrigger, Flip, Observer);
 
 // ── LENIS ─────────────────────────────────────────────────
 const lenis = new Lenis({
