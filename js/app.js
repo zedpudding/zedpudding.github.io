@@ -20,6 +20,7 @@ gsap.ticker.lagSmoothing(0);
 // ── CURSOR ────────────────────────────────────────────────
 const cursor = document.getElementById('cursor');
 if (cursor) {
+  gsap.set(cursor, { xPercent: -50, yPercent: -50 });
   document.addEventListener('mousemove', e => {
     gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.12, ease: 'none' });
   });
