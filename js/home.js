@@ -36,34 +36,35 @@ SiteFX.register('home', (() => {
 
   function animateNavSections() {
     document.querySelectorAll('.nav-section').forEach(section => {
-      const tag   = section.querySelector('.nav-section-tag');
+      const panel = section.querySelector('.nav-section-panel');
       const label = section.querySelector('.nav-section-label');
+      const copy  = section.querySelector('.nav-section-copy');
 
-      gsap.set(section, { y: 60, opacity: 0 });
-      gsap.set(label,   { y: 24 });
+      gsap.set(panel, { y: 50, opacity: 0 });
+      gsap.set(label, { y: 20 });
+      gsap.set(copy,  { y: 24, opacity: 0 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: 'top 82%',
+          start: 'top 70%',
           toggleActions: 'play none none none',
         },
       });
 
-      tl.to(section, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' })
-        .to(label,   { y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5');
+      tl.to(panel, { y: 0, opacity: 1, duration: 1,   ease: 'power3.out' })
+        .to(label, { y: 0,              duration: 0.7, ease: 'power3.out' }, '-=0.6')
+        .to(copy,  { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, '-=0.5');
 
       _triggers.push(tl.scrollTrigger);
     });
   }
 
   function animateNavParallax() {
-    // GSAP handles all img transforms so hover scale & parallax compose without conflict
     document.querySelectorAll('.nav-section').forEach(section => {
       const img = section.querySelector('.nav-section-img img');
       if (!img) return;
 
-      // Parallax scrub — GSAP moves yPercent, scale is layered on top via overwrite:auto
       const t = gsap.fromTo(img,
         { yPercent: 5 },
         {
@@ -79,12 +80,12 @@ SiteFX.register('home', (() => {
       );
       _triggers.push(t.scrollTrigger);
 
-      // Hover scale — uses overwrite:'auto' so it layers with the parallax yPercent
+      // Hover scale composes with parallax yPercent via GSAP's unified transform
       section.addEventListener('mouseenter', () => {
-        gsap.to(img, { scale: 1.08, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(img, { scale: 1.06, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
       });
       section.addEventListener('mouseleave', () => {
-        gsap.to(img, { scale: 1, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(img, { scale: 1,    duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
       });
     });
   }
