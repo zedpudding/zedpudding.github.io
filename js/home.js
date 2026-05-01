@@ -37,43 +37,55 @@ SiteFX.register('home', (() => {
   function animateNavSections() {
     document.querySelectorAll('.nav-section').forEach(section => {
       const tag   = section.querySelector('.nav-section-tag');
-      const img   = section.querySelector('.nav-section-img');
       const label = section.querySelector('.nav-section-label');
 
-      gsap.set(tag,   { y: 28, opacity: 0 });
-      gsap.set(img,   { scale: 0.92, opacity: 0 });
-      gsap.set(label, { scaleY: 0, opacity: 0, transformOrigin: 'bottom center' });
+      gsap.set(section, { y: 60, opacity: 0 });
+      gsap.set(label,   { y: 24 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: 'top 78%',
+          start: 'top 82%',
           toggleActions: 'play none none none',
         },
       });
 
-      tl.to(tag,   { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' })
-        .to(img,   { scale: 1, opacity: 1, duration: 1.1, ease: 'power3.out' }, '-=0.4')
-        .to(label, { scaleY: 1, opacity: 1, duration: 0.7, ease: 'back.out(1.2)' }, '-=0.7');
+      tl.to(section, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' })
+        .to(label,   { y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5');
 
       _triggers.push(tl.scrollTrigger);
     });
   }
 
   function animateNavParallax() {
-    document.querySelectorAll('.nav-section-img img').forEach(img => {
-      gsap.set(img, { yPercent: 8 });
-      const t = gsap.to(img, {
-        yPercent: -8,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: img.closest('.nav-section'),
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
+    // GSAP handles all img transforms so hover scale & parallax compose without conflict
+    document.querySelectorAll('.nav-section').forEach(section => {
+      const img = section.querySelector('.nav-section-img img');
+      if (!img) return;
+
+      // Parallax scrub — GSAP moves yPercent, scale is layered on top via overwrite:auto
+      const t = gsap.fromTo(img,
+        { yPercent: 5 },
+        {
+          yPercent: -5,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
       _triggers.push(t.scrollTrigger);
+
+      // Hover scale — uses overwrite:'auto' so it layers with the parallax yPercent
+      section.addEventListener('mouseenter', () => {
+        gsap.to(img, { scale: 1.08, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
+      });
+      section.addEventListener('mouseleave', () => {
+        gsap.to(img, { scale: 1, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
+      });
     });
   }
 
