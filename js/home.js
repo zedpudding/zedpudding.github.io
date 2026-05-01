@@ -34,61 +34,6 @@ SiteFX.register('home', (() => {
     _triggers.push(t.scrollTrigger);
   }
 
-  function animateNavSections() {
-    document.querySelectorAll('.nav-section').forEach(section => {
-      const panel = section.querySelector('.nav-section-panel');
-      const label = section.querySelector('.nav-section-label');
-      const copy  = section.querySelector('.nav-section-copy');
-
-      gsap.set(panel, { y: 50, opacity: 0 });
-      gsap.set(label, { y: 20 });
-      gsap.set(copy,  { y: 24, opacity: 0 });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 70%',
-          toggleActions: 'play none none none',
-        },
-      });
-
-      tl.to(panel, { y: 0, opacity: 1, duration: 1,   ease: 'power3.out' })
-        .to(label, { y: 0,              duration: 0.7, ease: 'power3.out' }, '-=0.6')
-        .to(copy,  { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, '-=0.5');
-
-      _triggers.push(tl.scrollTrigger);
-    });
-  }
-
-  function animateNavParallax() {
-    document.querySelectorAll('.nav-section').forEach(section => {
-      const img = section.querySelector('.nav-section-img img');
-      if (!img) return;
-
-      const t = gsap.fromTo(img,
-        { yPercent: 5 },
-        {
-          yPercent: -5,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        }
-      );
-      _triggers.push(t.scrollTrigger);
-
-      section.addEventListener('mouseenter', () => {
-        gsap.to(img, { scale: 1.06, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
-      });
-      section.addEventListener('mouseleave', () => {
-        gsap.to(img, { scale: 1,    duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
-      });
-    });
-  }
-
   function animateFooter() {
     const card = document.querySelector('.home-footer-card');
     if (!card) return;
@@ -119,105 +64,219 @@ SiteFX.register('home', (() => {
     });
   }
 
-  // ── SECTION SNAP ──────────────────────────────────────────
-  // Uses a capture-phase wheel interceptor (registered in app.js) that fires
-  // before Lenis's bubble-phase listener, completely blocking Lenis from adding
-  // wheel delta on top of the snap target.
-  function initSnapScroll() {
-    const stops = [
-      document.querySelector('.hero'),
-      ...document.querySelectorAll('.nav-section'),
-    ].filter(Boolean);
+  // ── PANEL HOVER ───────────────────────────────────────────
+  function initPanelHover() {
+    document.querySelectorAll('.nav-section').forEach(section => {
+      const img = section.querySelector('.nav-section-img img');
+      if (!img) return;
+      section.addEventListener('mouseenter', () => {
+        gsap.to(img, { scale: 1.06, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
+      });
+      section.addEventListener('mouseleave', () => {
+        gsap.to(img, { scale: 1,    duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
+      });
+    });
+  }
 
-    let current = 0;
-    let locked  = false;
+  // ── LOOPED PANELS ─────────────────────────────────────────
+  // All nav-sections are stacked (position:absolute, inset:0).
+  // Wheel events cycle through them with a scale+slide GSAP transition.
+  // Lenis is blocked during transitions via the capture-phase interceptor.
+  function initLoopedPanels() {
+    const navSectionsEl = document.querySelector('.nav-sections');
+    const heroEl        = document.querySelector('.hero');
+    const panels        = gsap.utils.toArray('.nav-section');
+    if (!panels.length || !navSectionsEl) return;
 
+    let currentIdx = -1; // -1 = hero is active, 0..n = panel index
+    let locked     = false;
+
+    // Hide all panels initially
+    gsap.set(panels, { autoAlpha: 0, yPercent: 0, scale: 1 });
     updateIndicator(0);
 
-    // Track current section via document-relative offsetTop (not getBoundingClientRect
-    // which breaks when page loads mid-scroll via browser scroll restoration).
-    lenis.on('scroll', ({ scroll }) => {
-      if (locked) return;
-      let c = 0;
-      stops.forEach((el, i) => {
-        if (el.offsetTop <= scroll + window.innerHeight * 0.4) c = i;
-      });
-      if (c !== current) {
-        current = c;
-        updateIndicator(current);
-      }
-    });
+    // ── transition ──
+    function showPanel(idx, dir) {
+      const entering = panels[idx];
+      const leaving  = currentIdx >= 0 ? panels[currentIdx] : null;
 
+      const enterLabel = entering.querySelector('.nav-section-label');
+      const enterCopy  = entering.querySelector('.nav-section-copy');
+      const leaveLabel = leaving?.querySelector('.nav-section-label');
+      const leaveCopy  = leaving?.querySelector('.nav-section-copy');
+
+      locked     = true;
+      currentIdx = idx;
+      updateIndicator(idx + 1);
+
+      const tl = gsap.timeline({ onComplete: () => { locked = false; } });
+
+      // ── outgoing: panel shrinks, label + copy slide out ──
+      if (leaving) {
+        tl.to(leaving, {
+          yPercent : dir > 0 ? -7 : 7,
+          scale    : 0.88,
+          autoAlpha: 0,
+          duration : 0.55,
+          ease     : 'power2.in',
+        }, 0);
+        if (leaveLabel) tl.to(leaveLabel, { y: dir > 0 ? -28 : 28, opacity: 0, duration: 0.3, ease: 'power2.in' }, 0);
+        if (leaveCopy)  tl.to(leaveCopy,  { y: dir > 0 ? -14 : 14, opacity: 0, duration: 0.28, ease: 'power2.in' }, 0.05);
+      }
+
+      // ── incoming: panel scales in, then label rises, then copy follows ──
+      const enterStart = leaving ? 0.22 : 0;
+
+      gsap.set(entering, { yPercent: dir > 0 ? 9 : -9, scale: 0.93, autoAlpha: 0 });
+      if (enterLabel) gsap.set(enterLabel, { y: dir > 0 ? 55 : -55, opacity: 0 });
+      if (enterCopy)  gsap.set(enterCopy,  { y: dir > 0 ? 26 : -26, opacity: 0 });
+
+      tl.to(entering, {
+        yPercent : 0,
+        scale    : 1,
+        autoAlpha: 1,
+        duration : 0.85,
+        ease     : 'power3.out',
+      }, enterStart);
+
+      if (enterLabel) tl.to(enterLabel, {
+        y        : 0,
+        opacity  : 1,
+        duration : 0.72,
+        ease     : 'power3.out',
+      }, enterStart + 0.3);
+
+      if (enterCopy) tl.to(enterCopy, {
+        y        : 0,
+        opacity  : 1,
+        duration : 0.6,
+        ease     : 'power3.out',
+      }, enterStart + 0.46);
+    }
+
+    // ── directional navigation ──
     function goTo(dir) {
       if (locked) return;
-      const next = current + dir;
 
-      // Past the last stop → release: clear handler so Lenis scrolls freely to footer
-      if (next >= stops.length) {
+      // ── hero → first panel ──
+      if (currentIdx === -1 && dir > 0) {
+        locked = true;
+        lenis.scrollTo(navSectionsEl, { duration: 0.85, offset: 0 });
+        setTimeout(() => { showPanel(0, 1); }, 380);
+        return;
+      }
+
+      const next = currentIdx + dir;
+
+      // ── past last panel → release to footer ──
+      if (next >= panels.length) {
         window._homeWheelHandler = null;
         return;
       }
-      if (next < 0) return;
 
-      locked = true;
-
-      // Squish the departing panel
-      const fromPanel = stops[current].querySelector?.('.nav-section-panel');
-      if (fromPanel) {
-        gsap.to(fromPanel, { scale: 0.88, duration: 0.55, ease: 'power2.in' });
+      // ── before first panel → back to hero ──
+      if (next < 0) {
+        locked = true;
+        gsap.to(panels[currentIdx], {
+          yPercent : 7,
+          scale    : 0.9,
+          autoAlpha: 0,
+          duration : 0.5,
+          ease     : 'power2.in',
+          onComplete() {
+            currentIdx = -1;
+            updateIndicator(0);
+            lenis.scrollTo(heroEl, { duration: 0.75, offset: 0 });
+            setTimeout(() => {
+              locked = false;
+              if (document.querySelector('.hero')) window._homeWheelHandler = handleWheel;
+            }, 950);
+          },
+        });
+        return;
       }
 
-      current = next;
-      updateIndicator(current);
+      showPanel(next, dir);
+    }
 
-      // scrollTo fires after capture interceptor has already blocked Lenis wheel events,
-      // so Lenis goes exactly to target without drift.
-      lenis.scrollTo(stops[current], { duration: 1.05, offset: 0 });
+    // ── index navigation (indicator clicks) ──
+    function goToIndex(targetIdx) {
+      if (locked) return;
 
-      setTimeout(() => {
-        if (fromPanel) gsap.set(fromPanel, { scale: 1 });
-        locked = false;
-        // Restore handler if we're still on home page
-        if (document.querySelector('.hero')) {
-          window._homeWheelHandler = handleWheel;
+      if (targetIdx === 0) {
+        // Back to hero
+        if (currentIdx >= 0) {
+          locked = true;
+          gsap.to(panels[currentIdx], {
+            yPercent : 7,
+            scale    : 0.9,
+            autoAlpha: 0,
+            duration : 0.5,
+            ease     : 'power2.in',
+            onComplete() {
+              currentIdx = -1;
+              updateIndicator(0);
+              lenis.scrollTo(heroEl, { duration: 0.75 });
+              setTimeout(() => {
+                locked = false;
+                if (document.querySelector('.hero')) window._homeWheelHandler = handleWheel;
+              }, 950);
+            },
+          });
+        } else {
+          lenis.scrollTo(heroEl, { duration: 0.75 });
         }
-      }, 1350);
+        return;
+      }
+
+      const panelIdx = targetIdx - 1;
+      if (panelIdx >= panels.length) return;
+
+      if (currentIdx === -1) {
+        // From hero to a specific panel
+        locked = true;
+        lenis.scrollTo(navSectionsEl, { duration: 0.85 });
+        setTimeout(() => { showPanel(panelIdx, 1); }, 380);
+      } else {
+        showPanel(panelIdx, panelIdx > currentIdx ? 1 : -1);
+      }
     }
 
-    function handleWheel(e) {
-      goTo(e.deltaY > 0 ? 1 : -1);
-    }
-
-    // Activate capture interceptor
+    function handleWheel(e) { goTo(e.deltaY > 0 ? 1 : -1); }
     window._homeWheelHandler = handleWheel;
 
-    // Indicator: hover scrolls to section, click also scrolls (no navigation)
+    // Re-enable handler if user scrolled back from footer via normal lenis scroll
+    lenis.on('scroll', ({ scroll }) => {
+      if (locked) return;
+      if (!window._homeWheelHandler && document.querySelector('.hero')) {
+        const navTop = navSectionsEl.offsetTop;
+        if (scroll <= navTop + 50) {
+          window._homeWheelHandler = handleWheel;
+          // Reset panels if back at hero level
+          if (scroll < navTop - 100 && currentIdx >= 0) {
+            gsap.set(panels[currentIdx], { autoAlpha: 0, yPercent: 0, scale: 1 });
+            currentIdx = -1;
+            updateIndicator(0);
+          }
+        }
+      }
+    });
+
+    // ── Indicator hover / click ──
     let hoverTimer = null;
     document.querySelectorAll('.si-line').forEach((line, i) => {
-      // Mouseenter: smooth scroll to section after short intent delay
       line.addEventListener('mouseenter', () => {
         clearTimeout(hoverTimer);
-        hoverTimer = setTimeout(() => {
-          if (i >= stops.length || locked) return;
-          current = i;
-          updateIndicator(current);
-          lenis.scrollTo(stops[current], { duration: 0.9, offset: 0 });
-        }, 120);
+        hoverTimer = setTimeout(() => { goToIndex(i); }, 120);
       });
       line.addEventListener('mouseleave', () => clearTimeout(hoverTimer));
-
-      // Click also triggers scroll but never navigates anywhere
       line.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (i >= stops.length || locked) return;
-        current = i;
-        updateIndicator(current);
-        lenis.scrollTo(stops[current], { duration: 0.9, offset: 0 });
+        goToIndex(i);
       });
     });
 
-    // Prevent any click on the indicator container from falling through
     document.getElementById('scroll-indicator')?.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -227,7 +286,6 @@ SiteFX.register('home', (() => {
   function init() {
     document.body.classList.add('is-home-light');
 
-    // Ensure page always starts at top regardless of browser scroll restoration
     lenis.scrollTo(0, { immediate: true });
 
     fitHeroName();
@@ -236,10 +294,9 @@ SiteFX.register('home', (() => {
 
     animateHero();
     animateHeroParallax();
-    animateNavSections();
-    animateNavParallax();
+    initPanelHover();
     animateFooter();
-    initSnapScroll();
+    initLoopedPanels();
   }
 
   function destroy() {
