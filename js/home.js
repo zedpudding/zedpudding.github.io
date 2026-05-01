@@ -22,6 +22,7 @@ SiteFX.register('home', (() => {
   }
 
   function init() {
+    document.body.classList.add('is-home-light');
     fitHeroName();
     _resizeFn = () => fitHeroName();
     window.addEventListener('resize', _resizeFn);
@@ -47,6 +48,7 @@ SiteFX.register('home', (() => {
   }
 
   function destroy() {
+    document.body.classList.remove('is-home-light');
     if (_resizeFn) window.removeEventListener('resize', _resizeFn);
     _triggers.forEach(t => t?.kill());
     _triggers = [];
