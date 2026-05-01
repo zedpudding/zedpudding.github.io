@@ -17,8 +17,90 @@ SiteFX.register('home', (() => {
     gsap.timeline()
       .to('.hero-tag span',       { y: 0, duration: 0.8, ease: 'power3.out' })
       .to('.hero-name-line span', { y: 0, duration: 1,   ease: 'power3.out', stagger: 0.08 }, '-=0.5')
-      .to('.hero-desc span',      { y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.06 }, '-=0.6')
-      .to('.hero-scroll-hint',    { opacity: 0.3, duration: 0.8 }, '-=0.4');
+      .to('.hero-tagline span',   { y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.06 }, '-=0.6');
+  }
+
+  function animateHeroParallax() {
+    const t = gsap.to('.hero-name', {
+      yPercent: 20,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    });
+    _triggers.push(t.scrollTrigger);
+  }
+
+  function animateNavSections() {
+    document.querySelectorAll('.nav-section').forEach(section => {
+      const tag   = section.querySelector('.nav-section-tag');
+      const img   = section.querySelector('.nav-section-img');
+      const label = section.querySelector('.nav-section-label');
+
+      gsap.set(tag,   { y: 28, opacity: 0 });
+      gsap.set(img,   { scale: 0.92, opacity: 0 });
+      gsap.set(label, { scaleY: 0, opacity: 0, transformOrigin: 'bottom center' });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 78%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      tl.to(tag,   { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' })
+        .to(img,   { scale: 1, opacity: 1, duration: 1.1, ease: 'power3.out' }, '-=0.4')
+        .to(label, { scaleY: 1, opacity: 1, duration: 0.7, ease: 'back.out(1.2)' }, '-=0.7');
+
+      _triggers.push(tl.scrollTrigger);
+    });
+  }
+
+  function animateNavParallax() {
+    document.querySelectorAll('.nav-section-img img').forEach(img => {
+      gsap.set(img, { yPercent: 8 });
+      const t = gsap.to(img, {
+        yPercent: -8,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: img.closest('.nav-section'),
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+      _triggers.push(t.scrollTrigger);
+    });
+  }
+
+  function animateFooter() {
+    const card = document.querySelector('.home-footer-card');
+    if (!card) return;
+
+    const title = card.querySelector('.home-footer-title');
+    const bolt  = card.querySelector('.home-footer-bolt');
+    const links = card.querySelectorAll('.home-footer-link');
+
+    gsap.set(title, { y: 50, opacity: 0 });
+    gsap.set(bolt,  { scale: 0, opacity: 0, rotation: -25 });
+    gsap.set(links, { y: 20, opacity: 0 });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: card,
+        start: 'top 82%',
+      },
+    });
+
+    tl.to(title, { y: 0, opacity: 1, duration: 1,   ease: 'power3.out' })
+      .to(bolt,  { scale: 1, opacity: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.5)' }, '-=0.6')
+      .to(links, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', stagger: 0.1 }, '-=0.4');
+
+    _triggers.push(tl.scrollTrigger);
   }
 
   function init() {
@@ -27,24 +109,11 @@ SiteFX.register('home', (() => {
     _resizeFn = () => fitHeroName();
     window.addEventListener('resize', _resizeFn);
 
-    SiteFX.initReveal(document);
-    SiteFX.initCardTilt(document);
     animateHero();
-
-    // Subtle parallax on featured tiles
-    document.querySelectorAll('.featured-tile .featured-thumb').forEach(img => {
-      const t = gsap.to(img, {
-        yPercent: -10,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: img.closest('.featured-tile'),
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-      _triggers.push(t.scrollTrigger);
-    });
+    animateHeroParallax();
+    animateNavSections();
+    animateNavParallax();
+    animateFooter();
   }
 
   function destroy() {
@@ -61,12 +130,10 @@ SiteFX.register('home', (() => {
 (function () {
   const preloader = document.getElementById('preloader');
   if (!preloader) {
-    // Barba navigation back to home — init runs the hero animation
     SiteFX.getModule('home').init();
     return;
   }
 
-  // First load — run preloader then hand off to init
   const plFirst = document.getElementById('pl-first');
   const plLast  = document.getElementById('pl-last');
   const plPct   = document.getElementById('pl-pct');
@@ -86,7 +153,6 @@ SiteFX.register('home', (() => {
           ease: 'power3.inOut',
           onComplete: () => { preloader.style.display = 'none'; },
         });
-        // Init (including hero animation) starts as preloader exits
         setTimeout(() => SiteFX.getModule('home').init(), 300);
       }, 400);
     }
