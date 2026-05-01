@@ -3,6 +3,7 @@
 ═══════════════════════════════════════════════════════════ */
 SiteFX.register('home', (() => {
   let _triggers = [];
+  let _snapObs  = null;
   let _resizeFn = null;
 
   function fitHeroName() {
@@ -80,7 +81,6 @@ SiteFX.register('home', (() => {
       );
       _triggers.push(t.scrollTrigger);
 
-      // Hover scale composes with parallax yPercent via GSAP's unified transform
       section.addEventListener('mouseenter', () => {
         gsap.to(img, { scale: 1.06, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
       });
@@ -116,6 +116,47 @@ SiteFX.register('home', (() => {
     _triggers.push(tl.scrollTrigger);
   }
 
+  // ── SECTION SNAP ──────────────────────────────────────────
+  // Observer intercepts scroll intent; lenis.scrollTo() handles the smooth snap.
+  // Scrolling past the last nav section releases into the footer naturally.
+  function initSnapScroll() {
+    const stops = [
+      document.querySelector('.hero'),
+      ...document.querySelectorAll('.nav-section'),
+    ].filter(Boolean);
+
+    let current = 0;
+    let locked  = false;
+
+    // Keep current index in sync when user reaches footer and scrolls back
+    lenis.on('scroll', ({ scroll }) => {
+      if (locked) return;
+      stops.forEach((el, i) => {
+        if (el.getBoundingClientRect().top <= window.innerHeight * 0.25) current = i;
+      });
+    });
+
+    function goTo(dir) {
+      if (locked) return;
+      const next = current + dir;
+      // Past last stop → release to footer naturally
+      if (next >= stops.length || next < 0) return;
+      locked  = true;
+      current = next;
+      lenis.scrollTo(stops[current], { duration: 1.1, offset: 0 });
+      setTimeout(() => { locked = false; }, 1300);
+    }
+
+    _snapObs = Observer.create({
+      target: window,
+      type: 'wheel,touch',
+      onDown: () => goTo(1),
+      onUp:   () => goTo(-1),
+      tolerance: 10,
+      preventDefault: true,
+    });
+  }
+
   function init() {
     document.body.classList.add('is-home-light');
     fitHeroName();
@@ -127,6 +168,7 @@ SiteFX.register('home', (() => {
     animateNavSections();
     animateNavParallax();
     animateFooter();
+    initSnapScroll();
   }
 
   function destroy() {
@@ -134,6 +176,7 @@ SiteFX.register('home', (() => {
     if (_resizeFn) window.removeEventListener('resize', _resizeFn);
     _triggers.forEach(t => t?.kill());
     _triggers = [];
+    if (_snapObs) { _snapObs.kill(); _snapObs = null; }
   }
 
   return { init, destroy };
