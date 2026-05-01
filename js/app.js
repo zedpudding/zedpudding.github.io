@@ -3,8 +3,25 @@
    GSAP plugins · Lenis · Barba · Cursor · Nav active state
 ═══════════════════════════════════════════════════════════ */
 
+// Prevent browser from restoring a mid-page scroll position on reload
+history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 // ── GSAP PLUGINS ──────────────────────────────────────────
 gsap.registerPlugin(ScrollTrigger, Flip, Observer);
+
+// ── WHEEL CAPTURE INTERCEPTOR ─────────────────────────────
+// Fires in capture phase, before Lenis's bubble-phase listener.
+// When home page snap is active, stopImmediatePropagation() prevents
+// Lenis from adding wheel delta on top of the snap target.
+window._homeWheelHandler = null;
+window.addEventListener('wheel', (e) => {
+  if (window._homeWheelHandler) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    window._homeWheelHandler(e);
+  }
+}, { passive: false, capture: true });
 
 // ── LENIS ─────────────────────────────────────────────────
 const lenis = new Lenis({
