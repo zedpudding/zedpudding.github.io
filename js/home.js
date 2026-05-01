@@ -116,9 +116,14 @@ SiteFX.register('home', (() => {
     _triggers.push(tl.scrollTrigger);
   }
 
+  // ── SCROLL INDICATOR ──────────────────────────────────────
+  function updateIndicator(index) {
+    document.querySelectorAll('.si-line').forEach((line, i) => {
+      line.classList.toggle('is-active', i === index);
+    });
+  }
+
   // ── SECTION SNAP ──────────────────────────────────────────
-  // Observer intercepts scroll intent; lenis.scrollTo() handles the smooth snap.
-  // Scrolling past the last nav section releases into the footer naturally.
   function initSnapScroll() {
     const stops = [
       document.querySelector('.hero'),
@@ -128,7 +133,9 @@ SiteFX.register('home', (() => {
     let current = 0;
     let locked  = false;
 
-    // Keep current index in sync when user reaches footer and scrolls back
+    updateIndicator(0);
+
+    // Keep current in sync when user free-scrolls (e.g. into footer and back)
     lenis.on('scroll', ({ scroll }) => {
       if (locked) return;
       stops.forEach((el, i) => {
@@ -139,12 +146,29 @@ SiteFX.register('home', (() => {
     function goTo(dir) {
       if (locked) return;
       const next = current + dir;
-      // Past last stop → release to footer naturally
       if (next >= stops.length || next < 0) return;
-      locked  = true;
+
+      locked = true;
+
+      // Squish the departing panel
+      const fromPanel = stops[current].querySelector?.('.nav-section-panel');
+      if (fromPanel) {
+        gsap.to(fromPanel, {
+          scale: 0.88,
+          duration: 0.55,
+          ease: 'power2.in',
+        });
+      }
+
       current = next;
-      lenis.scrollTo(stops[current], { duration: 1.1, offset: 0 });
-      setTimeout(() => { locked = false; }, 1300);
+      updateIndicator(current);
+      lenis.scrollTo(stops[current], { duration: 1.05, offset: 0 });
+
+      // Restore squished panel after it scrolls out of view
+      setTimeout(() => {
+        if (fromPanel) gsap.set(fromPanel, { scale: 1 });
+        locked = false;
+      }, 1350);
     }
 
     _snapObs = Observer.create({

@@ -69,10 +69,43 @@ body.is-home-light .cursor-label { color: var(--white); }
 /* Hide global footer — home uses its own card footer */
 body.is-home-light #site-footer { display: none; }
 
+/* ── SCROLL INDICATOR ─────────────────────────────────────── */
+.scroll-indicator {
+  position: fixed;
+  right: 2.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  z-index: 9998;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+.si-line {
+  display: block;
+  height: 2px;
+  width: 1.6rem;
+  background: var(--black);
+  border-radius: 2px;
+  opacity: 0.18;
+  transition: width 0.35s cubic-bezier(0.22,1,0.36,1),
+              opacity 0.35s ease;
+}
+.si-line.is-active {
+  width: 2.8rem;
+  opacity: 0.75;
+}
+
 /* ── HERO ──────────────────────────────────────────────────── */
 .hero {
+  min-height: 100svh;
   padding: 14rem 5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-bottom: 0.05rem solid rgba(0,0,0,0.12);
+  box-sizing: border-box;
 }
 .hero-tag {
   font-size: 1.1rem;
