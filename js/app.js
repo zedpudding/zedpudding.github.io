@@ -50,6 +50,7 @@ updateNavActive();
 // ── CURSOR HOVER + INITIAL SETUP ──────────────────────────
 // Run these before barba.init so a missing Barba can't block them
 SiteFX.bindCursorHover(document);
+SiteFX.initCardTilt(document);
 SiteFX.initReveal(document);
 SiteFX.setPhase('ready');
 
@@ -85,6 +86,7 @@ if (typeof barba !== 'undefined') {
 
         updateNavActive();
         SiteFX.bindCursorHover(document);
+        SiteFX.initCardTilt(document);
         SiteFX.initReveal(document);
         SiteFX.emit('page:enter', next);
         SiteFX.setPhase('enter');

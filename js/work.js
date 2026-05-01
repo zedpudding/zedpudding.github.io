@@ -6,6 +6,7 @@ SiteFX.register('work', (() => {
 
   function init() {
     SiteFX.initReveal(document);
+    SiteFX.initCardTilt(document);
 
     // Parallax on featured tile images
     document.querySelectorAll('.featured-thumb').forEach(img => {

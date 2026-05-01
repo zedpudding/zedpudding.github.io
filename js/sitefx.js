@@ -67,6 +67,48 @@ const SiteFX = (() => {
     });
   }
 
+  // ── CARD TILT ─────────────────────────────────────────────
+  function initCardTilt(root = document) {
+    const cursor = document.getElementById('cursor');
+    const sel = '.project-tile, .work-featured-tile, .featured-tile, .logo-tile, .book-card';
+    root.querySelectorAll(sel).forEach(card => {
+      // Avoid duplicate listeners
+      if (card._tiltBound) return;
+      card._tiltBound = true;
+
+      card.style.transformStyle = 'preserve-3d';
+
+      card.addEventListener('mouseenter', () => {
+        if (cursor) cursor.classList.add('is-card');
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (cursor) cursor.classList.remove('is-card');
+        gsap.to(card, {
+          rotateX: 0, rotateY: 0,
+          duration: 0.5,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        });
+      });
+
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const cx = rect.left + rect.width  / 2;
+        const cy = rect.top  + rect.height / 2;
+        const dx = (e.clientX - cx) / (rect.width  / 2);   // -1 … 1
+        const dy = (e.clientY - cy) / (rect.height / 2);   // -1 … 1
+        gsap.to(card, {
+          rotateY:  dx * 8,
+          rotateX: -dy * 5,
+          duration: 0.3,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      });
+    });
+  }
+
   // ── SCROLL REVEAL SETUP ────────────────────────────────────
   function initReveal(container = document) {
     if (typeof ScrollTrigger === 'undefined') return;
@@ -87,6 +129,7 @@ const SiteFX = (() => {
     register, getModule,
     killScrollTriggers,
     bindCursorHover,
+    initCardTilt,
     initReveal,
   };
 })();

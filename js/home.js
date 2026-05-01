@@ -27,6 +27,7 @@ SiteFX.register('home', (() => {
     window.addEventListener('resize', _resizeFn);
 
     SiteFX.initReveal(document);
+    SiteFX.initCardTilt(document);
     animateHero();
 
     // Subtle parallax on featured tiles
