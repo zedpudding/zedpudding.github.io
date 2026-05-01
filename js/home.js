@@ -2,8 +2,9 @@
    home.js — home page module
 ═══════════════════════════════════════════════════════════ */
 SiteFX.register('home', (() => {
-  let _triggers = [];
-  let _resizeFn  = null;
+  let _triggers      = [];
+  let _resizeFn      = null;
+  let _canvasCleanup = null;
 
   function fitHeroName() {
     document.querySelectorAll('.hero-name-line').forEach(line => {
@@ -64,11 +65,43 @@ SiteFX.register('home', (() => {
     });
   }
 
-  // ── PANEL HOVER ───────────────────────────────────────────
-  function initPanelHover() {
+  // ── NAV SECTION SCROLL REVEALS ────────────────────────────
+  function animateNavSections() {
+    document.querySelectorAll('.nav-section').forEach(section => {
+      const panel = section.querySelector('.nav-section-panel');
+      const label = section.querySelector('.nav-section-label');
+      const copy  = section.querySelector('.nav-section-copy');
+
+      gsap.set(panel, { y: 40, opacity: 0 });
+      gsap.set(label, { y: 55, opacity: 0 });
+      gsap.set(copy,  { y: 24, opacity: 0 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: section, start: 'top 72%', toggleActions: 'play none none none' },
+      });
+      tl.to(panel, { y: 0, opacity: 1, duration: 0.9,  ease: 'power3.out' })
+        .to(label, { y: 0, opacity: 1, duration: 0.72, ease: 'power3.out' }, '-=0.55')
+        .to(copy,  { y: 0, opacity: 1, duration: 0.6,  ease: 'power3.out' }, '-=0.5');
+
+      _triggers.push(tl.scrollTrigger);
+    });
+  }
+
+  // ── IMAGE PARALLAX + HOVER ────────────────────────────────
+  function animateNavParallax() {
     document.querySelectorAll('.nav-section').forEach(section => {
       const img = section.querySelector('.nav-section-img img');
       if (!img) return;
+
+      const t = gsap.fromTo(img,
+        { yPercent: 6 },
+        { yPercent: -6, ease: 'none', scrollTrigger: {
+            trigger: section, start: 'top bottom', end: 'bottom top', scrub: true,
+          },
+        }
+      );
+      _triggers.push(t.scrollTrigger);
+
       section.addEventListener('mouseenter', () => {
         gsap.to(img, { scale: 1.06, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
       });
@@ -78,209 +111,140 @@ SiteFX.register('home', (() => {
     });
   }
 
-  // ── LOOPED PANELS ─────────────────────────────────────────
-  // All nav-sections are stacked (position:absolute, inset:0).
-  // Wheel events cycle through them with a scale+slide GSAP transition.
-  // Lenis is blocked during transitions via the capture-phase interceptor.
-  function initLoopedPanels() {
-    const navSectionsEl = document.querySelector('.nav-sections');
-    const heroEl        = document.querySelector('.hero');
-    const panels        = gsap.utils.toArray('.nav-section');
-    if (!panels.length || !navSectionsEl) return;
+  // ── SECTION SNAP ──────────────────────────────────────────
+  function initSnapScroll() {
+    const stops = [
+      document.querySelector('.hero'),
+      ...document.querySelectorAll('.nav-section'),
+    ].filter(Boolean);
 
-    let currentIdx = -1; // -1 = hero is active, 0..n = panel index
-    let locked     = false;
+    let current = 0;
+    let locked  = false;
 
-    // Hide all panels initially
-    gsap.set(panels, { autoAlpha: 0, yPercent: 0, scale: 1 });
     updateIndicator(0);
 
-    // ── transition ──
-    function showPanel(idx, dir) {
-      const entering = panels[idx];
-      const leaving  = currentIdx >= 0 ? panels[currentIdx] : null;
+    lenis.on('scroll', ({ scroll }) => {
+      if (locked) return;
+      let c = 0;
+      stops.forEach((el, i) => {
+        if (el.offsetTop <= scroll + window.innerHeight * 0.4) c = i;
+      });
+      if (c !== current) { current = c; updateIndicator(current); }
+    });
 
-      const enterLabel = entering.querySelector('.nav-section-label');
-      const enterCopy  = entering.querySelector('.nav-section-copy');
-      const leaveLabel = leaving?.querySelector('.nav-section-label');
-      const leaveCopy  = leaving?.querySelector('.nav-section-copy');
-
-      locked     = true;
-      currentIdx = idx;
-      updateIndicator(idx + 1);
-
-      const tl = gsap.timeline({ onComplete: () => { locked = false; } });
-
-      // ── outgoing: panel shrinks, label + copy slide out ──
-      if (leaving) {
-        tl.to(leaving, {
-          yPercent : dir > 0 ? -7 : 7,
-          scale    : 0.88,
-          autoAlpha: 0,
-          duration : 0.55,
-          ease     : 'power2.in',
-        }, 0);
-        if (leaveLabel) tl.to(leaveLabel, { y: dir > 0 ? -28 : 28, opacity: 0, duration: 0.3, ease: 'power2.in' }, 0);
-        if (leaveCopy)  tl.to(leaveCopy,  { y: dir > 0 ? -14 : 14, opacity: 0, duration: 0.28, ease: 'power2.in' }, 0.05);
-      }
-
-      // ── incoming: panel scales in, then label rises, then copy follows ──
-      const enterStart = leaving ? 0.22 : 0;
-
-      gsap.set(entering, { yPercent: dir > 0 ? 9 : -9, scale: 0.93, autoAlpha: 0 });
-      if (enterLabel) gsap.set(enterLabel, { y: dir > 0 ? 55 : -55, opacity: 0 });
-      if (enterCopy)  gsap.set(enterCopy,  { y: dir > 0 ? 26 : -26, opacity: 0 });
-
-      tl.to(entering, {
-        yPercent : 0,
-        scale    : 1,
-        autoAlpha: 1,
-        duration : 0.85,
-        ease     : 'power3.out',
-      }, enterStart);
-
-      if (enterLabel) tl.to(enterLabel, {
-        y        : 0,
-        opacity  : 1,
-        duration : 0.72,
-        ease     : 'power3.out',
-      }, enterStart + 0.3);
-
-      if (enterCopy) tl.to(enterCopy, {
-        y        : 0,
-        opacity  : 1,
-        duration : 0.6,
-        ease     : 'power3.out',
-      }, enterStart + 0.46);
-    }
-
-    // ── directional navigation ──
     function goTo(dir) {
       if (locked) return;
+      const next = current + dir;
 
-      // ── hero → first panel ──
-      if (currentIdx === -1 && dir > 0) {
-        locked = true;
-        lenis.scrollTo(navSectionsEl, { duration: 0.85, offset: 0 });
-        setTimeout(() => { showPanel(0, 1); }, 380);
-        return;
-      }
+      if (next >= stops.length) { window._homeWheelHandler = null; return; }
+      if (next < 0) return;
 
-      const next = currentIdx + dir;
+      locked  = true;
+      current = next;
+      updateIndicator(current);
+      lenis.scrollTo(stops[current], { duration: 1.1, offset: 0 });
 
-      // ── past last panel → release to footer ──
-      if (next >= panels.length) {
-        window._homeWheelHandler = null;
-        return;
-      }
-
-      // ── before first panel → back to hero ──
-      if (next < 0) {
-        locked = true;
-        gsap.to(panels[currentIdx], {
-          yPercent : 7,
-          scale    : 0.9,
-          autoAlpha: 0,
-          duration : 0.5,
-          ease     : 'power2.in',
-          onComplete() {
-            currentIdx = -1;
-            updateIndicator(0);
-            lenis.scrollTo(heroEl, { duration: 0.75, offset: 0 });
-            setTimeout(() => {
-              locked = false;
-              if (document.querySelector('.hero')) window._homeWheelHandler = handleWheel;
-            }, 950);
-          },
-        });
-        return;
-      }
-
-      showPanel(next, dir);
-    }
-
-    // ── index navigation (indicator clicks) ──
-    function goToIndex(targetIdx) {
-      if (locked) return;
-
-      if (targetIdx === 0) {
-        // Back to hero
-        if (currentIdx >= 0) {
-          locked = true;
-          gsap.to(panels[currentIdx], {
-            yPercent : 7,
-            scale    : 0.9,
-            autoAlpha: 0,
-            duration : 0.5,
-            ease     : 'power2.in',
-            onComplete() {
-              currentIdx = -1;
-              updateIndicator(0);
-              lenis.scrollTo(heroEl, { duration: 0.75 });
-              setTimeout(() => {
-                locked = false;
-                if (document.querySelector('.hero')) window._homeWheelHandler = handleWheel;
-              }, 950);
-            },
-          });
-        } else {
-          lenis.scrollTo(heroEl, { duration: 0.75 });
-        }
-        return;
-      }
-
-      const panelIdx = targetIdx - 1;
-      if (panelIdx >= panels.length) return;
-
-      if (currentIdx === -1) {
-        // From hero to a specific panel
-        locked = true;
-        lenis.scrollTo(navSectionsEl, { duration: 0.85 });
-        setTimeout(() => { showPanel(panelIdx, 1); }, 380);
-      } else {
-        showPanel(panelIdx, panelIdx > currentIdx ? 1 : -1);
-      }
+      setTimeout(() => {
+        locked = false;
+        if (document.querySelector('.hero')) window._homeWheelHandler = handleWheel;
+      }, 1350);
     }
 
     function handleWheel(e) { goTo(e.deltaY > 0 ? 1 : -1); }
     window._homeWheelHandler = handleWheel;
 
-    // Re-enable handler if user scrolled back from footer via normal lenis scroll
-    lenis.on('scroll', ({ scroll }) => {
-      if (locked) return;
-      if (!window._homeWheelHandler && document.querySelector('.hero')) {
-        const navTop = navSectionsEl.offsetTop;
-        if (scroll <= navTop + 50) {
-          window._homeWheelHandler = handleWheel;
-          // Reset panels if back at hero level
-          if (scroll < navTop - 100 && currentIdx >= 0) {
-            gsap.set(panels[currentIdx], { autoAlpha: 0, yPercent: 0, scale: 1 });
-            currentIdx = -1;
-            updateIndicator(0);
-          }
-        }
-      }
-    });
-
-    // ── Indicator hover / click ──
     let hoverTimer = null;
     document.querySelectorAll('.si-line').forEach((line, i) => {
       line.addEventListener('mouseenter', () => {
         clearTimeout(hoverTimer);
-        hoverTimer = setTimeout(() => { goToIndex(i); }, 120);
+        hoverTimer = setTimeout(() => {
+          if (i >= stops.length || locked) return;
+          current = i; updateIndicator(current);
+          lenis.scrollTo(stops[current], { duration: 0.9, offset: 0 });
+        }, 120);
       });
       line.addEventListener('mouseleave', () => clearTimeout(hoverTimer));
       line.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        goToIndex(i);
+        e.preventDefault(); e.stopPropagation();
+        if (i >= stops.length || locked) return;
+        current = i; updateIndicator(current);
+        lenis.scrollTo(stops[current], { duration: 0.9, offset: 0 });
       });
     });
 
     document.getElementById('scroll-indicator')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+      e.preventDefault(); e.stopPropagation();
     });
+  }
+
+  // ── CANVAS GRADIENT BACKGROUND ────────────────────────────
+  // Five soft greyscale radial-gradient blobs drifting in slow
+  // Lissajous paths. Smooth by construction — no hash noise.
+  function initCanvasBackground() {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'home-canvas-bg';
+    Object.assign(canvas.style, {
+      position: 'fixed', inset: '0',
+      width: '100%', height: '100%',
+      zIndex: '0', pointerEvents: 'none',
+    });
+    document.body.insertBefore(canvas, document.body.firstChild);
+
+    const ctx = canvas.getContext('2d');
+    let W = 0, H = 0;
+
+    const onResize = () => {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    };
+    onResize();
+    window.addEventListener('resize', onResize);
+
+    // blob: r  = radius as fraction of min(W,H)
+    //       lo = darkest greyscale value at edge, hi = brightest at center
+    //       fx/fy = angular velocity (radians/second) — kept very low
+    //       px/py = initial phase offset
+    const blobs = [
+      { r: 0.70, hi: 255, lo: 210, fx: 0.018, fy: 0.013, px: 0.00, py: 0.00 },
+      { r: 0.60, hi: 250, lo: 205, fx: 0.024, fy: 0.019, px: 2.10, py: 1.40 },
+      { r: 0.65, hi: 230, lo: 195, fx: 0.015, fy: 0.022, px: 4.20, py: 2.80 },
+      { r: 0.55, hi: 255, lo: 215, fx: 0.021, fy: 0.017, px: 1.50, py: 3.20 },
+      { r: 0.50, hi: 220, lo: 190, fx: 0.027, fy: 0.012, px: 3.70, py: 5.10 },
+    ];
+
+    let t = 0;
+
+    function draw() {
+      ctx.fillStyle = '#d8d8d8';
+      ctx.fillRect(0, 0, W, H);
+
+      const R = Math.min(W, H);
+      blobs.forEach(b => {
+        // Slow Lissajous orbit — different x/y frequencies = figure-8 style paths
+        const x = W * (0.5 + Math.sin(t * b.fx + b.px) * 0.36);
+        const y = H * (0.5 + Math.cos(t * b.fy + b.py) * 0.36);
+        const r = R * b.r;
+
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0,   `rgba(${b.hi},${b.hi},${b.hi},0.65)`);
+        g.addColorStop(0.5, `rgba(${b.hi},${b.hi},${b.hi},0.18)`);
+        g.addColorStop(1,   `rgba(${b.lo},${b.lo},${b.lo},0)`);
+
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, W, H);
+      });
+
+      t += 0.012; // seconds of sim-time per frame — blobs orbit every 5–8 min
+    }
+
+    gsap.ticker.add(draw);
+
+    _canvasCleanup = () => {
+      gsap.ticker.remove(draw);
+      window.removeEventListener('resize', onResize);
+      canvas.remove();
+      _canvasCleanup = null;
+    };
   }
 
   function init() {
@@ -292,17 +256,20 @@ SiteFX.register('home', (() => {
     _resizeFn = () => fitHeroName();
     window.addEventListener('resize', _resizeFn);
 
+    initCanvasBackground();
     animateHero();
     animateHeroParallax();
-    initPanelHover();
+    animateNavSections();
+    animateNavParallax();
     animateFooter();
-    initLoopedPanels();
+    initSnapScroll();
   }
 
   function destroy() {
     document.body.classList.remove('is-home-light');
     window._homeWheelHandler = null;
     if (_resizeFn) window.removeEventListener('resize', _resizeFn);
+    if (_canvasCleanup) _canvasCleanup();
     _triggers.forEach(t => t?.kill());
     _triggers = [];
   }
