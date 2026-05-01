@@ -171,6 +171,25 @@ SiteFX.register('home', (() => {
       }, 1350);
     }
 
+    // Click on a dash → snap directly to that section
+    document.querySelectorAll('.si-line').forEach((line, i) => {
+      line.addEventListener('click', () => {
+        if (i >= stops.length || i === current) return;
+        locked = true;
+        const fromPanel = stops[current].querySelector?.('.nav-section-panel');
+        if (fromPanel) {
+          gsap.to(fromPanel, { scale: 0.88, duration: 0.55, ease: 'power2.in' });
+        }
+        current = i;
+        updateIndicator(current);
+        lenis.scrollTo(stops[current], { duration: 1.05, offset: 0 });
+        setTimeout(() => {
+          if (fromPanel) gsap.set(fromPanel, { scale: 1 });
+          locked = false;
+        }, 1350);
+      });
+    });
+
     _snapObs = Observer.create({
       target: window,
       type: 'wheel,touch',
