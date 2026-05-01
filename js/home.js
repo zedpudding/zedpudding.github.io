@@ -191,23 +191,36 @@ SiteFX.register('home', (() => {
     // Activate capture interceptor
     window._homeWheelHandler = handleWheel;
 
-    // Indicator dot clicks
+    // Indicator: hover scrolls to section, click also scrolls (no navigation)
+    let hoverTimer = null;
     document.querySelectorAll('.si-line').forEach((line, i) => {
-      line.addEventListener('click', () => {
-        if (i >= stops.length || i === current) return;
-        const dir = i > current ? 1 : -1;
-        // Jump directly regardless of step distance
-        const fromPanel = stops[current].querySelector?.('.nav-section-panel');
-        if (fromPanel) gsap.to(fromPanel, { scale: 0.88, duration: 0.55, ease: 'power2.in' });
-        locked = true;
+      // Mouseenter: smooth scroll to section after short intent delay
+      line.addEventListener('mouseenter', () => {
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => {
+          if (i >= stops.length || locked) return;
+          current = i;
+          updateIndicator(current);
+          lenis.scrollTo(stops[current], { duration: 0.9, offset: 0 });
+        }, 120);
+      });
+      line.addEventListener('mouseleave', () => clearTimeout(hoverTimer));
+
+      // Click also triggers scroll but never navigates anywhere
+      line.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (i >= stops.length || locked) return;
         current = i;
         updateIndicator(current);
-        lenis.scrollTo(stops[current], { duration: 1.05, offset: 0 });
-        setTimeout(() => {
-          if (fromPanel) gsap.set(fromPanel, { scale: 1 });
-          locked = false;
-        }, 1350);
+        lenis.scrollTo(stops[current], { duration: 0.9, offset: 0 });
       });
+    });
+
+    // Prevent any click on the indicator container from falling through
+    document.getElementById('scroll-indicator')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
     });
   }
 

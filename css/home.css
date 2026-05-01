@@ -79,30 +79,31 @@ body.is-home-light #site-footer { display: none; }
   flex-direction: column;
   gap: 0.75rem;
   z-index: 9998;
-  pointer-events: none;
-  mix-blend-mode: multiply;
+  /* auto catches all clicks inside bounding box — prevents gap clicks
+     from falling through to nav-section <a> tags underneath */
+  pointer-events: auto;
+  /* difference blend: white bars invert against background —
+     dark on the light hero, light on the dark nav panels */
+  mix-blend-mode: difference;
 }
 .si-line {
   display: block;
   height: 3px;
-  width: 2.4rem;
-  background: var(--black);
+  width: 2.2rem;
+  background: white;
   border-radius: 3px;
-  opacity: 0.2;
+  opacity: 0.3;
   cursor: pointer;
-  pointer-events: auto;
-  transition: width 0.35s cubic-bezier(0.22,1,0.36,1),
-              opacity 0.35s ease,
-              transform 0.2s ease;
+  transition: width 0.4s cubic-bezier(0.22,1,0.36,1),
+              opacity 0.3s ease;
 }
 .si-line:hover {
-  opacity: 0.5;
-  transform: scaleX(1.15);
-  transform-origin: right center;
+  width: 4.5rem;
+  opacity: 0.65;
 }
 .si-line.is-active {
-  width: 4rem;
-  opacity: 0.8;
+  width: 3.8rem;
+  opacity: 1;
 }
 
 /* ── HERO ──────────────────────────────────────────────────── */
