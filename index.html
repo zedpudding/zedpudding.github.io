@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zander Vera</title>
-<meta name="description" content="Zander Vera — Creative Director. Thirty years of brand systems. One book of poems.">
+<meta name="description" content="Zander Vera — Creative Director. Brand systems, poems, and other trouble.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper: #F2F0EA;
@@ -23,7 +23,7 @@
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:'PT Serif', serif;
+    font-family:'Atkinson Hyperlegible', Arial, sans-serif;
     font-size:18px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
@@ -43,21 +43,48 @@
     padding:40px 32px 18px;
     background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
   }
-  .bottom-cat{
+  .bottom-cat-wrap{
     position:relative;
     bottom:-34px;
     width:110px;
-    height:auto;
-    mix-blend-mode:multiply;
+    display:block;
+    flex:0 0 auto;
     pointer-events:none;
+  }
+  .bottom-cat{
+    width:100%;
+    height:auto;
+    display:block;
+    mix-blend-mode:multiply;
+  }
+  .cat-eye{
+    position:absolute;
+    top:55.5%;
+    width:14%;
+    height:7%;
+    background:#242321;
+    border-radius:999px;
+    transform:scaleY(0);
+    transform-origin:center;
+    animation:cat-blink 7.5s infinite;
+  }
+  .cat-eye.left{left:31.5%;}
+  .cat-eye.right{left:57.5%;}
+  @keyframes cat-blink{
+    0%, 88%, 91%, 94%, 100%{transform:scaleY(0);}
+    89.5%, 92.5%{transform:scaleY(1);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .cat-eye{animation:none;}
   }
   .bottom-nav{
     display:flex;
     flex-wrap:wrap;
     gap:0;
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
-    font-size:13px;
-    letter-spacing:.05em;
+    font-size:16px;
+    letter-spacing:0;
     text-transform:uppercase;
     color:var(--red);
     padding-bottom:8px;
@@ -71,9 +98,10 @@
   main section + section{border-top:1px solid #DAD5C8;}
 
   .eyebrow{
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
-    font-size:13px;
-    letter-spacing:.08em;
+    font-size:14px;
+    letter-spacing:0;
     text-transform:uppercase;
     color:var(--red);
     margin-bottom:8px;
@@ -99,8 +127,9 @@
   }
   .hero-text{max-width:620px;}
   .hero h1{
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:400;
-    font-size:clamp(46px, 7vw, 84px);
+    font-size:clamp(58px, 9vw, 104px);
     line-height:1.04;
     letter-spacing:-.01em;
     margin:0 0 26px 0;
@@ -113,9 +142,10 @@
     max-width:34ch;
   }
   .hero-sign{
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
-    font-size:14px;
-    letter-spacing:.05em;
+    font-size:18px;
+    letter-spacing:0;
     text-transform:uppercase;
     color:var(--red);
   }
@@ -158,11 +188,12 @@
   }
   .work-item:first-of-type{border-top:none; padding-top:0;}
   .work-index{font-weight:700; font-size:20px; color:var(--red);}
-  .work-name{font-weight:700; font-size:28px; margin:0 0 8px 0; line-height:1.15;}
+  .work-name{font-family:'Staatliches', Impact, sans-serif; font-weight:400; font-size:34px; margin:0 0 8px 0; line-height:1.05;}
   .work-desc{font-size:16px; color:#3A3833; max-width:56ch;}
   .work-years{
-    font-size:13px;
-    letter-spacing:.02em;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-size:14px;
+    letter-spacing:0;
     color:var(--muted);
     white-space:nowrap;
     justify-self:end;
@@ -182,6 +213,7 @@
     display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:center;
   }
   .book-title-pre, .book-title-post{
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:400;
     font-size:clamp(22px, 2.8vw, 30px);
     line-height:1.2;
@@ -190,6 +222,7 @@
   .book-title-pre{margin:14px 0 0 0;}
   .book-title-post{margin:0 0 26px 0;}
   .book-title{
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
     letter-spacing:-.01em;
     font-size:clamp(52px, 7vw, 80px);
@@ -202,9 +235,10 @@
   .book a.buy{
     display:inline-block;
     margin-top:20px;
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
-    font-size:13px;
-    letter-spacing:.05em;
+    font-size:14px;
+    letter-spacing:0;
     text-transform:uppercase;
     text-decoration:none;
     color:var(--paper);
@@ -226,16 +260,17 @@
 
   /* --- about --- */
   .about-lead{
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
-    font-size:32px;
-    line-height:1.3;
+    font-size:40px;
+    line-height:1.12;
     margin-bottom:52px;
     max-width:22ch;
   }
   .role{padding:30px 0; border-top:1px solid #DAD5C8; display:grid; grid-template-columns:170px 1fr; gap:24px;}
   .role:first-of-type{border-top:none; padding-top:0;}
   .role-years{font-size:14px; color:var(--muted);}
-  .role-title{font-weight:700; font-size:20px; margin-bottom:6px;}
+  .role-title{font-family:'Staatliches', Impact, sans-serif; font-weight:400; font-size:26px; margin-bottom:6px; line-height:1.1;}
   .role-desc{font-size:16px; color:#3A3833; max-width:56ch;}
   @media (max-width:600px){
     .role{grid-template-columns:1fr; gap:8px;}
@@ -244,6 +279,7 @@
 
   /* --- contact --- */
   .contact-lead{
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
     font-size:clamp(38px,5vw,58px);
     margin-bottom:46px;
@@ -259,7 +295,8 @@
   .contact-list a{text-decoration:none; color:var(--ink); font-weight:700; font-size:20px;}
   .contact-list a:hover{color:var(--red);}
   .contact-list span.label{
-    color:var(--muted); letter-spacing:.05em; text-transform:uppercase; font-size:13px; font-weight:700;
+    font-family:'Staatliches', Impact, sans-serif;
+    color:var(--muted); letter-spacing:0; text-transform:uppercase; font-size:15px; font-weight:400;
   }
 
   @media (max-width:600px){
@@ -267,8 +304,8 @@
     main section{padding:80px 0;}
     .book{padding:70px 20px;}
     .bottom-bar{padding:30px 18px 12px; gap:12px;}
-    .bottom-cat{width:78px; bottom:-24px;}
-    .bottom-nav{font-size:11px;}
+    .bottom-cat-wrap{width:78px; bottom:-24px;}
+    .bottom-nav{font-size:13px;}
     .bottom-nav .sep{margin:0 6px;}
   }
 </style>
@@ -297,60 +334,23 @@
           <div class="book-title">downhill</div>
           <div class="book-title-post">from here</div>
           <p class="book-tag">Some of it happened. Some of it didn't. They're poems. You were warned.</p>
-          <p class="desc">A hundred-plus pages of poems, sketches, and observations about love, family, music, growing older, questionable choices, and finding humor where it probably shouldn't exist. Independently published, July 2026 — because apparently thirty years of branding other people wasn't enough. He wanted a cover of his own.</p>
+          <p class="desc">A hundred-plus pages of poems, sketches, and observations about love, family, music, growing older, questionable choices, and finding humor where it probably shouldn't exist. Independently published, July 2026 — because apparently branding other people wasn't enough. He wanted a cover of his own.</p>
           <a class="buy" href="https://www.amazon.com/its-all-downhill-here-Unfiltered/dp/B0H858FKWX/" target="_blank" rel="noopener">Read it on Amazon →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="about">
-    <div class="eyebrow"><span class="num">—</span>About</div>
-    <br>
-    <p class="about-lead">Thirty years turning other people's ambitions into things people recognize on sight.</p>
-
-    <div class="role">
-      <div class="role-years">2001 – Present</div>
-      <div>
-        <div class="role-title">Agency 689, Partner + Creative Director</div>
-        <div class="role-desc">Founded the studio. Fifty-plus brand systems since, from a travel-guitar startup to a rock 'n' roll hotel. Still does the work himself.</div>
-      </div>
-    </div>
-
-    <div class="role">
-      <div class="role-years">1997 – 2001</div>
-      <div>
-        <div class="role-title">DGWB, Interactive Creative Director</div>
-        <div class="role-desc">Landed in advertising right as it was discovering the internet existed. Spent four years figuring out what a website was supposed to do.</div>
-      </div>
-    </div>
-
-    <div class="role">
-      <div class="role-years">1993 – 1997</div>
-      <div>
-        <div class="role-title">firstsource.com, Creative Director</div>
-        <div class="role-desc">Started here. Back when "creative director" didn't mean much of anything at a dot-com nobody remembers.</div>
-      </div>
-    </div>
-
-    <p class="about-tail">Along the way: a handful of ADDYs, a Netty Award, and a keynote at the Art Institute of Orange County, where he presumably told twenty-year-olds that AI would either end their career or make it — still isn't sure which. Lives in California. Writes poems on the side. Recently found out that counts as "other writing."</p>
-  </section>
-
-  <section id="contact">
-    <div class="eyebrow"><span class="num">—</span>Contact</div>
-    <p class="contact-lead">Let's <i>talk.</i></p>
-    <ul class="contact-list">
-      <li><span class="label">Email</span><a href="mailto:zander@zndrcrtv.com">zander@zndrcrtv.com</a></li>
-      <li><span class="label">LinkedIn</span><a href="https://linkedin.com/in/zandervera" target="_blank" rel="noopener">linkedin.com/in/zandervera</a></li>
-    </ul>
-  </section>
-
 </main>
 
 <div class="bottom-bar">
-  <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
+  <span class="bottom-cat-wrap">
+    <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
+    <span class="cat-eye left" aria-hidden="true"></span>
+    <span class="cat-eye right" aria-hidden="true"></span>
+  </span>
   <nav class="bottom-nav" aria-label="Primary">
-    <a href="#top">Home</a><span class="sep">|</span><a href="work.html">Work</a><span class="sep">|</span><a href="#about">About</a><span class="sep">|</span><a href="#book">Books</a><span class="sep">|</span><a href="#contact">Contact</a>
+    <a href="#top">Home</a><span class="sep">|</span><a href="work.html">Work</a><span class="sep">|</span><a href="about.html">About</a><span class="sep">|</span><a href="book.html">Books</a><span class="sep">|</span><a href="contact.html">Contact</a>
   </nav>
 </div>
 

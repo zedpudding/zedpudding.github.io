@@ -7,7 +7,7 @@
 <meta name="description" content="Selected work by Zander Vera — brand systems, identity, and product design.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper: #F2F0EA;
@@ -23,7 +23,7 @@
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:'PT Serif', serif;
+    font-family:'Atkinson Hyperlegible', Arial, sans-serif;
     font-size:18px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
@@ -43,21 +43,48 @@
     padding:40px 32px 18px;
     background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
   }
-  .bottom-cat{
+  .bottom-cat-wrap{
     position:relative;
     bottom:-34px;
     width:110px;
-    height:auto;
-    mix-blend-mode:multiply;
+    display:block;
+    flex:0 0 auto;
     pointer-events:none;
+  }
+  .bottom-cat{
+    width:100%;
+    height:auto;
+    display:block;
+    mix-blend-mode:multiply;
+  }
+  .cat-eye{
+    position:absolute;
+    top:55.5%;
+    width:14%;
+    height:7%;
+    background:#242321;
+    border-radius:999px;
+    transform:scaleY(0);
+    transform-origin:center;
+    animation:cat-blink 7.5s infinite;
+  }
+  .cat-eye.left{left:31.5%;}
+  .cat-eye.right{left:57.5%;}
+  @keyframes cat-blink{
+    0%, 88%, 91%, 94%, 100%{transform:scaleY(0);}
+    89.5%, 92.5%{transform:scaleY(1);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .cat-eye{animation:none;}
   }
   .bottom-nav{
     display:flex;
     flex-wrap:wrap;
     gap:0;
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
-    font-size:13px;
-    letter-spacing:.05em;
+    font-size:16px;
+    letter-spacing:0;
     text-transform:uppercase;
     color:var(--red);
     padding-bottom:8px;
@@ -71,9 +98,10 @@
   section{padding:130px 0;}
 
   .eyebrow{
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
-    font-size:13px;
-    letter-spacing:.08em;
+    font-size:14px;
+    letter-spacing:0;
     text-transform:uppercase;
     color:var(--red);
     margin-bottom:8px;
@@ -83,8 +111,9 @@
   /* --- page hero --- */
   .page-hero{padding-top:110px; padding-bottom:60px;}
   .page-hero h1{
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:400;
-    font-size:clamp(40px, 6vw, 68px);
+    font-size:clamp(54px, 8vw, 88px);
     line-height:1.06;
     letter-spacing:-.01em;
     margin:0 0 22px 0;
@@ -108,11 +137,12 @@
   }
   .work-item:last-of-type{border-bottom:1px solid #DAD5C8;}
   .work-index{font-weight:700; font-size:20px; color:var(--red);}
-  .work-name{font-weight:700; font-size:28px; margin:0 0 8px 0; line-height:1.15;}
+  .work-name{font-family:'Staatliches', Impact, sans-serif; font-weight:400; font-size:34px; margin:0 0 8px 0; line-height:1.05;}
   .work-desc{font-size:16px; color:#3A3833; max-width:56ch;}
   .work-years{
-    font-size:13px;
-    letter-spacing:.02em;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-size:14px;
+    letter-spacing:0;
     color:var(--muted);
     white-space:nowrap;
     justify-self:end;
@@ -130,8 +160,8 @@
     section{padding:80px 0;}
     .page-hero{padding-top:60px;}
     .bottom-bar{padding:30px 18px 12px; gap:12px;}
-    .bottom-cat{width:78px; bottom:-24px;}
-    .bottom-nav{font-size:11px;}
+    .bottom-cat-wrap{width:78px; bottom:-24px;}
+    .bottom-nav{font-size:13px;}
     .bottom-nav .sep{margin:0 6px;}
   }
 </style>
@@ -142,7 +172,7 @@
 
   <section class="page-hero">
     <div class="eyebrow"><span class="num">—</span>Selected Work</div>
-    <h1>Thirty years of brand systems, five ways.</h1>
+    <h1>Brand systems, five ways.</h1>
     <p>A partial list. The rest lives in boxes, hard drives, and a few hotel lobbies.</p>
   </section>
 
@@ -196,9 +226,13 @@
 </main>
 
 <div class="bottom-bar">
-  <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
+  <span class="bottom-cat-wrap">
+    <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
+    <span class="cat-eye left" aria-hidden="true"></span>
+    <span class="cat-eye right" aria-hidden="true"></span>
+  </span>
   <nav class="bottom-nav" aria-label="Primary">
-    <a href="index.html">Home</a><span class="sep">|</span><a href="work.html" class="current">Work</a><span class="sep">|</span><a href="index.html#about">About</a><span class="sep">|</span><a href="index.html#book">Books</a><span class="sep">|</span><a href="index.html#contact">Contact</a>
+    <a href="index.html">Home</a><span class="sep">|</span><a href="work.html" class="current">Work</a><span class="sep">|</span><a href="about.html">About</a><span class="sep">|</span><a href="book.html">Books</a><span class="sep">|</span><a href="contact.html">Contact</a>
   </nav>
 </div>
 

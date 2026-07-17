@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Zander Vera</title>
+<meta name="description" content="About Zander Vera — creative director, Agency 689 partner, and author.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F2F0EA;
+    --ink: #1A1917;
+    --red: #8C2A2A;
+    --muted: #8A8577;
+    --max: 1040px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Atkinson Hyperlegible', Arial, sans-serif;
+    font-size:18px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:100px;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--red);color:#fff;}
+
+  .bottom-bar{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:50;
+    display:flex;
+    align-items:flex-end;
+    gap:18px;
+    padding:40px 32px 18px;
+    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
+  }
+  .bottom-cat-wrap{
+    position:relative;
+    bottom:-34px;
+    width:110px;
+    display:block;
+    flex:0 0 auto;
+    pointer-events:none;
+  }
+  .bottom-cat{
+    width:100%;
+    height:auto;
+    display:block;
+    mix-blend-mode:multiply;
+  }
+  .cat-eye{
+    position:absolute;
+    top:55.5%;
+    width:14%;
+    height:7%;
+    background:#242321;
+    border-radius:999px;
+    transform:scaleY(0);
+    transform-origin:center;
+    animation:cat-blink 7.5s infinite;
+  }
+  .cat-eye.left{left:31.5%;}
+  .cat-eye.right{left:57.5%;}
+  @keyframes cat-blink{
+    0%, 88%, 91%, 94%, 100%{transform:scaleY(0);}
+    89.5%, 92.5%{transform:scaleY(1);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .cat-eye{animation:none;}
+  }
+  .bottom-nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:0;
+    text-transform:uppercase;
+    color:var(--red);
+    padding-bottom:8px;
+  }
+  .bottom-nav a{text-decoration:none; opacity:.85; transition:opacity .15s;}
+  .bottom-nav a:hover,
+  .bottom-nav a.current{opacity:1;}
+  .bottom-nav .sep{margin:0 10px; opacity:.5;}
+
+  main{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  section{padding:130px 0;}
+
+  .eyebrow{
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:0;
+    text-transform:uppercase;
+    color:var(--red);
+    margin-bottom:8px;
+  }
+  .eyebrow .num{color:var(--muted); margin-right:8px;}
+
+  .page-hero{padding-top:110px; padding-bottom:70px;}
+  .about-lead{
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
+    font-size:clamp(46px, 7vw, 82px);
+    line-height:1.04;
+    letter-spacing:-.01em;
+    margin:18px 0 0 0;
+    max-width:12ch;
+  }
+  .role{
+    padding:30px 0;
+    border-top:1px solid #DAD5C8;
+    display:grid;
+    grid-template-columns:170px 1fr;
+    gap:24px;
+  }
+  .role:first-of-type{border-top:none; padding-top:0;}
+  .role-years{font-size:14px; color:var(--muted);}
+  .role-title{
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:400;
+    font-size:26px;
+    margin-bottom:6px;
+    line-height:1.1;
+  }
+  .role-desc{font-size:16px; color:#3A3833; max-width:56ch;}
+  .about-tail{margin-top:44px; font-size:17px; color:#3A3833; max-width:56ch;}
+
+  @media (max-width:600px){
+    body{font-size:16px;}
+    section{padding:80px 0;}
+    .page-hero{padding-top:60px; padding-bottom:46px;}
+    .role{grid-template-columns:1fr; gap:8px;}
+    .bottom-bar{padding:30px 18px 12px; gap:12px;}
+    .bottom-cat-wrap{width:78px; bottom:-24px;}
+    .bottom-nav{font-size:13px;}
+    .bottom-nav .sep{margin:0 6px;}
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <section class="page-hero">
+    <div class="eyebrow"><span class="num">—</span>About</div>
+    <h1 class="about-lead">Making other people's ambitions recognizable on sight.</h1>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="role">
+      <div class="role-years">2001 – Present</div>
+      <div>
+        <div class="role-title">Agency 689, Partner + Creative Director</div>
+        <div class="role-desc">Founded the studio. Fifty-plus brand systems since, from a travel-guitar startup to a rock 'n' roll hotel. Still does the work himself.</div>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-years">1997 – 2001</div>
+      <div>
+        <div class="role-title">DGWB, Interactive Creative Director</div>
+        <div class="role-desc">Landed in advertising right as it was discovering the internet existed. Spent four years figuring out what a website was supposed to do.</div>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-years">1993 – 1997</div>
+      <div>
+        <div class="role-title">firstsource.com, Creative Director</div>
+        <div class="role-desc">Started here. Back when "creative director" didn't mean much of anything at a dot-com nobody remembers.</div>
+      </div>
+    </div>
+
+    <p class="about-tail">Along the way: a handful of ADDYs, a Netty Award, and a keynote at the Art Institute of Orange County, where he presumably told twenty-year-olds that AI would either end their career or make it — still isn't sure which. Lives in California. Writes poems on the side. Recently found out that counts as "other writing."</p>
+  </section>
+</main>
+
+<div class="bottom-bar">
+  <span class="bottom-cat-wrap">
+    <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
+    <span class="cat-eye left" aria-hidden="true"></span>
+    <span class="cat-eye right" aria-hidden="true"></span>
+  </span>
+  <nav class="bottom-nav" aria-label="Primary">
+    <a href="index.html">Home</a><span class="sep">|</span><a href="work.html">Work</a><span class="sep">|</span><a href="about.html" class="current">About</a><span class="sep">|</span><a href="book.html">Books</a><span class="sep">|</span><a href="contact.html">Contact</a>
+  </nav>
+</div>
+
+</body>
+</html>
