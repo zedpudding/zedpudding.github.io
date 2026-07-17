@@ -7,164 +7,161 @@
 <meta name="description" content="Zander Vera — Creative Director. Thirty years of brand systems. One book of poems.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Libre+Baskerville:ital@0;1&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper: #FFFFFF;
-    --paper2: #F2F1EC;
-    --ink: #141310;
-    --red: #BE242B;
-    --muted: #7A766C;
+    --paper: #F2F0EA;
+    --paper2: #E8E4D9;
+    --ink: #1A1917;
+    --red: #8C2A2A;
+    --muted: #8A8577;
     --max: 1040px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background:var(--paper) url('images/background/paper.png') center top / cover no-repeat fixed;
+    background:var(--paper);
     color:var(--ink);
-    font-family:'Patrick Hand', sans-serif;
+    font-family:'PT Serif', serif;
     font-size:18px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
-    padding-bottom:110px;
+    padding-bottom:100px;
   }
   a{color:inherit;}
   ::selection{background:var(--red);color:#fff;}
-  em, .accent{
-    font-family:'Libre Baskerville', serif;
-    font-style:italic;
-    font-weight:700;
-    color:var(--red);
-  }
 
-  /* --- floating dock nav --- */
-  .dock{
+  /* --- bottom bar: nav + cat --- */
+  .bottom-bar{
     position:fixed;
-    left:50%;
-    bottom:26px;
-    transform:translateX(-50%);
+    left:0; right:0; bottom:0;
     z-index:50;
     display:flex;
-    align-items:center;
-    gap:24px;
-    padding:14px 24px;
-    background:rgba(255,255,255,.72);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-    border:1px solid rgba(20,19,16,.08);
-    border-radius:999px;
-    box-shadow:0 24px 48px -22px rgba(20,19,16,.3);
-    max-width:calc(100vw - 32px);
+    align-items:flex-end;
+    gap:18px;
+    padding:40px 32px 18px;
+    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
   }
-  .dock-name{
-    font-family:'Patrick Hand',sans-serif;
+  .bottom-cat{
+    position:relative;
+    bottom:-34px;
+    width:110px;
+    height:auto;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  .bottom-nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
     font-weight:700;
-    letter-spacing:-.01em;
-    font-size:15px;
-    text-decoration:none;
-    padding-right:16px;
-    border-right:1px solid rgba(20,19,16,.14);
-    white-space:nowrap;
-  }
-  .dock-links{
-    display:flex; gap:20px;
-    font-family:'Source Code Pro',monospace;
-    font-size:12px;
-    font-weight:500;
-    letter-spacing:.04em;
+    font-size:13px;
+    letter-spacing:.05em;
     text-transform:uppercase;
+    color:var(--red);
+    padding-bottom:8px;
   }
-  .dock-links a{text-decoration:none; opacity:.62; transition:opacity .15s,color .15s; white-space:nowrap;}
-  .dock-links a:hover{opacity:1; color:var(--red);}
+  .bottom-nav a{text-decoration:none; opacity:.85; transition:opacity .15s;}
+  .bottom-nav a:hover{opacity:1;}
+  .bottom-nav .sep{margin:0 10px; opacity:.5;}
 
   main{max-width:var(--max); margin:0 auto; padding:0 32px;}
-  section{padding:130px 0;}
-  section + section{border-top:1px solid #E7E4DA;}
+  main section{padding:130px 0;}
+  main section + section{border-top:1px solid #DAD5C8;}
 
   .eyebrow{
-    font-family:'Source Code Pro',monospace;
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:8px;
-  }
-  .eyebrow .num{color:var(--red); margin-right:8px;}
-
-  /* --- hero --- */
-  .hero{
-    padding-top:120px; padding-bottom:100px;
-    display:grid;
-    grid-template-columns:1fr;
-  }
-  .hero-kicker{
-    font-family:'Source Code Pro',monospace;
+    font-weight:700;
     font-size:13px;
     letter-spacing:.08em;
     text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:26px;
+    color:var(--red);
+    margin-bottom:8px;
   }
+  .eyebrow .num{color:var(--muted); margin-right:8px;}
+
+  /* --- hero --- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    border-top:none;
+  }
+  .hero-inner{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 32px;
+    width:100%;
+    position:relative;
+    z-index:2;
+  }
+  .hero-text{max-width:620px;}
   .hero h1{
-    font-family:'Patrick Hand',sans-serif;
-    font-weight:800;
-    font-size:clamp(52px, 9vw, 112px);
-    line-height:.94;
-    letter-spacing:-.02em;
-    margin:0 0 48px 0;
-    max-width:14ch;
+    font-weight:400;
+    font-size:clamp(46px, 7vw, 84px);
+    line-height:1.04;
+    letter-spacing:-.01em;
+    margin:0 0 26px 0;
   }
-  .hero h1 i{
-    font-family:'Libre Baskerville', serif;
-    font-style:italic;
+  .hero-sub{
+    font-size:22px;
+    line-height:1.45;
+    color:#3A3833;
+    margin:0 0 40px 0;
+    max-width:34ch;
+  }
+  .hero-sign{
     font-weight:700;
+    font-size:14px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
     color:var(--red);
   }
-  .hero-body{
-    max-width:640px;
-    font-size:20px;
-    line-height:1.7;
+  .hero-portrait{
+    position:absolute;
+    right:0;
+    bottom:0;
+    height:92%;
+    max-height:800px;
+    width:auto;
+    max-width:58vw;
+    object-fit:contain;
+    object-position:right bottom;
+    mix-blend-mode:multiply;
+    z-index:1;
+    pointer-events:none;
+    transform:translateX(18%);
   }
-  .hero-body p{margin:0 0 22px 0;}
-  .hero .sign{
-    margin-top:40px;
-    font-family:'Source Code Pro',monospace;
-    font-size:13px;
-    font-weight:500;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:var(--ink);
+  @media (max-width:760px){
+    .hero{min-height:auto; padding:90px 0 60px; flex-direction:column; align-items:stretch;}
+    .hero-portrait{
+      position:static;
+      display:block;
+      height:auto;
+      width:220px;
+      max-width:70vw;
+      margin:40px auto 0;
+      transform:none;
+    }
   }
 
   /* --- work --- */
   .work-item{
     display:grid;
-    grid-template-columns:90px 1fr auto;
+    grid-template-columns:70px 1fr auto;
     gap:24px;
     align-items:baseline;
-    padding:38px 0;
-    border-top:1px solid #E7E4DA;
+    padding:34px 0;
+    border-top:1px solid #DAD5C8;
   }
   .work-item:first-of-type{border-top:none; padding-top:0;}
-  .work-index{
-    font-family:'Patrick Hand',sans-serif;
-    font-weight:700;
-    font-size:22px;
-    color:var(--red);
-  }
-  .work-name{
-    font-family:'Patrick Hand',sans-serif;
-    font-weight:700;
-    font-size:32px;
-    margin:0 0 10px 0;
-    line-height:1.1;
-  }
-  .work-desc{font-size:17px; color:#37342c; max-width:56ch;}
+  .work-index{font-weight:700; font-size:20px; color:var(--red);}
+  .work-name{font-weight:700; font-size:28px; margin:0 0 8px 0; line-height:1.15;}
+  .work-desc{font-size:16px; color:#3A3833; max-width:56ch;}
   .work-years{
-    font-family:'Source Code Pro',monospace;
-    font-size:12px;
+    font-size:13px;
     letter-spacing:.02em;
     color:var(--muted);
     white-space:nowrap;
@@ -179,197 +176,130 @@
   }
 
   /* --- book --- */
-  .book{background:var(--paper2); margin:0 -32px; padding:120px 32px;}
+  .book{background:var(--paper2); margin:0 -32px; padding:110px 32px;}
   .book-inner{
     max-width:var(--max); margin:0 auto;
-    display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center;
+    display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:center;
   }
-  .book-title{
-    font-family:'Patrick Hand',sans-serif;
-    font-weight:800;
-    font-style:normal;
-    letter-spacing:-.02em;
-    font-size:clamp(64px, 8vw, 96px);
-    line-height:.86;
-    margin:18px 0 30px 0;
+  .book-title-pre, .book-title-post{
+    font-weight:400;
+    font-size:clamp(22px, 2.8vw, 30px);
+    line-height:1.2;
     color:var(--ink);
   }
-  .book-title span{
-    font-family:'Libre Baskerville', serif;
-    font-style:italic;
+  .book-title-pre{margin:14px 0 0 0;}
+  .book-title-post{margin:0 0 26px 0;}
+  .book-title{
     font-weight:700;
-    color:var(--red);
+    letter-spacing:-.01em;
+    font-size:clamp(52px, 7vw, 80px);
+    line-height:.92;
+    margin:2px 0;
+    color:var(--ink);
   }
-  .book-tag{
-    font-family:'Patrick Hand',sans-serif;
-    font-style:normal;
-    font-weight:500;
-    font-size:22px;
-    line-height:1.5;
-    margin:0 0 22px 0;
-  }
-  .book p.desc{font-size:17px; color:#37342c;}
+  .book-tag{font-style:italic; font-size:20px; line-height:1.5; margin:0 0 20px 0;}
+  .book p.desc{font-size:16px; color:#3A3833;}
   .book a.buy{
     display:inline-block;
-    margin-top:22px;
-    font-family:'Source Code Pro',monospace;
+    margin-top:20px;
+    font-weight:700;
     font-size:13px;
-    font-weight:600;
-    letter-spacing:.04em;
+    letter-spacing:.05em;
     text-transform:uppercase;
     text-decoration:none;
     color:var(--paper);
     background:var(--red);
-    padding:14px 26px;
+    padding:13px 24px;
     border-radius:2px;
   }
   .book-cover{
-    background:var(--red);
-    aspect-ratio:5/7.5;
-    border-radius:2px;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 30px 60px -20px rgba(190,36,43,.45), 0 8px 0 rgba(20,19,16,.06);
+    width:100%;
+    height:auto;
+    display:block;
+    filter:drop-shadow(0 20px 30px rgba(26,25,23,.35));
     transform:rotate(1.5deg);
-  }
-  .book-cover .stack{
-    font-family:'Patrick Hand',sans-serif;
-    font-weight:800;
-    font-style:normal;
-    letter-spacing:-.02em;
-    font-size:52px;
-    line-height:.85;
-    color:#F6E9E9;
-    text-align:center;
   }
   @media (max-width:760px){
     .book-inner{grid-template-columns:1fr;}
-    .book-cover{max-width:240px; margin:0 auto; order:-1;}
+    .book-cover{max-width:260px; margin:0 auto; order:-1; display:block;}
   }
 
   /* --- about --- */
   .about-lead{
-    font-family:'Patrick Hand',sans-serif;
-    font-style:normal;
     font-weight:700;
-    letter-spacing:-.01em;
-    font-size:34px;
+    font-size:32px;
     line-height:1.3;
-    margin-bottom:56px;
+    margin-bottom:52px;
     max-width:22ch;
   }
-  .role{padding:32px 0; border-top:1px solid #E7E4DA; display:grid; grid-template-columns:180px 1fr; gap:24px;}
+  .role{padding:30px 0; border-top:1px solid #DAD5C8; display:grid; grid-template-columns:170px 1fr; gap:24px;}
   .role:first-of-type{border-top:none; padding-top:0;}
-  .role-years{
-    font-family:'Source Code Pro',monospace;
-    font-size:13px;
-    letter-spacing:.02em;
-    color:var(--muted);
-  }
-  .role-title{
-    font-family:'Patrick Hand',sans-serif;
-    font-weight:600;
-    font-size:21px;
-    margin-bottom:8px;
-  }
-  .role-desc{font-size:17px; color:#37342c; max-width:56ch;}
+  .role-years{font-size:14px; color:var(--muted);}
+  .role-title{font-weight:700; font-size:20px; margin-bottom:6px;}
+  .role-desc{font-size:16px; color:#3A3833; max-width:56ch;}
   @media (max-width:600px){
     .role{grid-template-columns:1fr; gap:8px;}
   }
-  .about-tail{margin-top:48px; font-size:18px; font-style:normal; color:#37342c; max-width:56ch; font-family:'Patrick Hand',sans-serif;}
+  .about-tail{margin-top:44px; font-size:17px; color:#3A3833; max-width:56ch;}
 
   /* --- contact --- */
   .contact-lead{
-    font-family:'Patrick Hand',sans-serif;
-    font-style:normal;
-    font-weight:800;
-    letter-spacing:-.02em;
-    font-size:clamp(40px,6vw,64px);
-    margin-bottom:50px;
-  }
-  .contact-lead i{
-    font-family:'Libre Baskerville', serif;
-    font-style:italic;
     font-weight:700;
-    color:var(--red);
+    font-size:clamp(38px,5vw,58px);
+    margin-bottom:46px;
   }
+  .contact-lead i{color:var(--red); font-style:italic;}
   .contact-list{list-style:none; margin:0; padding:0; display:grid; gap:0;}
   .contact-list li{
-    padding:22px 0;
-    border-top:1px solid #E7E4DA;
+    padding:20px 0;
+    border-top:1px solid #DAD5C8;
     display:flex; justify-content:space-between; align-items:center;
   }
-  .contact-list li:last-child{border-bottom:1px solid #E7E4DA;}
-  .contact-list a{
-    text-decoration:none; color:var(--ink);
-    font-family:'Patrick Hand',sans-serif;
-    font-size:22px;
-  }
+  .contact-list li:last-child{border-bottom:1px solid #DAD5C8;}
+  .contact-list a{text-decoration:none; color:var(--ink); font-weight:700; font-size:20px;}
   .contact-list a:hover{color:var(--red);}
   .contact-list span.label{
-    color:var(--muted); letter-spacing:.06em; text-transform:uppercase; font-size:12px;
-    font-family:'Source Code Pro',monospace; font-weight:500;
+    color:var(--muted); letter-spacing:.05em; text-transform:uppercase; font-size:13px; font-weight:700;
   }
-
-  footer{
-    padding:50px 32px 130px;
-    text-align:center;
-    font-family:'Source Code Pro',monospace;
-    font-size:12px;
-    font-weight:500;
-    letter-spacing:.04em;
-    text-transform:uppercase;
-    color:var(--muted);
-  }
-  footer a{text-decoration:none; margin:0 10px;}
-  footer a:hover{color:var(--red);}
 
   @media (max-width:600px){
     body{font-size:16px;}
-    section{padding:80px 0;}
-    .hero{padding-top:70px;}
-    .book{padding:80px 20px;}
-    .dock{gap:14px; padding:12px 18px; bottom:16px;}
-    .dock-name{display:none;}
-    .dock-links{gap:14px; font-size:11px;}
+    main section{padding:80px 0;}
+    .book{padding:70px 20px;}
+    .bottom-bar{padding:30px 18px 12px; gap:12px;}
+    .bottom-cat{width:78px; bottom:-24px;}
+    .bottom-nav{font-size:11px;}
+    .bottom-nav .sep{margin:0 6px;}
   }
 </style>
 </head>
 <body>
 
-<nav class="dock" aria-label="Primary">
-  <a class="dock-name" href="#top">Zander Vera</a>
-  <div class="dock-links">
-    <a href="work.html">Work</a>
-    <a href="#book">Book</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-<main id="top">
-
-  <section class="hero">
-    <div class="hero-kicker">Creative Director — Agency 689</div>
-    <h1>Thirty years making ideas look <i>inevitable.</i></h1>
-    <div class="hero-body">
-      <p>A logo isn't decoration. A system isn't a rulebook. Done right, they're the quiet thing that makes someone trust a brand before they know why. That's the job. Clarity, dressed up as taste.</p>
-      <p>Somewhere in there I also wrote a book of poems, drew the pictures for it, and put my name on the cover — which was either brave or foolish. Probably both.</p>
-      <p>I still believe the best ideas are the simplest ones, argued for the longest.</p>
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>ideas are easy.</h1>
+      <p class="hero-sub">The tricky part is knowing which one changes everything.</p>
+      <div class="hero-sign">Zander Vera. Creative director.</div>
     </div>
-    <div class="sign">Zander Vera, Creative Director</div>
-  </section>
+  </div>
+  <img class="hero-portrait" src="images/z+t-trans.png" alt="Pen sketch portrait of Zander Vera with a kitten on his shoulder">
+</section>
+
+<main>
 
   <section id="book" style="padding:0; border-top:none;">
     <div class="book">
       <div class="book-inner">
+        <img class="book-cover" src="images/cover.png" alt="Cover of 'it's all downhill from here' by Zander Vera">
         <div>
-          <div class="eyebrow"><span class="num">—</span>Other Writing</div>
-          <div class="book-title">down hill<br><span>(from here)</span></div>
+          <div class="book-title-pre">it's all</div>
+          <div class="book-title">downhill</div>
+          <div class="book-title-post">from here</div>
           <p class="book-tag">Some of it happened. Some of it didn't. They're poems. You were warned.</p>
           <p class="desc">A hundred-plus pages of poems, sketches, and observations about love, family, music, growing older, questionable choices, and finding humor where it probably shouldn't exist. Independently published, July 2026 — because apparently thirty years of branding other people wasn't enough. He wanted a cover of his own.</p>
           <a class="buy" href="https://www.amazon.com/its-all-downhill-here-Unfiltered/dp/B0H858FKWX/" target="_blank" rel="noopener">Read it on Amazon →</a>
         </div>
-        <div class="book-cover"><div class="stack">down<br>hill</div></div>
       </div>
     </div>
   </section>
@@ -418,9 +348,12 @@
 
 </main>
 
-<footer>
-  <a href="#top">Home</a> · <a href="work.html">Work</a> · <a href="#about">About</a> · <a href="#contact">Contact</a>
-</footer>
+<div class="bottom-bar">
+  <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
+  <nav class="bottom-nav" aria-label="Primary">
+    <a href="#top">Home</a><span class="sep">|</span><a href="work.html">Work</a><span class="sep">|</span><a href="#about">About</a><span class="sep">|</span><a href="#book">Books</a><span class="sep">|</span><a href="#contact">Contact</a>
+  </nav>
+</div>
 
 </body>
 </html>
