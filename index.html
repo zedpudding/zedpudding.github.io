@@ -7,6 +7,7 @@
 <meta name="description" content="Zander Vera — Creative Director. Brand systems, poems, and other trouble.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -46,10 +47,11 @@
   .bottom-cat-wrap{
     position:relative;
     bottom:-34px;
-    width:110px;
+    width:121px;
     display:block;
     flex:0 0 auto;
     pointer-events:none;
+    animation:cat-enter 2.8s cubic-bezier(.16,.72,.24,1) both;
   }
   .bottom-cat{
     width:100%;
@@ -57,25 +59,23 @@
     display:block;
     mix-blend-mode:multiply;
   }
-  .cat-eye{
+  .bottom-cat-wink{
     position:absolute;
-    top:55.5%;
-    width:14%;
-    height:7%;
-    background:#242321;
-    border-radius:999px;
-    transform:scaleY(0);
-    transform-origin:center;
-    animation:cat-blink 7.5s infinite;
+    inset:0;
+    width:100%;
+    height:auto;
+    display:block;
+    mix-blend-mode:multiply;
+    opacity:0;
   }
-  .cat-eye.left{left:31.5%;}
-  .cat-eye.right{left:57.5%;}
-  @keyframes cat-blink{
-    0%, 88%, 91%, 94%, 100%{transform:scaleY(0);}
-    89.5%, 92.5%{transform:scaleY(1);}
+  .bottom-cat-wrap.is-winking .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-winking .bottom-cat-wink{opacity:1;}
+  @keyframes cat-enter{
+    from{transform:translateY(96px);}
+    to{transform:translateY(0);}
   }
   @media (prefers-reduced-motion:reduce){
-    .cat-eye{animation:none;}
+    .bottom-cat-wrap{animation:none;}
   }
   .bottom-nav{
     display:flex;
@@ -304,7 +304,7 @@
     main section{padding:80px 0;}
     .book{padding:70px 20px;}
     .bottom-bar{padding:30px 18px 12px; gap:12px;}
-    .bottom-cat-wrap{width:78px; bottom:-24px;}
+    .bottom-cat-wrap{width:86px; bottom:-24px;}
     .bottom-nav{font-size:13px;}
     .bottom-nav .sep{margin:0 6px;}
   }
@@ -346,13 +346,25 @@
 <div class="bottom-bar">
   <span class="bottom-cat-wrap">
     <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
-    <span class="cat-eye left" aria-hidden="true"></span>
-    <span class="cat-eye right" aria-hidden="true"></span>
+    <img class="bottom-cat-wink" src="images/2-Cats-pico-wink.png" alt="" aria-hidden="true">
   </span>
   <nav class="bottom-nav" aria-label="Primary">
     <a href="#top">Home</a><span class="sep">|</span><a href="work.html">Work</a><span class="sep">|</span><a href="about.html">About</a><span class="sep">|</span><a href="book.html">Books</a><span class="sep">|</span><a href="contact.html">Contact</a>
   </nav>
 </div>
+
+<script>
+(() => {
+  const cats = document.querySelectorAll('.bottom-cat-wrap');
+  if (!cats.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const wink = () => {
+    cats.forEach((cat) => cat.classList.add('is-winking'));
+    window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-winking')), 420);
+    window.setTimeout(wink, 3500 + Math.random() * 8500);
+  };
+  window.setTimeout(wink, 1800 + Math.random() * 4500);
+})();
+</script>
 
 </body>
 </html>
