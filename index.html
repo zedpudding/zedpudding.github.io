@@ -10,15 +10,8 @@
 <link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
 <link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
 <link rel="preload" as="image" href="images/2-Cats-pico-half.png">
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
 <style>
-  @font-face{
-    font-family:'Wingman';
-    src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
-    font-weight:400;
-    font-style:normal;
-    font-display:swap;
-  }
   :root{
     --paper: #F2F0EA;
     --paper2: #E8E4D9;
@@ -40,37 +33,6 @@
   }
   a{color:inherit;}
   ::selection{background:var(--red);color:#fff;}
-
-  .bottom-nav,
-  .eyebrow,
-  h1,
-  .hero-sign,
-  .work-index,
-  .work-name,
-  .book-title-pre,
-  .book-title-post,
-  .book-title,
-  .book a.buy,
-  .book-proof h2,
-  .book-caption,
-  .book-pull,
-  .about-lead,
-  .role-title,
-  .client-list h2,
-  .contact-lead,
-  .contact-list span.label,
-  .project-title,
-  .back-link,
-  .hero-deck,
-  .case-meta dt,
-  .section-note h2,
-  .logo-formula figcaption,
-  .campaign-title,
-  .ad-gallery-header h2,
-  .book-lightbox-button{
-    font-family:'Wingman', Impact, sans-serif;
-    font-weight:400;
-  }
 
   /* --- bottom bar: nav + cat --- */
   .bottom-bar{
@@ -131,7 +93,8 @@
     display:flex;
     flex-wrap:wrap;
     gap:0;
-    font-weight:400;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
     font-size:16px;
     letter-spacing:0;
     text-transform:uppercase;
@@ -147,7 +110,8 @@
   main section + section{border-top:1px solid #DAD5C8;}
 
   .eyebrow{
-    font-weight:400;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
     font-size:14px;
     letter-spacing:0;
     text-transform:uppercase;
@@ -175,7 +139,8 @@
   }
   .hero-text{max-width:620px;}
   .hero h1{
-    font-weight:400;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
     font-size:clamp(58px, 9vw, 104px);
     line-height:.9;
     letter-spacing:-.01em;
@@ -189,7 +154,8 @@
     max-width:34ch;
   }
   .hero-sign{
-    font-weight:400;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
     font-size:18px;
     letter-spacing:0;
     text-transform:uppercase;
@@ -233,10 +199,10 @@
   }
   .work-item:first-of-type{border-top:none; padding-top:0;}
   .work-index{font-weight:700; font-size:20px; color:var(--red);}
-  .work-name{font-family:'Wingman', Impact, sans-serif; font-weight:400; font-size:34px; margin:0 0 8px 0; line-height:1.05;}
+  .work-name{font-family:'Staatliches', Impact, sans-serif; font-weight:400; font-size:34px; margin:0 0 8px 0; line-height:1.05;}
   .work-desc{font-size:16px; color:#3A3833; max-width:56ch;}
   .work-years{
-    font-family:'Wingman', Impact, sans-serif;
+    font-family:'Staatliches', Impact, sans-serif;
     font-size:14px;
     letter-spacing:0;
     color:var(--muted);
@@ -258,7 +224,7 @@
     display:grid; grid-template-columns:auto minmax(0, 1fr); gap:52px; align-items:center;
   }
   .book-title-pre, .book-title-post{
-    font-family:'Wingman', Impact, sans-serif;
+    font-family:'Staatliches', Impact, sans-serif;
     font-weight:400;
     font-size:clamp(22px, 2.8vw, 30px);
     line-height:1.2;
@@ -267,7 +233,8 @@
   .book-title-pre{margin:14px 0 0 0;}
   .book-title-post{margin:0 0 26px 0;}
   .book-title{
-    font-weight:400;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
     letter-spacing:-.01em;
     font-size:clamp(52px, 7vw, 80px);
     line-height:.9;
@@ -279,7 +246,8 @@
   .book a.buy{
     display:inline-block;
     margin-top:20px;
-    font-weight:400;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
     font-size:14px;
     letter-spacing:0;
     text-transform:uppercase;
@@ -304,7 +272,8 @@
 
   /* --- about --- */
   .about-lead{
-    font-weight:400;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
     font-size:40px;
     line-height:.9;
     margin-bottom:52px;
@@ -313,7 +282,7 @@
   .role{padding:30px 0; border-top:1px solid #DAD5C8; display:grid; grid-template-columns:170px 1fr; gap:24px;}
   .role:first-of-type{border-top:none; padding-top:0;}
   .role-years{font-size:14px; color:var(--muted);}
-  .role-title{font-family:'Wingman', Impact, sans-serif; font-weight:400; font-size:26px; margin-bottom:6px; line-height:1.1;}
+  .role-title{font-family:'Staatliches', Impact, sans-serif; font-weight:400; font-size:26px; margin-bottom:6px; line-height:1.1;}
   .role-desc{font-size:16px; color:#3A3833; max-width:56ch;}
   @media (max-width:600px){
     .role{grid-template-columns:1fr; gap:8px;}
@@ -322,7 +291,8 @@
 
   /* --- contact --- */
   .contact-lead{
-    font-weight:400;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
     font-size:clamp(38px,5vw,58px);
     line-height:.9;
     margin-bottom:46px;
@@ -338,7 +308,7 @@
   .contact-list a{text-decoration:none; color:var(--ink); font-weight:700; font-size:20px;}
   .contact-list a:hover{color:var(--red);}
   .contact-list span.label{
-    font-family:'Wingman', Impact, sans-serif;
+    font-family:'Staatliches', Impact, sans-serif;
     color:var(--muted); letter-spacing:0; text-transform:uppercase; font-size:15px; font-weight:400;
   }
 
