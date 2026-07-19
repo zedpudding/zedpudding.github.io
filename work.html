@@ -10,8 +10,15 @@
 <link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
 <link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
 <link rel="preload" as="image" href="images/2-Cats-pico-half.png">
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
+  @font-face{
+    font-family:'Wingman';
+    src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
   :root{
     --paper: #F2F0EA;
     --paper2: #E8E4D9;
@@ -33,6 +40,37 @@
   }
   a{color:inherit;}
   ::selection{background:var(--red);color:#fff;}
+
+  .bottom-nav,
+  .eyebrow,
+  h1,
+  .hero-sign,
+  .work-index,
+  .work-name,
+  .book-title-pre,
+  .book-title-post,
+  .book-title,
+  .book a.buy,
+  .book-proof h2,
+  .book-caption,
+  .book-pull,
+  .about-lead,
+  .role-title,
+  .client-list h2,
+  .contact-lead,
+  .contact-list span.label,
+  .project-title,
+  .back-link,
+  .hero-deck,
+  .case-meta dt,
+  .section-note h2,
+  .logo-formula figcaption,
+  .campaign-title,
+  .ad-gallery-header h2,
+  .book-lightbox-button{
+    font-family:'Wingman', Impact, sans-serif;
+    font-weight:400;
+  }
 
   /* --- bottom bar: nav + cat --- */
   .bottom-bar{
@@ -85,8 +123,7 @@
     display:flex;
     flex-wrap:wrap;
     gap:0;
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
+    font-weight:400;
     font-size:16px;
     letter-spacing:0;
     text-transform:uppercase;
@@ -109,8 +146,7 @@
     max-width:1040px;
   }
   .eyebrow{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
+    font-weight:400;
     font-size:14px;
     letter-spacing:0;
     text-transform:uppercase;
@@ -119,8 +155,7 @@
   }
   .eyebrow .num{color:var(--muted); margin-right:8px;}
   .work-hero h1{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
+    font-weight:400;
     font-size:clamp(46px, 7vw, 82px);
     line-height:.9;
     letter-spacing:-.01em;
@@ -170,7 +205,7 @@
     color:#5D594F;
   }
   .project-title{
-    font-family:'Staatliches', Impact, sans-serif;
+    font-family:'Wingman', Impact, sans-serif;
     font-size:20px;
     line-height:1;
     color:var(--red);

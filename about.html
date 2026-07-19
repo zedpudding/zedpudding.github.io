@@ -10,8 +10,15 @@
 <link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
 <link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
 <link rel="preload" as="image" href="images/2-Cats-pico-half.png">
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
+  @font-face{
+    font-family:'Wingman';
+    src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
   :root{
     --paper: #F2F0EA;
     --ink: #1A1917;
@@ -32,6 +39,37 @@
   }
   a{color:inherit;}
   ::selection{background:var(--red);color:#fff;}
+
+  .bottom-nav,
+  .eyebrow,
+  h1,
+  .hero-sign,
+  .work-index,
+  .work-name,
+  .book-title-pre,
+  .book-title-post,
+  .book-title,
+  .book a.buy,
+  .book-proof h2,
+  .book-caption,
+  .book-pull,
+  .about-lead,
+  .role-title,
+  .client-list h2,
+  .contact-lead,
+  .contact-list span.label,
+  .project-title,
+  .back-link,
+  .hero-deck,
+  .case-meta dt,
+  .section-note h2,
+  .logo-formula figcaption,
+  .campaign-title,
+  .ad-gallery-header h2,
+  .book-lightbox-button{
+    font-family:'Wingman', Impact, sans-serif;
+    font-weight:400;
+  }
 
   .bottom-bar{
     position:fixed;
@@ -83,8 +121,7 @@
     display:flex;
     flex-wrap:wrap;
     gap:0;
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
+    font-weight:400;
     font-size:16px;
     letter-spacing:0;
     text-transform:uppercase;
@@ -100,8 +137,7 @@
   section{padding:130px 0;}
 
   .eyebrow{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
+    font-weight:400;
     font-size:14px;
     letter-spacing:0;
     text-transform:uppercase;
@@ -112,8 +148,7 @@
 
   .page-hero{padding-top:110px; padding-bottom:70px;}
   .about-lead{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
+    font-weight:400;
     font-size:clamp(46px, 7vw, 82px);
     line-height:.9;
     letter-spacing:-.01em;
@@ -137,7 +172,7 @@
   .role:first-of-type{border-top:none; padding-top:0;}
   .role-years{font-size:14px; color:var(--muted);}
   .role-title{
-    font-family:'Staatliches', Impact, sans-serif;
+    font-family:'Wingman', Impact, sans-serif;
     font-weight:400;
     font-size:26px;
     margin-bottom:6px;
@@ -152,7 +187,7 @@
     max-width:64ch;
   }
   .client-list h2{
-    font-family:'Staatliches', Impact, sans-serif;
+    font-family:'Wingman', Impact, sans-serif;
     font-weight:400;
     font-size:30px;
     line-height:1.1;
