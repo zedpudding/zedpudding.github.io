@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Work — Zander Vera</title>
-<meta name="description" content="Selected work by Zander Vera — brand systems, identity, and product design.">
+<meta name="description" content="Selected work by Zander Vera — brand transformation, identity systems, naming, digital, campaigns, products, places, and AI-assisted creative systems.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-half.png">
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -16,7 +18,7 @@
     --ink: #1A1917;
     --red: #8C2A2A;
     --muted: #8A8577;
-    --max: 1040px;
+    --max: 1680px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -38,11 +40,16 @@
     position:fixed;
     left:0; right:0; bottom:0;
     z-index:50;
+    padding:0;
+    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
+  }
+  .bottom-bar-inner{
+    width:min(100%, 1680px);
+    margin:0 auto;
     display:flex;
     align-items:flex-end;
     gap:18px;
     padding:40px 32px 18px;
-    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
   }
   .bottom-cat-wrap{
     position:relative;
@@ -58,7 +65,9 @@
     display:block;
     mix-blend-mode:multiply;
   }
-  .bottom-cat-wink{
+  .bottom-cat-wink,
+  .bottom-cat-closed,
+  .bottom-cat-half{
     position:absolute;
     inset:0;
     width:100%;
@@ -69,6 +78,10 @@
   }
   .bottom-cat-wrap.is-winking .bottom-cat{opacity:0;}
   .bottom-cat-wrap.is-winking .bottom-cat-wink{opacity:1;}
+  .bottom-cat-wrap.is-love-half .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-love-half .bottom-cat-half{opacity:1;}
+  .bottom-cat-wrap.is-loving .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-loving .bottom-cat-closed{opacity:1;}
   .bottom-nav{
     display:flex;
     flex-wrap:wrap;
@@ -86,9 +99,16 @@
   .bottom-nav a.current{opacity:1;}
   .bottom-nav .sep{margin:0 10px; opacity:.5;}
 
-  main{max-width:var(--max); margin:0 auto; padding:0 32px;}
-  section{padding:130px 0;}
+  main{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 48px 180px;
+  }
 
+  .work-hero{
+    padding:110px 0 78px;
+    max-width:1040px;
+  }
   .eyebrow{
     font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
@@ -99,59 +119,83 @@
     margin-bottom:8px;
   }
   .eyebrow .num{color:var(--muted); margin-right:8px;}
-
-  /* --- page hero --- */
-  .page-hero{padding-top:110px; padding-bottom:60px;}
-  .page-hero h1{
+  .work-hero h1{
     font-family:'Staatliches', Impact, sans-serif;
-    font-weight:400;
-    font-size:clamp(54px, 8vw, 88px);
-    line-height:1.06;
+    font-weight:700;
+    font-size:clamp(46px, 7vw, 82px);
+    line-height:.9;
     letter-spacing:-.01em;
-    margin:0 0 22px 0;
-    max-width:16ch;
+    margin:18px 0 0 0;
+    max-width:13ch;
+    color:var(--ink);
+    text-transform:uppercase;
   }
-  .page-hero p{
-    font-size:19px;
+  .work-hero p{
+    margin:34px 0 0 0;
+    max-width:62ch;
     color:#3A3833;
-    max-width:56ch;
-    margin:0;
+    font-size:20px;
+    line-height:1.55;
   }
-
-  /* --- work list --- */
-  .work-item{
-    display:grid;
-    grid-template-columns:70px 1fr auto;
-    gap:24px;
-    align-items:baseline;
-    padding:40px 0;
-    border-top:1px solid #DAD5C8;
-  }
-  .work-item:last-of-type{border-bottom:1px solid #DAD5C8;}
-  .work-index{font-weight:700; font-size:20px; color:var(--red);}
-  .work-name{font-family:'Staatliches', Impact, sans-serif; font-weight:400; font-size:34px; margin:0 0 8px 0; line-height:1.05;}
-  .work-desc{font-size:16px; color:#3A3833; max-width:56ch;}
-  .work-years{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-size:14px;
-    letter-spacing:0;
+  .work-hero p + p{
+    margin-top:18px;
     color:var(--muted);
-    white-space:nowrap;
-    justify-self:end;
-  }
-  @media (max-width:720px){
-    .work-item{grid-template-columns:40px 1fr; grid-template-areas:"i n" "d d" "y y";}
-    .work-index{grid-area:i;}
-    .work-name{grid-area:n;}
-    .work-desc{grid-area:d;}
-    .work-years{grid-area:y; justify-self:start; margin-top:8px;}
+    font-size:18px;
+    line-height:1.5;
   }
 
+  .work-grid{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:68px 24px;
+  }
+  .project{
+    display:block;
+    color:inherit;
+    text-decoration:none;
+  }
+  .project-media{
+    width:100%;
+    aspect-ratio:1/1.04;
+    display:block;
+    object-fit:cover;
+    background:#fff;
+  }
+  .project-caption{
+    display:grid;
+    grid-template-columns:minmax(130px, .5fr) minmax(0, 1fr);
+    gap:20px;
+    padding-top:14px;
+    font-size:15px;
+    line-height:1.35;
+    color:#5D594F;
+  }
+  .project-title{
+    font-family:'Staatliches', Impact, sans-serif;
+    font-size:20px;
+    line-height:1;
+    color:var(--red);
+    font-weight:700;
+    text-transform:uppercase;
+  }
+  .project-desc{
+    max-width:430px;
+  }
+  .project:hover .project-title{text-decoration:underline;}
+
+  @media (max-width:1080px){
+    .work-grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
+  }
+  @media (max-width:760px){
+    main{padding:0 18px 150px;}
+    .work-hero{padding:70px 0 48px;}
+    .work-grid{grid-template-columns:1fr; gap:54px;}
+    .project-caption{grid-template-columns:112px 1fr; font-size:14px;}
+    .project-title{font-size:18px;}
+  }
   @media (max-width:600px){
     body{font-size:16px;}
-    section{padding:80px 0;}
-    .page-hero{padding-top:60px;}
-    .bottom-bar{padding:30px 18px 12px; gap:12px;}
+    .bottom-bar-inner{padding:30px 18px 12px; gap:12px;}
     .bottom-cat-wrap{width:86px; bottom:-24px;}
     .bottom-nav{font-size:13px;}
     .bottom-nav .sep{margin:0 6px;}
@@ -162,81 +206,146 @@
 
 <main>
 
-  <section class="page-hero">
-    <div class="eyebrow"><span class="num">—</span>Selected Work</div>
-    <h1>Brand systems, five ways.</h1>
-    <p>A partial list. The rest lives in boxes, hard drives, and a few hotel lobbies.</p>
-  </section>
+  <header class="work-hero">
+    <div class="eyebrow"><span class="num">—</span>The Work</div>
+    <h1>I like hats, which is useful, because the best projects rarely need just one.</h1>
+    <p>Zander Vera makes brands, identities, campaigns, objects, and digital things feel more inevitable than they probably were.</p>
+    <p>Creative director, brand builder, writer, musician, father. Founder of <a href="https://agency689.com/" target="_blank" rel="noopener noreferrer">Agency 689</a> and <a href="https://zndrcrtv.com/" target="_blank" rel="noopener noreferrer">ZNDR CRTV</a>.</p>
+  </header>
 
-  <section style="padding-top:0;">
-    <div class="work-item">
-      <div class="work-index">01</div>
-      <div>
-        <div class="work-name">Traveler Guitar</div>
-        <div class="work-desc">Full brand overhaul, packaging, website, and campaigns — plus the actual hardware: headstocks, nameplates, product-level design most creative directors never touch. Went from a boutique unknown to the undisputed leader in travel guitars.</div>
+  <section class="work-grid" aria-label="Selected work">
+    <a class="project" href="traveler-guitar.html">
+      <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/TG-Redlands-Headstock.webp" alt="Traveler Guitar Redlands headstock branding">
+      <div class="project-caption">
+        <div class="project-title">Traveler Guitar</div>
+        <div class="project-desc">Master brand, product marks, digital, packaging, and the small details people actually hold.</div>
       </div>
-      <div class="work-years">Identity · Product</div>
-    </div>
+    </a>
 
-    <div class="work-item">
-      <div class="work-index">02</div>
-      <div>
-        <div class="work-name">Sunset Marquis</div>
-        <div class="work-desc">Reimagined the branding for a legendary rock 'n' roll hotel for a modern audience — website, campaigns, collateral, the whole on-property experience. Named and built out Cavatina, the restaurant.</div>
+    <a class="project" href="https://agency689.com/hotel-figueroa/">
+      <img class="project-media" src="https://agency689.com/wp-content/uploads/2018/03/Hero-Figueroa-Brand-Book.jpg" alt="Hotel Figueroa brand book">
+      <div class="project-caption">
+        <div class="project-title">Hotel Figueroa</div>
+        <div class="project-desc">A Los Angeles icon rebuilt as an identity system with memory, atmosphere, and bite.</div>
       </div>
-      <div class="work-years">2007 – Present</div>
-    </div>
+    </a>
 
-    <div class="work-item">
-      <div class="work-index">03</div>
-      <div>
-        <div class="work-name">Killer Networks / Bigfoot Networks</div>
-        <div class="work-desc">Built the brand from the ground up — identity, product design, packaging, digital. Later acquired by Qualcomm.</div>
+    <a class="project" href="https://agency689.com/sunset-marquis/">
+      <img class="project-media" src="https://agency689.com/wp-content/uploads/2017/04/sunset-VT.jpg" alt="Sunset Marquis brand work">
+      <div class="project-caption">
+        <div class="project-title">Sunset Marquis</div>
+        <div class="project-desc">A legendary hotel brand moved forward without sanding off the thing people came for.</div>
       </div>
-      <div class="work-years">Brand from zero</div>
-    </div>
+    </a>
 
-    <div class="work-item">
-      <div class="work-index">04</div>
-      <div>
-        <div class="work-name">NSCatalyst</div>
-        <div class="work-desc">An AI-native creative studio, built as proof that AI and craft aren't opposites. Still figuring out exactly what that means, on purpose.</div>
+    <a class="project" href="https://zndrcrtv.com/overlook/">
+      <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/Overlook-Masthead.webp" alt="The Overlook identity">
+      <div class="project-caption">
+        <div class="project-title">The Overlook</div>
+        <div class="project-desc">Naming, identity, and environmental cues for a place that needed to read instantly.</div>
       </div>
-      <div class="work-years">Ongoing</div>
-    </div>
+    </a>
 
-    <div class="work-item">
-      <div class="work-index">05</div>
-      <div>
-        <div class="work-name">Agency 689</div>
-        <div class="work-desc">Founded the studio itself. Fifty-plus brand systems since, still hands-on with every one — which either means he never learned to delegate, or just likes making things.</div>
+    <a class="project" href="https://agency689.com/killer-networking/">
+      <img class="project-media" src="https://agency689.com/wp-content/uploads/2017/05/Killer-header.jpg" alt="Killer Networks identity and packaging">
+      <div class="project-caption">
+        <div class="project-title">Killer Networks</div>
+        <div class="project-desc">Networking hardware turned into a gaming brand with a simple enemy: lag.</div>
       </div>
-      <div class="work-years">2001 – Present</div>
-    </div>
+    </a>
+
+    <a class="project" href="https://zndrcrtv.com/firefly-venues/">
+      <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/FireFly-Sweatshirt.webp" alt="FireFly Venues apparel identity">
+      <div class="project-caption">
+        <div class="project-title">FireFly Venues</div>
+        <div class="project-desc">A warm identity system for events, gatherings, web, and the stuff people keep.</div>
+      </div>
+    </a>
+
+    <a class="project" href="https://zndrcrtv.com/orbital-virtual-studios/">
+      <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/OVS-Truck.webp" alt="Orbital Virtual Studios vehicle identity">
+      <div class="project-caption">
+        <div class="project-title">Orbital</div>
+        <div class="project-desc">A virtual production brand built around movement, precision, and scale.</div>
+      </div>
+    </a>
+
+    <a class="project" href="https://zndrcrtv.com/grillhut/">
+      <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/GH-Brick.webp" alt="GrillHut environmental logo">
+      <div class="project-caption">
+        <div class="project-title">GrillHut</div>
+        <div class="project-desc">A food brand with stronger signage, menus, and a more ownable visual attitude.</div>
+      </div>
+    </a>
+
+    <a class="project" href="https://agency689.com/oxford/">
+      <img class="project-media" src="https://agency689.com/wp-content/uploads/2019/03/oxford-collection_brand-book-cover.jpg" alt="Oxford Collection brand book">
+      <div class="project-caption">
+        <div class="project-title">Oxford Collection</div>
+        <div class="project-desc">A clearer house of brands for a hospitality group ready to scale.</div>
+      </div>
+    </a>
   </section>
 
 </main>
 
 <div class="bottom-bar">
+  <div class="bottom-bar-inner">
   <span class="bottom-cat-wrap">
     <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
     <img class="bottom-cat-wink" src="images/2-Cats-pico-wink.png" alt="" aria-hidden="true">
+    <img class="bottom-cat-closed" src="images/2-Cats-pico-closed.png" alt="" aria-hidden="true">
+    <img class="bottom-cat-half" src="images/2-Cats-pico-half.png" alt="" aria-hidden="true">
   </span>
   <nav class="bottom-nav" aria-label="Primary">
     <a href="index.html">Home</a><span class="sep">|</span><a href="work.html" class="current">Work</a><span class="sep">|</span><a href="about.html">About</a><span class="sep">|</span><a href="book.html">Books</a><span class="sep">|</span><a href="contact.html">Contact</a>
   </nav>
+  </div>
 </div>
 
 <script>
 (() => {
   const cats = document.querySelectorAll('.bottom-cat-wrap');
   if (!cats.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const wink = () => {
+  let lastMove = '';
+  let repeatCount = 0;
+  const nextDelay = () => 6500 + Math.random() * 10500;
+  const chooseMove = () => {
+    let move = Math.random() < 0.45 ? 'love' : 'wink';
+    if (move === lastMove) repeatCount += 1;
+    else repeatCount = 0;
+    if (repeatCount > 1 && Math.random() < 0.7) move = move === 'love' ? 'wink' : 'love';
+    repeatCount = move === lastMove ? repeatCount : 0;
+    lastMove = move;
+    return move;
+  };
+  const runLoveBlink = () => {
+    cats.forEach((cat) => cat.classList.add('is-love-half'));
+    window.setTimeout(() => {
+      cats.forEach((cat) => {
+        cat.classList.remove('is-love-half');
+        cat.classList.add('is-loving');
+      });
+    }, 180);
+    window.setTimeout(() => {
+      cats.forEach((cat) => {
+        cat.classList.remove('is-loving');
+        cat.classList.add('is-love-half');
+      });
+    }, 900);
+    window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-love-half')), 1120);
+    return 1120;
+  };
+  const runWink = () => {
     cats.forEach((cat) => cat.classList.add('is-winking'));
     window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-winking')), 420);
-    window.setTimeout(wink, 3500 + Math.random() * 8500);
+    return 420;
   };
-  window.setTimeout(wink, 1800 + Math.random() * 4500);
+  const animateCat = () => {
+    const duration = chooseMove() === 'love' ? runLoveBlink() : runWink();
+    window.setTimeout(animateCat, duration + nextDelay());
+  };
+  window.setTimeout(animateCat, 2800 + Math.random() * 6000);
 })();
 </script>
 

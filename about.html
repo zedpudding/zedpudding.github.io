@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Zander Vera</title>
-<meta name="description" content="About Zander Vera — creative director, Agency 689 partner, and author.">
+<meta name="description" content="About Zander Vera — creative director, brand builder, writer, musician, and Agency689 partner.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-half.png">
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -15,7 +17,7 @@
     --ink: #1A1917;
     --red: #8C2A2A;
     --muted: #8A8577;
-    --max: 1040px;
+    --max: 1680px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -36,11 +38,16 @@
     position:fixed;
     left:0; right:0; bottom:0;
     z-index:50;
+    padding:0;
+    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
+  }
+  .bottom-bar-inner{
+    width:min(100%, 1680px);
+    margin:0 auto;
     display:flex;
     align-items:flex-end;
     gap:18px;
     padding:40px 32px 18px;
-    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
   }
   .bottom-cat-wrap{
     position:relative;
@@ -56,7 +63,9 @@
     display:block;
     mix-blend-mode:multiply;
   }
-  .bottom-cat-wink{
+  .bottom-cat-wink,
+  .bottom-cat-closed,
+  .bottom-cat-half{
     position:absolute;
     inset:0;
     width:100%;
@@ -67,6 +76,10 @@
   }
   .bottom-cat-wrap.is-winking .bottom-cat{opacity:0;}
   .bottom-cat-wrap.is-winking .bottom-cat-wink{opacity:1;}
+  .bottom-cat-wrap.is-love-half .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-love-half .bottom-cat-half{opacity:1;}
+  .bottom-cat-wrap.is-loving .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-loving .bottom-cat-closed{opacity:1;}
   .bottom-nav{
     display:flex;
     flex-wrap:wrap;
@@ -84,7 +97,7 @@
   .bottom-nav a.current{opacity:1;}
   .bottom-nav .sep{margin:0 10px; opacity:.5;}
 
-  main{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  main{max-width:var(--max); margin:0 auto; padding:0 48px;}
   section{padding:130px 0;}
 
   .eyebrow{
@@ -103,10 +116,17 @@
     font-family:'Staatliches', Impact, sans-serif;
     font-weight:700;
     font-size:clamp(46px, 7vw, 82px);
-    line-height:1.04;
+    line-height:.9;
     letter-spacing:-.01em;
     margin:18px 0 0 0;
-    max-width:12ch;
+    max-width:13ch;
+  }
+  .about-intro{
+    font-size:20px;
+    line-height:1.55;
+    color:#3A3833;
+    max-width:62ch;
+    margin:34px 0 0 0;
   }
   .role{
     padding:30px 0;
@@ -126,13 +146,31 @@
   }
   .role-desc{font-size:16px; color:#3A3833; max-width:56ch;}
   .about-tail{margin-top:44px; font-size:17px; color:#3A3833; max-width:56ch;}
+  .client-list{
+    margin-top:44px;
+    padding-top:34px;
+    border-top:1px solid #DAD5C8;
+    max-width:64ch;
+  }
+  .client-list h2{
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:400;
+    font-size:30px;
+    line-height:1.1;
+    margin:0 0 12px 0;
+  }
+  .client-list p{
+    margin:0;
+    font-size:17px;
+    color:#3A3833;
+  }
 
   @media (max-width:600px){
     body{font-size:16px;}
     section{padding:80px 0;}
     .page-hero{padding-top:60px; padding-bottom:46px;}
     .role{grid-template-columns:1fr; gap:8px;}
-    .bottom-bar{padding:30px 18px 12px; gap:12px;}
+    .bottom-bar-inner{padding:30px 18px 12px; gap:12px;}
     .bottom-cat-wrap{width:86px; bottom:-24px;}
     .bottom-nav{font-size:13px;}
     .bottom-nav .sep{margin:0 6px;}
@@ -144,58 +182,101 @@
 <main>
   <section class="page-hero">
     <div class="eyebrow"><span class="num">—</span>About</div>
-    <h1 class="about-lead">Making other people's ambitions recognizable on sight.</h1>
+    <h1 class="about-lead">Zander Vera has made peace with having too many interests.</h1>
+    <p class="about-intro">Zander Vera is a creative director, brand builder, writer, musician, and partner at Agency689. He works across identity, naming, logos, digital, print, packaging, signage, campaigns, AI-assisted creative systems, and the small, maddening details that decide whether a thing feels finished or just approved.</p>
   </section>
 
   <section style="padding-top:0;">
     <div class="role">
-      <div class="role-years">2001 – Present</div>
+      <div class="role-years">Now</div>
       <div>
-        <div class="role-title">Agency 689, Partner + Creative Director</div>
-        <div class="role-desc">Founded the studio. Fifty-plus brand systems since, from a travel-guitar startup to a rock 'n' roll hotel. Still does the work himself.</div>
+        <div class="role-title">Agency689, Partner + Creative Director</div>
+        <div class="role-desc">Built a studio around the idea that identity is more than a logo, though he has also made a great many logos. Names, systems, campaigns, websites, signs, packaging, rooms, products, and whatever else a brand needs to become real. Now he is using AI the same way he used the web when it first got interesting: as a tool for momentum, sharper thinking, faster prototypes, and better creative decisions.</div>
       </div>
     </div>
 
     <div class="role">
-      <div class="role-years">1997 – 2001</div>
+      <div class="role-years">Digital shift</div>
       <div>
         <div class="role-title">DGWB, Interactive Creative Director</div>
-        <div class="role-desc">Landed in advertising right as it was discovering the internet existed. Spent four years figuring out what a website was supposed to do.</div>
+        <div class="role-desc">Led brands into the interactive era before "digital" became the department everyone claimed to understand. Clients came to him to make the new stuff useful: websites with purpose, campaigns that moved between media, and brand systems that could survive outside a printed page.</div>
       </div>
     </div>
 
     <div class="role">
-      <div class="role-years">1993 – 1997</div>
+      <div class="role-years">First wave</div>
       <div>
         <div class="role-title">firstsource.com, Creative Director</div>
-        <div class="role-desc">Started here. Back when "creative director" didn't mean much of anything at a dot-com nobody remembers.</div>
+        <div class="role-desc">Helped turn emerging technology into language people could understand and experiences they could use. Strategy, interface, content, and design all had to work together, which suited him fine. That has pretty much been the job ever since.</div>
       </div>
     </div>
 
-    <p class="about-tail">Along the way: a handful of ADDYs, a Netty Award, and a keynote at the Art Institute of Orange County, where he presumably told twenty-year-olds that AI would either end their career or make it — still isn't sure which. Lives in California. Writes poems on the side. Recently found out that counts as "other writing."</p>
+    <div class="client-list">
+      <h2>What he's made</h2>
+      <p>Along the way, he has worked on brand systems for Traveler Guitar, Sunset Marquis, Killer Networking, AMD, XBOX, Hotel Figueroa, Oxford Collection, and others.</p>
+    </div>
+
+    <p class="about-tail">He has won some awards, written a book of poems and sketches, made music, and continued to believe that the best creative people do not defend the old way or chase the new one blindly. They learn the tool, test the edge, and make the work better.</p>
   </section>
 </main>
 
 <div class="bottom-bar">
+  <div class="bottom-bar-inner">
   <span class="bottom-cat-wrap">
     <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
     <img class="bottom-cat-wink" src="images/2-Cats-pico-wink.png" alt="" aria-hidden="true">
+    <img class="bottom-cat-closed" src="images/2-Cats-pico-closed.png" alt="" aria-hidden="true">
+    <img class="bottom-cat-half" src="images/2-Cats-pico-half.png" alt="" aria-hidden="true">
   </span>
   <nav class="bottom-nav" aria-label="Primary">
     <a href="index.html">Home</a><span class="sep">|</span><a href="work.html">Work</a><span class="sep">|</span><a href="about.html" class="current">About</a><span class="sep">|</span><a href="book.html">Books</a><span class="sep">|</span><a href="contact.html">Contact</a>
   </nav>
+  </div>
 </div>
 
 <script>
 (() => {
   const cats = document.querySelectorAll('.bottom-cat-wrap');
   if (!cats.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const wink = () => {
+  let lastMove = '';
+  let repeatCount = 0;
+  const nextDelay = () => 6500 + Math.random() * 10500;
+  const chooseMove = () => {
+    let move = Math.random() < 0.45 ? 'love' : 'wink';
+    if (move === lastMove) repeatCount += 1;
+    else repeatCount = 0;
+    if (repeatCount > 1 && Math.random() < 0.7) move = move === 'love' ? 'wink' : 'love';
+    repeatCount = move === lastMove ? repeatCount : 0;
+    lastMove = move;
+    return move;
+  };
+  const runLoveBlink = () => {
+    cats.forEach((cat) => cat.classList.add('is-love-half'));
+    window.setTimeout(() => {
+      cats.forEach((cat) => {
+        cat.classList.remove('is-love-half');
+        cat.classList.add('is-loving');
+      });
+    }, 180);
+    window.setTimeout(() => {
+      cats.forEach((cat) => {
+        cat.classList.remove('is-loving');
+        cat.classList.add('is-love-half');
+      });
+    }, 900);
+    window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-love-half')), 1120);
+    return 1120;
+  };
+  const runWink = () => {
     cats.forEach((cat) => cat.classList.add('is-winking'));
     window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-winking')), 420);
-    window.setTimeout(wink, 3500 + Math.random() * 8500);
+    return 420;
   };
-  window.setTimeout(wink, 1800 + Math.random() * 4500);
+  const animateCat = () => {
+    const duration = chooseMove() === 'love' ? runLoveBlink() : runWink();
+    window.setTimeout(animateCat, duration + nextDelay());
+  };
+  window.setTimeout(animateCat, 2800 + Math.random() * 6000);
 })();
 </script>
 

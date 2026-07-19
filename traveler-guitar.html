@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traveler Guitar — Zander Vera</title>
+<meta name="description" content="Traveler Guitar brand work by Zander Vera — master brand, product logos, packaging, digital, and product badging.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-half.png">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F2F0EA;
+    --paper2: #E8E4D9;
+    --ink: #1A1917;
+    --red: #8C2A2A;
+    --muted: #8A8577;
+    --max: 1680px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Atkinson Hyperlegible', Arial, sans-serif;
+    font-size:18px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:100px;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--red);color:#fff;}
+
+  .bottom-bar{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:50;
+    padding:0;
+    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
+  }
+  .bottom-bar-inner{
+    width:min(100%, 1680px);
+    margin:0 auto;
+    display:flex;
+    align-items:flex-end;
+    gap:18px;
+    padding:40px 32px 18px;
+  }
+  .bottom-cat-wrap{
+    position:relative;
+    bottom:-34px;
+    width:121px;
+    display:block;
+    flex:0 0 auto;
+    pointer-events:none;
+  }
+  .bottom-cat,
+  .bottom-cat-wink,
+  .bottom-cat-closed,
+  .bottom-cat-half{
+    width:100%;
+    height:auto;
+    display:block;
+    mix-blend-mode:multiply;
+  }
+  .bottom-cat-wink,
+  .bottom-cat-closed,
+  .bottom-cat-half{
+    position:absolute;
+    inset:0;
+    opacity:0;
+  }
+  .bottom-cat-wrap.is-winking .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-winking .bottom-cat-wink{opacity:1;}
+  .bottom-cat-wrap.is-love-half .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-love-half .bottom-cat-half{opacity:1;}
+  .bottom-cat-wrap.is-loving .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-loving .bottom-cat-closed{opacity:1;}
+  .bottom-nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:0;
+    text-transform:uppercase;
+    color:var(--red);
+    padding-bottom:8px;
+  }
+  .bottom-nav a{text-decoration:none; opacity:.85; transition:opacity .15s;}
+  .bottom-nav a:hover,
+  .bottom-nav a.current{opacity:1;}
+  .bottom-nav .sep{margin:0 10px; opacity:.5;}
+
+  main{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 48px 28px;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top:34px;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-size:18px;
+    line-height:1;
+    color:var(--red);
+    text-decoration:none;
+    text-transform:uppercase;
+  }
+  .back-link:hover{text-decoration:underline;}
+
+  .case-hero{
+    padding:72px 0 48px;
+  }
+  .case-kicker{
+    font-family:'Staatliches', Impact, sans-serif;
+    font-size:20px;
+    line-height:1;
+    color:var(--red);
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  h1{
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:400;
+    font-size:clamp(58px, 5.8vw, 104px);
+    line-height:.88;
+    letter-spacing:0;
+    margin:0;
+    color:var(--ink);
+    text-transform:uppercase;
+  }
+  .hero-copy-grid{
+    display:grid;
+    grid-template-columns:minmax(0, .95fr) minmax(460px, 1.05fr);
+    gap:86px;
+    align-items:start;
+  }
+  .hero-deck{
+    margin:16px 0 0;
+    max-width:70ch;
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.35;
+  }
+  .hero-logo-panel{
+    position:relative;
+    display:grid;
+    place-items:center;
+    min-height:560px;
+    margin:56px auto 0;
+    background:#087FC5;
+    border-radius:10px;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .hero-logo-panel.has-bg{
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+  }
+  .hero-logo-panel::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:0;
+    background:
+      radial-gradient(ellipse at 50% 52%, rgba(255,255,255,.64) 0%, rgba(255,255,255,.28) 19%, transparent 38%);
+  }
+  .hero-logo-panel::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:3;
+    background:
+      linear-gradient(180deg, rgba(0,53,106,.06) 0%, rgba(255,255,255,.02) 42%, rgba(255,255,255,.14) 100%);
+    pointer-events:none;
+  }
+  .cloud-photo{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:116%;
+    height:116%;
+    min-width:100%;
+    min-height:100%;
+    object-fit:cover;
+    object-position:center 55%;
+    z-index:1;
+    pointer-events:none;
+    transform:translate3d(-50%, -50%, 0) scale(1.03);
+    will-change:transform;
+    animation:cloud-photo-drift 38s ease-in-out infinite alternate;
+  }
+  .cloud-photo-soft{
+    z-index:2;
+    opacity:.38;
+    filter:blur(18px);
+    mix-blend-mode:screen;
+    animation-duration:56s;
+    animation-direction:alternate-reverse;
+  }
+  .hero-mark{
+    position:relative;
+    z-index:4;
+    display:block;
+    width:min(42vw, 540px);
+    height:auto;
+    object-fit:contain;
+  }
+  @keyframes cloud-photo-drift{
+    from{transform:translate3d(-51.5%, -50%, 0) scale(1.04);}
+    to{transform:translate3d(-48.5%, -51.4%, 0) scale(1.08);}
+  }
+  .case-copy{
+    margin:0;
+    font-family:'Atkinson Hyperlegible', Arial, sans-serif;
+    font-weight:400;
+    max-width:34ch;
+    color:var(--ink);
+    font-size:clamp(28px, 2.85vw, 46px);
+    line-height:1.05;
+    letter-spacing:0;
+    word-spacing:-.08em;
+    font-kerning:normal;
+  }
+  .case-meta{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+    margin:0;
+    padding:0;
+    border-top:0;
+    border-right:0;
+  }
+  .meta-label{
+    font-family:'Atkinson Hyperlegible', Arial, sans-serif;
+    color:var(--ink);
+    font-size:16px;
+    line-height:1.35;
+    text-transform:none;
+    margin-bottom:2px;
+  }
+  .meta-value{
+    margin:0;
+    color:var(--ink);
+    font-size:16px;
+    line-height:1.35;
+  }
+  .case-summary{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:12px;
+    padding:0 20px 178px;
+    align-items:start;
+  }
+  .assignment-copy p{
+    margin:0;
+    max-width:84ch;
+    color:var(--ink);
+    font-size:16px;
+    line-height:1.42;
+  }
+  .assignment-copy p + p{margin-top:22px;}
+  .work-list{
+    margin:0;
+    padding:0;
+    list-style:none;
+    color:var(--ink);
+    font-size:16px;
+    line-height:1.35;
+    letter-spacing:0;
+    text-transform:none;
+  }
+  .work-list li{
+    margin:0;
+  }
+  .image-pair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:0 0 110px;
+    align-items:stretch;
+  }
+  .image-pair img{
+    width:100%;
+    display:block;
+    object-fit:cover;
+    background:#fff;
+    border-radius:10px;
+  }
+  .image-pair img{aspect-ratio:1.72/1;}
+  .image-pair img:nth-child(2){margin-top:0;}
+  .logo-formula{
+    margin:0 0 110px;
+    overflow:hidden;
+  }
+  .logo-formula img{
+    width:50%;
+    margin:0 auto;
+    display:block;
+    height:auto;
+  }
+  .section-note{
+    display:grid;
+    grid-template-columns:.6fr 1.4fr;
+    gap:32px;
+    padding:54px 0;
+    border-top:1px solid #DAD5C8;
+  }
+  .section-note h2{
+    margin:0;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:400;
+    font-size:clamp(38px, 5vw, 70px);
+    line-height:.9;
+    color:var(--red);
+    text-transform:uppercase;
+  }
+  .section-note p{
+    margin:0;
+    max-width:64ch;
+    color:#3A3833;
+  }
+  .lineup-panel{
+    margin:0 0 36px;
+    overflow:hidden;
+  }
+  .lineup-panel img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+  }
+  .product-strip{
+    position:relative;
+    margin:0 0 104px;
+    overflow:hidden;
+    overflow-y:hidden;
+    padding:0;
+  }
+  .product-strip::before,
+  .product-strip::after{
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    z-index:2;
+    width:90px;
+    pointer-events:none;
+  }
+  .product-strip::before{
+    left:0;
+    background:linear-gradient(90deg, var(--paper) 0%, rgba(242,240,234,0) 100%);
+  }
+  .product-strip::after{
+    right:0;
+    background:linear-gradient(270deg, var(--paper) 0%, rgba(242,240,234,0) 100%);
+  }
+  .product-strip-track{
+    display:flex;
+    gap:18px;
+    min-width:max-content;
+    width:max-content;
+    animation:logo-marquee 44s linear infinite;
+  }
+  .product-strip:hover .product-strip-track,
+  .product-strip:focus-within .product-strip-track{
+    animation-play-state:paused;
+  }
+  .product-strip img{
+    width:clamp(180px, 15vw, 260px);
+    aspect-ratio:1.35/1;
+    object-fit:contain;
+    display:block;
+    padding:10px 24px;
+    flex:0 0 auto;
+  }
+  @keyframes logo-marquee{
+    from{transform:translate3d(0, 0, 0);}
+    to{transform:translate3d(calc(-50% - 9px), 0, 0);}
+  }
+  .campaign-section{
+    margin:0 0 112px;
+  }
+  .campaign-hero-grid{
+    display:grid;
+    grid-template-columns:minmax(0, .58fr) minmax(0, .9fr);
+    gap:clamp(28px, 6vw, 86px);
+    align-items:start;
+  }
+  .campaign-media,
+  .campaign-compare{
+    margin:0;
+    min-width:0;
+  }
+  .campaign-media img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:10px;
+  }
+  .campaign-media.is-cropped img{
+    aspect-ratio:1.29/1;
+    object-fit:cover;
+  }
+  .campaign-title{
+    margin:26px 0 18px;
+    color:#3A3833;
+    font-size:24px;
+    line-height:1.2;
+  }
+  .campaign-compare-frame{
+    position:relative;
+    overflow:hidden;
+    border-radius:10px;
+    background:#fff;
+    touch-action:pan-y;
+  }
+  .campaign-compare-frame img{
+    width:100%;
+    height:auto;
+    display:block;
+    user-select:none;
+    pointer-events:none;
+  }
+  .campaign-compare-after{
+    position:absolute;
+    inset:0;
+    clip-path:inset(0 calc(100% - var(--compare, 50%)) 0 0);
+  }
+  .campaign-compare-range{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    opacity:0;
+    cursor:ew-resize;
+  }
+  .campaign-compare-handle{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:var(--compare, 50%);
+    width:1px;
+    background:rgba(255,255,255,.94);
+    transform:translateX(-50%);
+    pointer-events:none;
+  }
+  .campaign-compare-handle::before{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:rgba(255,255,255,.94);
+    border:1px solid rgba(26,25,23,.16);
+    transform:translate(-50%, -50%);
+    box-shadow:0 10px 28px rgba(0,0,0,.14);
+  }
+  .campaign-compare-handle::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:12px;
+    height:14px;
+    border-left:2px solid var(--red);
+    border-right:2px solid var(--red);
+    transform:translate(-50%, -50%);
+  }
+  .campaign-compare-labels{
+    position:absolute;
+    left:18px;
+    right:18px;
+    bottom:18px;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    color:#3A3833;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-size:16px;
+    line-height:1;
+    text-transform:uppercase;
+    pointer-events:none;
+  }
+  .campaign-compare-labels span{
+    background:rgba(255,255,255,.9);
+    border-radius:999px;
+    padding:8px 10px 6px;
+  }
+  .campaign-caption{
+    margin:16px 0 0;
+    color:#706B62;
+    font-size:22px;
+    line-height:1.25;
+  }
+  .polaroid-wall{
+    margin:0;
+  }
+  .polaroid-wall img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:10px;
+  }
+  .ad-gallery{
+    margin:0 0 112px;
+  }
+  .ad-gallery-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+    margin:0 0 20px;
+  }
+  .ad-gallery h2{
+    margin:0;
+    color:#3A3833;
+    font-size:24px;
+    line-height:1.2;
+    font-weight:400;
+  }
+  .gallery-controls{
+    display:flex;
+    gap:10px;
+  }
+  .gallery-control,
+  .lightbox-button{
+    appearance:none;
+    border:1px solid #DAD5C8;
+    background:var(--paper);
+    color:var(--red);
+    font-family:'Staatliches', Impact, sans-serif;
+    font-size:24px;
+    line-height:1;
+    cursor:pointer;
+  }
+  .gallery-control{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+  }
+  .ad-gallery-track{
+    display:flex;
+    gap:24px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-padding:0;
+    padding:0 0 18px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .ad-gallery-track::-webkit-scrollbar{height:8px;}
+  .ad-gallery-track::-webkit-scrollbar-track{background:#E4E0D5;}
+  .ad-gallery-track::-webkit-scrollbar-thumb{background:#A02D2D; border-radius:999px;}
+  .ad-thumb{
+    flex:0 0 clamp(260px, 28vw, 430px);
+    border:0;
+    padding:0;
+    background:transparent;
+    cursor:zoom-in;
+    scroll-snap-align:start;
+  }
+  .ad-thumb img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+  }
+  .ad-lightbox[hidden]{display:none;}
+  .ad-lightbox{
+    position:fixed;
+    inset:0;
+    z-index:30;
+    display:grid;
+    place-items:center;
+    padding:32px;
+    background:rgba(26,25,23,.88);
+  }
+  .lightbox-frame{
+    position:relative;
+    width:min(92vw, 1040px);
+    max-height:92vh;
+    display:grid;
+    place-items:center;
+  }
+  .lightbox-frame img{
+    max-width:100%;
+    max-height:86vh;
+    display:block;
+    border-radius:10px;
+  }
+  .lightbox-button{
+    position:absolute;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:rgba(242,240,234,.94);
+  }
+  .lightbox-close{
+    top:-18px;
+    right:-18px;
+  }
+  .lightbox-prev,
+  .lightbox-next{
+    top:50%;
+    transform:translateY(-50%);
+  }
+  .lightbox-prev{left:-22px;}
+  .lightbox-next{right:-22px;}
+  @media (max-width:760px){
+    main{padding:0 18px 28px;}
+    .case-hero{padding:52px 0 38px;}
+    .hero-copy-grid,
+    .case-summary,
+    .section-note{grid-template-columns:1fr; display:grid;}
+    .hero-logo-panel{min-height:360px; margin-top:36px;}
+    .hero-mark{width:min(74vw, 420px);}
+    .case-meta{
+      grid-template-columns:1fr;
+      border-right:0;
+      border-bottom:1px solid #DAD5C8;
+      padding:0 0 28px;
+    }
+    .image-pair{grid-template-columns:1fr; gap:18px;}
+    .image-pair img:nth-child(2){margin-top:0;}
+    .logo-formula{margin-bottom:70px;}
+    .lineup-panel{
+      overflow-x:auto;
+      padding-bottom:8px;
+    }
+    .lineup-panel img{
+      width:1120px;
+      max-width:none;
+    }
+    .product-strip{margin-bottom:78px;}
+    .product-strip::before,
+    .product-strip::after{width:48px;}
+    .product-strip img{width:210px; padding:8px 18px;}
+    .campaign-section{margin-bottom:82px;}
+    .campaign-hero-grid{
+      grid-template-columns:1fr;
+      gap:24px;
+    }
+    .campaign-title{font-size:22px; margin-top:22px;}
+    .campaign-caption{font-size:19px;}
+    .campaign-compare-labels{font-size:14px; left:12px; right:12px; bottom:12px;}
+    .campaign-compare-handle::before{width:38px; height:38px;}
+    .polaroid-wall{margin-bottom:0;}
+    .ad-gallery{margin-bottom:82px;}
+    .ad-gallery-header{align-items:flex-end;}
+    .ad-thumb{flex-basis:78vw;}
+    .ad-lightbox{padding:18px;}
+    .lightbox-frame{width:100%;}
+    .lightbox-close{top:8px; right:8px;}
+    .lightbox-prev{left:8px;}
+    .lightbox-next{right:8px;}
+  }
+  @media (max-width:600px){
+    body{font-size:16px;}
+    .bottom-bar-inner{padding:30px 18px 12px; gap:12px;}
+    .bottom-cat-wrap{width:86px; bottom:-24px;}
+    .bottom-nav{font-size:13px;}
+    .bottom-nav .sep{margin:0 6px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .cloud-photo{animation:none;}
+    .product-strip{
+      overflow-x:auto;
+      padding-bottom:8px;
+    }
+    .product-strip::before,
+    .product-strip::after{display:none;}
+    .product-strip-track{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <a class="back-link" href="work.html">← Work</a>
+
+  <section class="case-hero">
+    <div class="hero-copy-grid">
+      <div>
+        <h1>Traveler Guitar</h1>
+        <p class="hero-deck">Brand identity, product logo system, product badging, headstock branding, marketing collateral</p>
+      </div>
+      <h2 class="case-copy">Built the master brand and product identity system for a guitar line made to go anywhere.</h2>
+    </div>
+    <div class="hero-logo-panel">
+      <img class="cloud-photo" src="images/traveler-clouds.png" alt="" aria-hidden="true">
+      <img class="cloud-photo cloud-photo-soft" src="images/traveler-clouds.png" alt="" aria-hidden="true">
+      <img class="hero-mark" src="images/traveler-guitar-logo-transparent.png" alt="Traveler Guitar master brand mark">
+    </div>
+  </section>
+
+  <section class="case-summary">
+    <div class="case-meta">
+      <div>
+        <div class="meta-label">Role:</div>
+        <p class="meta-value">Creative Director</p>
+        <p class="meta-value">Agency689 Inc.</p>
+      </div>
+      <div>
+        <div class="meta-label">Work:</div>
+        <ul class="work-list">
+          <li>Master brand mark</li>
+          <li>Product logo system</li>
+          <li>Sub-brand development</li>
+          <li>Product badging + headstock branding</li>
+          <li>Anniversary marks</li>
+          <li>Marketing collateral</li>
+        </ul>
+      </div>
+    </div>
+    <div class="assignment-copy">
+      <p>Traveler Guitar builds instruments for players who want to keep music within reach: on the road, backstage, in an apartment, in a hotel room, or anywhere a full-size guitar becomes too much object for the moment. The brand had strong recognition in the travel-guitar space, but its growing product family needed a clearer system around it.</p>
+      <p>I worked with the team to turn a logo refresh into a broader identity system. The work included a master brand mark, a complete family of product logos, sub-brand development, product badging, headstock branding, and marketing collateral built to hold together across retail, packaging, ecommerce, photography, and the instruments themselves.</p>
+      <p>The goal was to make the small guitar feel like the real one. The identity needed to be simple enough to live on hardware and headstocks, but strong enough to carry the brand across a full product ecosystem. The final system created a more consistent visual language while giving each line enough room to keep its own character.</p>
+    </div>
+  </section>
+
+  <div class="image-pair">
+    <img src="TG/TG-collateral.webp" alt="Traveler Guitar collateral system">
+    <img src="TG/campground.webp" alt="Traveler Guitar campground campaign artwork">
+  </div>
+
+  <section class="logo-formula" aria-label="Traveler Guitar logo build">
+    <img src="TG/TG-logo-build.png" alt="Traveler Guitar logo build graphic">
+  </section>
+
+  <section class="section-note">
+    <h2>Not just a logo.</h2>
+    <p>Traveler needed a brand that could live at every scale: on a headstock, on a product page, on packaging, in a catalog, and across an expanding line of instruments. The work made room for the master brand while giving each model a clearer personality of its own.</p>
+  </section>
+
+  <div class="lineup-panel">
+    <img src="TG/guitar-lineup.png" alt="Traveler Guitar product family lineup with logos and instruments">
+  </div>
+
+  <div class="product-strip" aria-label="Traveler Guitar product logo system">
+    <div class="product-strip-track">
+      <img src="TG/Logos/E-Series.svg" alt="Traveler Guitar E-Series product mark">
+      <img src="TG/Logos/EDGE.svg" alt="Traveler Guitar EDGE product mark">
+      <img src="TG/Logos/Escape.svg" alt="Traveler Guitar Escape product mark">
+      <img src="TG/Logos/Microcaster.svg" alt="Traveler Guitar Microcaster product mark">
+      <img src="TG/Logos/Pro-Series.svg" alt="Traveler Guitar Pro-Series product mark">
+      <img src="TG/Logos/Redlands.svg" alt="Traveler Guitar Redlands product mark">
+      <img src="TG/Logos/sonic.svg" alt="Traveler Guitar Sonic product mark">
+      <img src="TG/Logos/speedster.svg" alt="Traveler Guitar Speedster product mark">
+      <img src="TG/Logos/Travelcaster.svg" alt="Traveler Guitar Travelcaster product mark">
+      <img src="TG/Logos/Ultralight.svg" alt="Traveler Guitar Ultralight product mark">
+      <img src="TG/Logos/Travelcaster_1.svg" alt="Traveler Guitar alternate product mark">
+      <img src="TG/Logos/E-Series.svg" alt="" aria-hidden="true">
+      <img src="TG/Logos/EDGE.svg" alt="" aria-hidden="true">
+      <img src="TG/Logos/Escape.svg" alt="" aria-hidden="true">
+      <img src="TG/Logos/Microcaster.svg" alt="" aria-hidden="true">
+      <img src="TG/Logos/Pro-Series.svg" alt="" aria-hidden="true">
+      <img src="TG/Logos/Redlands.svg" alt="" aria-hidden="true">
+      <img src="TG/Logos/sonic.svg" alt="" aria-hidden="true">
+      <img src="TG/Logos/speedster.svg" alt="" aria-hidden="true">
+      <img src="TG/Logos/Travelcaster.svg" alt="" aria-hidden="true">
+      <img src="TG/Logos/Ultralight.svg" alt="" aria-hidden="true">
+      <img src="TG/Logos/Travelcaster_1.svg" alt="" aria-hidden="true">
+    </div>
+  </div>
+
+  <section class="ad-gallery" aria-labelledby="ad-gallery-title">
+    <div class="ad-gallery-header">
+      <h2 id="ad-gallery-title">Ads</h2>
+      <div class="gallery-controls" aria-label="Ad gallery controls">
+        <button class="gallery-control gallery-prev" type="button" aria-label="Scroll ads left">‹</button>
+        <button class="gallery-control gallery-next" type="button" aria-label="Scroll ads right">›</button>
+      </div>
+    </div>
+    <div class="ad-gallery-track" tabindex="0" aria-label="Traveler Guitar ad gallery">
+      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-12-a744e402.webp" data-title="Traveler Guitar ad">
+        <img src="TG/Ads/TG-Ads-Vert-12-a744e402.webp" alt="Traveler Guitar vertical ad">
+      </button>
+      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-2-bc142c20.webp" data-title="Traveler Guitar ad">
+        <img src="TG/Ads/TG-Ads-Vert-2-bc142c20.webp" alt="Traveler Guitar vertical ad">
+      </button>
+      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-4-cba69261.webp" data-title="Traveler Guitar ad">
+        <img src="TG/Ads/TG-Ads-Vert-4-cba69261.webp" alt="Traveler Guitar vertical ad">
+      </button>
+      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-5-2b86c034.webp" data-title="Traveler Guitar ad">
+        <img src="TG/Ads/TG-Ads-Vert-5-2b86c034.webp" alt="Traveler Guitar vertical ad">
+      </button>
+      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-6-19733e1f.webp" data-title="Traveler Guitar ad">
+        <img src="TG/Ads/TG-Ads-Vert-6-19733e1f.webp" alt="Traveler Guitar vertical ad">
+      </button>
+      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-9-005d96ff.webp" data-title="Traveler Guitar ad">
+        <img src="TG/Ads/TG-Ads-Vert-9-005d96ff.webp" alt="Traveler Guitar vertical ad">
+      </button>
+    </div>
+  </section>
+
+  <section class="campaign-section" aria-labelledby="sonic-bloom-title">
+    <div class="campaign-hero-grid">
+      <figure class="campaign-media">
+        <img src="TG/Ads/New/SonicBloom-FullPage.jpg" alt="Traveler Guitar Sonic Bloom ad">
+      </figure>
+      <figure class="campaign-media is-cropped">
+        <img src="TG/web/Therese-Forest-10-1-24.webp" alt="Sonic Bloom forest campaign artwork">
+      </figure>
+    </div>
+
+    <h2 class="campaign-title" id="sonic-bloom-title">Sonic Bloom</h2>
+
+    <figure class="campaign-compare">
+      <div class="campaign-compare-frame" style="--compare:50%;">
+        <img src="TG/before:after/Bloom-Before-dd35bbe3.webp" alt="Sonic Bloom background before compositing">
+        <div class="campaign-compare-after">
+          <img src="TG/before:after/Bloom-After-e057fada.webp" alt="Sonic Bloom final campaign image">
+        </div>
+        <input class="campaign-compare-range" type="range" min="0" max="100" value="50" aria-label="Compare Sonic Bloom before and after">
+        <span class="campaign-compare-handle" aria-hidden="true"></span>
+        <div class="campaign-compare-labels" aria-hidden="true"><span>Before</span><span>After</span></div>
+      </div>
+      <figcaption class="campaign-caption">Sonic Bloom before / after</figcaption>
+    </figure>
+  </section>
+
+  <section class="campaign-section" aria-labelledby="thunderstorm-title">
+    <div class="campaign-hero-grid">
+      <figure class="campaign-media">
+        <img src="TG/Ads/New/Force-FullPage.jpg" alt="Traveler Guitar A Force of Nature ad">
+      </figure>
+      <figure class="campaign-media is-cropped">
+        <img src="TG/web/NADIA-Thunderstorm-FLAT.webp" alt="Thunderstorm campaign artwork">
+      </figure>
+    </div>
+
+    <h2 class="campaign-title" id="thunderstorm-title">A Force of Nature</h2>
+
+    <figure class="campaign-compare">
+      <div class="campaign-compare-frame" style="--compare:50%;">
+        <img src="TG/before:after/NADIA-Thunderstorm-Before-cca14dd8.webp" alt="Thunderstorm background before compositing">
+        <div class="campaign-compare-after">
+          <img src="TG/before:after/NADIA-Thunderstorm-After-378d4bf0.webp" alt="Thunderstorm final campaign image">
+        </div>
+        <input class="campaign-compare-range" type="range" min="0" max="100" value="50" aria-label="Compare A Force of Nature before and after">
+        <span class="campaign-compare-handle" aria-hidden="true"></span>
+        <div class="campaign-compare-labels" aria-hidden="true"><span>Before</span><span>After</span></div>
+      </div>
+      <figcaption class="campaign-caption">A Force of Nature before / after</figcaption>
+    </figure>
+  </section>
+
+  <figure class="polaroid-wall">
+    <img src="TG/Polaroid-Wall.jpg" alt="Traveler Guitar polaroid wall">
+  </figure>
+</main>
+
+<div class="ad-lightbox" hidden role="dialog" aria-modal="true" aria-label="Ad viewer">
+  <div class="lightbox-frame">
+    <button class="lightbox-button lightbox-close" type="button" aria-label="Close viewer">×</button>
+    <button class="lightbox-button lightbox-prev" type="button" aria-label="Previous ad">‹</button>
+    <img class="lightbox-image" src="" alt="">
+    <button class="lightbox-button lightbox-next" type="button" aria-label="Next ad">›</button>
+  </div>
+</div>
+
+<div class="bottom-bar">
+  <div class="bottom-bar-inner">
+  <span class="bottom-cat-wrap">
+    <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
+    <img class="bottom-cat-wink" src="images/2-Cats-pico-wink.png" alt="" aria-hidden="true">
+    <img class="bottom-cat-closed" src="images/2-Cats-pico-closed.png" alt="" aria-hidden="true">
+    <img class="bottom-cat-half" src="images/2-Cats-pico-half.png" alt="" aria-hidden="true">
+  </span>
+  <nav class="bottom-nav" aria-label="Primary">
+    <a href="index.html">Home</a><span class="sep">|</span><a href="work.html" class="current">Work</a><span class="sep">|</span><a href="about.html">About</a><span class="sep">|</span><a href="book.html">Books</a><span class="sep">|</span><a href="contact.html">Contact</a>
+  </nav>
+  </div>
+</div>
+
+<script>
+(() => {
+  const sliders = document.querySelectorAll('.campaign-compare-frame');
+  sliders.forEach((slider) => {
+    const input = slider.querySelector('.campaign-compare-range');
+    if (!input) return;
+    const update = () => slider.style.setProperty('--compare', `${input.value}%`);
+    input.addEventListener('input', update);
+    update();
+  });
+})();
+
+(() => {
+  const gallery = document.querySelector('.ad-gallery');
+  if (!gallery) return;
+
+  const track = gallery.querySelector('.ad-gallery-track');
+  const thumbs = [...gallery.querySelectorAll('.ad-thumb')];
+  const lightbox = document.querySelector('.ad-lightbox');
+  const lightboxImage = lightbox?.querySelector('.lightbox-image');
+  const closeButton = lightbox?.querySelector('.lightbox-close');
+  const prevButton = lightbox?.querySelector('.lightbox-prev');
+  const nextButton = lightbox?.querySelector('.lightbox-next');
+  let activeIndex = 0;
+
+  const scrollGallery = (direction) => {
+    if (!track) return;
+    track.scrollBy({left: direction * Math.max(320, track.clientWidth * .72), behavior:'smooth'});
+  };
+
+  const showImage = (index) => {
+    if (!lightbox || !lightboxImage || !thumbs.length) return;
+    activeIndex = (index + thumbs.length) % thumbs.length;
+    const thumb = thumbs[activeIndex];
+    lightboxImage.src = thumb.dataset.full;
+    lightboxImage.alt = thumb.querySelector('img')?.alt || thumb.dataset.title || 'Traveler Guitar ad';
+  };
+
+  const openLightbox = (index) => {
+    if (!lightbox) return;
+    showImage(index);
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    closeButton?.focus();
+  };
+
+  const closeLightbox = () => {
+    if (!lightbox || lightbox.hidden) return;
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+    thumbs[activeIndex]?.focus();
+  };
+
+  gallery.querySelector('.gallery-prev')?.addEventListener('click', () => scrollGallery(-1));
+  gallery.querySelector('.gallery-next')?.addEventListener('click', () => scrollGallery(1));
+  thumbs.forEach((thumb, index) => thumb.addEventListener('click', () => openLightbox(index)));
+  closeButton?.addEventListener('click', closeLightbox);
+  prevButton?.addEventListener('click', () => showImage(activeIndex - 1));
+  nextButton?.addEventListener('click', () => showImage(activeIndex + 1));
+  lightbox?.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+  window.addEventListener('keydown', (event) => {
+    if (!lightbox || lightbox.hidden) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowLeft') showImage(activeIndex - 1);
+    if (event.key === 'ArrowRight') showImage(activeIndex + 1);
+  });
+})();
+
+(() => {
+  const cats = document.querySelectorAll('.bottom-cat-wrap');
+  if (!cats.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let lastMove = '';
+  let repeatCount = 0;
+  const nextDelay = () => 6500 + Math.random() * 10500;
+  const chooseMove = () => {
+    let move = Math.random() < 0.45 ? 'love' : 'wink';
+    if (move === lastMove) repeatCount += 1;
+    else repeatCount = 0;
+    if (repeatCount > 1 && Math.random() < 0.7) move = move === 'love' ? 'wink' : 'love';
+    repeatCount = move === lastMove ? repeatCount : 0;
+    lastMove = move;
+    return move;
+  };
+  const runLoveBlink = () => {
+    cats.forEach((cat) => cat.classList.add('is-love-half'));
+    window.setTimeout(() => {
+      cats.forEach((cat) => {
+        cat.classList.remove('is-love-half');
+        cat.classList.add('is-loving');
+      });
+    }, 180);
+    window.setTimeout(() => {
+      cats.forEach((cat) => {
+        cat.classList.remove('is-loving');
+        cat.classList.add('is-love-half');
+      });
+    }, 900);
+    window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-love-half')), 1120);
+    return 1120;
+  };
+  const runWink = () => {
+    cats.forEach((cat) => cat.classList.add('is-winking'));
+    window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-winking')), 420);
+    return 420;
+  };
+  const animateCat = () => {
+    const duration = chooseMove() === 'love' ? runLoveBlink() : runWink();
+    window.setTimeout(animateCat, duration + nextDelay());
+  };
+  window.setTimeout(animateCat, 2800 + Math.random() * 6000);
+})();
+</script>
+
+</body>
+</html>

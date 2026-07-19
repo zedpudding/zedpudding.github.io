@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-half.png">
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -16,7 +18,7 @@
     --ink: #1A1917;
     --red: #8C2A2A;
     --muted: #8A8577;
-    --max: 1040px;
+    --max: 1680px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -37,11 +39,16 @@
     position:fixed;
     left:0; right:0; bottom:0;
     z-index:50;
+    padding:0;
+    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
+  }
+  .bottom-bar-inner{
+    width:min(100%, 1680px);
+    margin:0 auto;
     display:flex;
     align-items:flex-end;
     gap:18px;
     padding:40px 32px 18px;
-    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
   }
   .bottom-cat-wrap{
     position:relative;
@@ -57,7 +64,9 @@
     display:block;
     mix-blend-mode:multiply;
   }
-  .bottom-cat-wink{
+  .bottom-cat-wink,
+  .bottom-cat-closed,
+  .bottom-cat-half{
     position:absolute;
     inset:0;
     width:100%;
@@ -68,6 +77,10 @@
   }
   .bottom-cat-wrap.is-winking .bottom-cat{opacity:0;}
   .bottom-cat-wrap.is-winking .bottom-cat-wink{opacity:1;}
+  .bottom-cat-wrap.is-love-half .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-love-half .bottom-cat-half{opacity:1;}
+  .bottom-cat-wrap.is-loving .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-loving .bottom-cat-closed{opacity:1;}
   .bottom-nav{
     display:flex;
     flex-wrap:wrap;
@@ -85,7 +98,7 @@
   .bottom-nav a.current{opacity:1;}
   .bottom-nav .sep{margin:0 10px; opacity:.5;}
 
-  main{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  main{max-width:var(--max); margin:0 auto; padding:0 48px;}
   section{padding:110px 0 130px;}
 
   .eyebrow{
@@ -104,11 +117,11 @@
     padding:0;
   }
   .book-inner{
-    max-width:var(--max);
+    max-width:1100px;
     margin:0 auto;
     display:grid;
-    grid-template-columns:1.2fr 1fr;
-    gap:60px;
+    grid-template-columns:auto minmax(0, 1fr);
+    gap:52px;
     align-items:center;
   }
   .book-title-pre,
@@ -126,7 +139,7 @@
     font-weight:700;
     letter-spacing:-.01em;
     font-size:clamp(58px, 8vw, 92px);
-    line-height:.92;
+    line-height:.9;
     margin:2px 0;
     color:var(--ink);
   }
@@ -140,6 +153,109 @@
     font-size:16px;
     color:#3A3833;
     max-width:58ch;
+  }
+  .book-proof{
+    max-width:1100px;
+    margin:84px auto 0;
+    padding:34px 0;
+    border-top:1px solid #DAD5C8;
+    border-bottom:1px solid #DAD5C8;
+    display:grid;
+    grid-template-columns:minmax(240px, .65fr) minmax(0, 1fr);
+    gap:48px;
+    align-items:start;
+  }
+  .book-proof h2{
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
+    font-size:clamp(34px, 5vw, 62px);
+    line-height:.9;
+    letter-spacing:-.01em;
+    margin:0;
+    color:var(--red);
+    text-transform:uppercase;
+  }
+  .book-proof p{
+    margin:0;
+    font-size:22px;
+    line-height:1.45;
+    color:#3A3833;
+    max-width:44ch;
+  }
+  .book-interior-wrap{
+    max-width:1120px;
+    margin:72px auto 0;
+  }
+  .downhill-art{
+    max-width:1120px;
+    margin:72px auto 0;
+  }
+  .downhill-art-grid{
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap:24px;
+    align-items:start;
+  }
+  .downhill-thumb{
+    border:0;
+    padding:0;
+    margin:0;
+    background:transparent;
+    cursor:zoom-in;
+    display:block;
+  }
+  .downhill-art-grid img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:8px;
+  }
+  .downhill-thumb.wide{
+    grid-column:span 2;
+  }
+  .book-lightbox{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:grid;
+    place-items:center;
+    padding:32px;
+    background:rgba(26,25,23,.82);
+  }
+  .book-lightbox[hidden]{display:none;}
+  .book-lightbox-frame{
+    position:relative;
+    width:min(92vw, 980px);
+    max-height:92vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .book-lightbox-image{
+    max-width:100%;
+    max-height:92vh;
+    width:auto;
+    height:auto;
+    display:block;
+    border-radius:8px;
+    box-shadow:0 24px 80px rgba(0,0,0,.35);
+  }
+  .book-lightbox-button{
+    position:absolute;
+    border:0;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:var(--paper);
+    color:var(--red);
+    font-family:'Staatliches', Impact, sans-serif;
+    font-size:30px;
+    line-height:1;
+    cursor:pointer;
+  }
+  .book-lightbox-close{
+    top:-18px;
+    right:-18px;
   }
   .book a.buy{
     display:inline-block;
@@ -157,29 +273,59 @@
   }
   .book-cover{
     width:100%;
+    max-width:420px;
     height:auto;
     display:block;
+    margin:0 auto;
     filter:drop-shadow(0 20px 30px rgba(26,25,23,.35));
-    transform:rotate(1.5deg);
   }
   .book-interior{
     display:block;
     width:100%;
     max-width:920px;
     height:auto;
-    margin:72px auto 0;
+    margin:0 auto;
   }
+  .book-caption{
+    max-width:920px;
+    margin:18px auto 0;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-size:18px;
+    line-height:1;
+    color:var(--muted);
+    text-transform:uppercase;
+  }
+  .book-pull{
+    max-width:1100px;
+    margin:84px auto 0;
+    font-family:'Staatliches', Impact, sans-serif;
+    font-weight:700;
+    font-size:clamp(44px, 7vw, 86px);
+    line-height:.9;
+    letter-spacing:-.01em;
+    color:var(--ink);
+  }
+  .book-pull span{color:var(--red);}
 
   @media (max-width:760px){
     section{padding:70px 0 96px;}
     .book{padding:70px 20px;}
     .book-inner{grid-template-columns:1fr;}
     .book-cover{max-width:260px; margin:0 auto; order:-1; display:block;}
-    .book-interior{margin-top:48px;}
+    .book-proof{grid-template-columns:1fr; gap:18px; margin-top:56px;}
+    .book-proof p{font-size:19px;}
+    .downhill-art{margin-top:48px;}
+    .downhill-art-grid{grid-template-columns:1fr 1fr; gap:16px;}
+    .downhill-thumb.wide{grid-column:1 / -1;}
+    .book-lightbox{padding:18px;}
+    .book-lightbox-frame{width:100%;}
+    .book-lightbox-close{top:8px; right:8px;}
+    .book-interior-wrap{margin-top:48px;}
+    .book-pull{margin-top:58px;}
   }
   @media (max-width:600px){
     body{font-size:16px;}
-    .bottom-bar{padding:30px 18px 12px; gap:12px;}
+    .bottom-bar-inner{padding:30px 18px 12px; gap:12px;}
     .bottom-cat-wrap{width:86px; bottom:-24px;}
     .bottom-nav{font-size:13px;}
     .bottom-nav .sep{margin:0 6px;}
@@ -198,36 +344,131 @@
           <div class="book-title-pre">it's all</div>
           <div class="book-title">downhill</div>
           <div class="book-title-post">from here</div>
-          <p class="book-tag">Some of it happened. Some of it didn't. They're poems. You were warned.</p>
+          <p class="book-tag">Some of it happened. Some of it didn't. They're poems.<br>You were warned.</p>
           <p class="desc">A hundred-plus pages of poems, sketches, and observations about love, family, music, growing older, questionable choices, and finding humor where it probably shouldn't exist. Independently published, July 2026 — because apparently branding other people wasn't enough. He wanted a cover of his own.</p>
           <a class="buy" href="https://www.amazon.com/its-all-downhill-here-Unfiltered/dp/B0H858FKWX/" target="_blank" rel="noopener">Read it on Amazon →</a>
         </div>
       </div>
-      <img class="book-interior" src="images/Downhill-inside.png" alt="Interior spread from 'it's all downhill from here'">
+      <div class="book-proof">
+        <h2>Part poetry collection. Part art book.</h2>
+        <p>Stories, sketches, and observations about love, family, music, growing older, questionable choices, and finding humor where it probably shouldn't exist.</p>
+      </div>
+      <div class="downhill-art" aria-label="Selected pages and artwork from the book">
+        <div class="downhill-art-grid">
+          <button class="downhill-thumb" type="button" data-full="books/downhill/contents.png"><img src="books/downhill/contents.png" alt="Contents page artwork from it's all downhill from here"></button>
+          <button class="downhill-thumb" type="button" data-full="books/downhill/tootsie.png"><img src="books/downhill/tootsie.png" alt="Tootsie poem page from it's all downhill from here"></button>
+          <button class="downhill-thumb" type="button" data-full="books/downhill/casually-unkind.png"><img src="books/downhill/casually-unkind.png" alt="Casually unkind poem page from it's all downhill from here"></button>
+          <button class="downhill-thumb" type="button" data-full="books/downhill/shhh.png"><img src="books/downhill/shhh.png" alt="Shhh poem page from it's all downhill from here"></button>
+          <button class="downhill-thumb wide" type="button" data-full="books/downhill/mouse-trap-3.png"><img src="books/downhill/mouse-trap-3.png" alt="Mouse trap illustration from it's all downhill from here"></button>
+          <button class="downhill-thumb" type="button" data-full="books/downhill/crossed-fingers.png"><img src="books/downhill/crossed-fingers.png" alt="Crossed fingers page from it's all downhill from here"></button>
+          <button class="downhill-thumb" type="button" data-full="books/downhill/yellow-butterflies.png"><img src="books/downhill/yellow-butterflies.png" alt="Yellow butterflies page from it's all downhill from here"></button>
+        </div>
+      </div>
+      <figure class="book-interior-wrap">
+        <img class="book-interior" src="images/Downhill-inside.png" alt="Interior spread from 'it's all downhill from here'">
+        <figcaption class="book-caption">Inside: poems, drawings, small emotional hazards.</figcaption>
+      </figure>
+      <div class="book-pull">Some funny. Some heartbreaking. <span>Some we'll deny if anyone asks.</span></div>
     </div>
   </section>
 </main>
 
+<div class="book-lightbox" hidden role="dialog" aria-modal="true" aria-label="Book page viewer">
+  <div class="book-lightbox-frame">
+    <button class="book-lightbox-button book-lightbox-close" type="button" aria-label="Close viewer">×</button>
+    <img class="book-lightbox-image" src="" alt="">
+  </div>
+</div>
+
 <div class="bottom-bar">
+  <div class="bottom-bar-inner">
   <span class="bottom-cat-wrap">
     <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
     <img class="bottom-cat-wink" src="images/2-Cats-pico-wink.png" alt="" aria-hidden="true">
+    <img class="bottom-cat-closed" src="images/2-Cats-pico-closed.png" alt="" aria-hidden="true">
+    <img class="bottom-cat-half" src="images/2-Cats-pico-half.png" alt="" aria-hidden="true">
   </span>
   <nav class="bottom-nav" aria-label="Primary">
     <a href="index.html">Home</a><span class="sep">|</span><a href="work.html">Work</a><span class="sep">|</span><a href="about.html">About</a><span class="sep">|</span><a href="book.html" class="current">Books</a><span class="sep">|</span><a href="contact.html">Contact</a>
   </nav>
+  </div>
 </div>
 
 <script>
 (() => {
+  const thumbs = [...document.querySelectorAll('.downhill-thumb')];
+  const lightbox = document.querySelector('.book-lightbox');
+  const lightboxImage = document.querySelector('.book-lightbox-image');
+  const closeButton = document.querySelector('.book-lightbox-close');
+  if (!thumbs.length || !lightbox || !lightboxImage || !closeButton) return;
+
+  const closeViewer = () => {
+    lightbox.hidden = true;
+    lightboxImage.src = '';
+    lightboxImage.alt = '';
+  };
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const image = thumb.querySelector('img');
+      lightboxImage.src = thumb.dataset.full;
+      lightboxImage.alt = image?.alt || 'Book page artwork';
+      lightbox.hidden = false;
+      closeButton.focus();
+    });
+  });
+
+  closeButton.addEventListener('click', closeViewer);
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeViewer();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !lightbox.hidden) closeViewer();
+  });
+})();
+
+(() => {
   const cats = document.querySelectorAll('.bottom-cat-wrap');
   if (!cats.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const wink = () => {
+  let lastMove = '';
+  let repeatCount = 0;
+  const nextDelay = () => 6500 + Math.random() * 10500;
+  const chooseMove = () => {
+    let move = Math.random() < 0.45 ? 'love' : 'wink';
+    if (move === lastMove) repeatCount += 1;
+    else repeatCount = 0;
+    if (repeatCount > 1 && Math.random() < 0.7) move = move === 'love' ? 'wink' : 'love';
+    repeatCount = move === lastMove ? repeatCount : 0;
+    lastMove = move;
+    return move;
+  };
+  const runLoveBlink = () => {
+    cats.forEach((cat) => cat.classList.add('is-love-half'));
+    window.setTimeout(() => {
+      cats.forEach((cat) => {
+        cat.classList.remove('is-love-half');
+        cat.classList.add('is-loving');
+      });
+    }, 180);
+    window.setTimeout(() => {
+      cats.forEach((cat) => {
+        cat.classList.remove('is-loving');
+        cat.classList.add('is-love-half');
+      });
+    }, 900);
+    window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-love-half')), 1120);
+    return 1120;
+  };
+  const runWink = () => {
     cats.forEach((cat) => cat.classList.add('is-winking'));
     window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-winking')), 420);
-    window.setTimeout(wink, 3500 + Math.random() * 8500);
+    return 420;
   };
-  window.setTimeout(wink, 1800 + Math.random() * 4500);
+  const animateCat = () => {
+    const duration = chooseMove() === 'love' ? runLoveBlink() : runWink();
+    window.setTimeout(animateCat, duration + nextDelay());
+  };
+  window.setTimeout(animateCat, 2800 + Math.random() * 6000);
 })();
 </script>
 
