@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Type Lab — Zander Vera</title>
+<style>
+  @font-face{
+    font-family:'Wingman';
+    src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
+  :root{
+    --paper:#F2F0EA;
+    --ink:#1A1917;
+    --red:#8C2A2A;
+    --muted:#8A8577;
+    --rule:#DAD5C8;
+    --body-size:19;
+    --body-leading:1.30;
+    --title-size:4.5;
+    --title-leading:.80;
+    --title-tracking:-.120;
+    --title-word-spacing:.025;
+    --label-size:17;
+    --nav-size:17;
+    --project-title-size:23;
+    --button-size:16;
+    --book-proof-size:4.0;
+    --book-proof-leading:.90;
+    --book-proof-tracking:-.080;
+    --book-caption-size:17;
+    --book-pull-size:4.0;
+    --book-pull-leading:.90;
+    --book-pull-tracking:-.080;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Wingman', sans-serif;
+    font-size:calc(var(--body-size) * 1px);
+    line-height:var(--body-leading);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .lab-shell{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) 340px;
+    min-height:100vh;
+  }
+  .lab-main{
+    max-width:1180px;
+    padding:56px 48px 120px;
+  }
+  .lab-title{
+    margin:0 0 24px;
+    font-size:clamp(46px, calc(var(--title-size) * 1vw), 92px);
+    line-height:var(--title-leading);
+    letter-spacing:calc(var(--title-tracking) * 1em);
+    word-spacing:calc(var(--title-word-spacing) * 1em);
+    text-transform:uppercase;
+    font-weight:400;
+    max-width:15ch;
+  }
+  .lab-section{
+    border-top:1px solid var(--rule);
+    padding:48px 0;
+  }
+  .lab-section:first-of-type{border-top:0; padding-top:0;}
+  .eyebrow,
+  .label,
+  .meta,
+  .bottom-nav,
+  .button{
+    text-transform:uppercase;
+    letter-spacing:0;
+    font-weight:400;
+  }
+  .eyebrow{
+    color:var(--red);
+    font-size:calc(var(--label-size) * 1px);
+    margin-bottom:12px;
+  }
+  .sample-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:36px 48px;
+  }
+  .body-copy{
+    max-width:64ch;
+    color:#3A3833;
+    font-size:calc(var(--body-size) * 1px);
+    line-height:var(--body-leading);
+  }
+  .body-copy p{margin:0 0 18px;}
+  .muted{color:var(--muted);}
+  .label{
+    color:var(--muted);
+    font-size:calc(var(--label-size) * 1px);
+    line-height:1;
+  }
+  .meta{
+    color:var(--muted);
+    font-size:calc(var(--label-size) * 1px);
+  }
+  .bottom-nav{
+    display:flex;
+    flex-wrap:wrap;
+    color:var(--red);
+    font-size:calc(var(--nav-size) * 1px);
+    line-height:1.30;
+  }
+  .bottom-nav a{text-decoration:none;}
+  .bottom-nav .sep{margin:0 10px; opacity:.5;}
+  .button-row{display:flex; flex-wrap:wrap; gap:12px;}
+  .button{
+    display:inline-block;
+    border:0;
+    background:var(--red);
+    color:#fff;
+    padding:14px 20px;
+    font-size:calc(var(--button-size) * 1px);
+    line-height:1;
+    text-decoration:none;
+  }
+  .button.secondary{
+    background:transparent;
+    color:var(--red);
+    border:1px solid var(--red);
+  }
+  .project-card{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:18px;
+    align-items:start;
+  }
+  .project-media{
+    aspect-ratio:1/1.04;
+    background:#fff;
+    border:1px solid var(--rule);
+  }
+  .project-title{
+    color:var(--red);
+    font-size:calc(var(--project-title-size) * 1px);
+    line-height:1;
+    text-transform:uppercase;
+    font-weight:400;
+  }
+  .project-desc{
+    margin-top:8px;
+    color:#5D594F;
+    font-size:calc(var(--body-size) * 1px);
+    line-height:var(--body-leading);
+  }
+  .type-stack{
+    display:grid;
+    gap:10px;
+  }
+  .title-preview{
+    font-size:clamp(46px, calc(var(--title-size) * 1vw), 92px);
+    line-height:var(--title-leading);
+    letter-spacing:calc(var(--title-tracking) * 1em);
+    word-spacing:calc(var(--title-word-spacing) * 1em);
+    text-transform:uppercase;
+    font-weight:400;
+  }
+  .book-proof-preview{
+    color:var(--red);
+    font-size:clamp(34px, calc(var(--book-proof-size) * 1vw), 62px);
+    line-height:var(--book-proof-leading);
+    letter-spacing:calc(var(--book-proof-tracking) * 1em);
+    font-weight:400;
+    max-width:12ch;
+  }
+  .book-proof-preview span{color:var(--ink);}
+  .book-caption-preview{
+    color:var(--muted);
+    font-size:calc(var(--book-caption-size) * 1px);
+    line-height:1;
+    text-transform:uppercase;
+  }
+  .book-pull-preview{
+    color:var(--ink);
+    font-size:clamp(44px, calc(var(--book-pull-size) * 1vw), 86px);
+    line-height:var(--book-pull-leading);
+    letter-spacing:calc(var(--book-pull-tracking) * 1em);
+    font-weight:400;
+  }
+  .book-pull-preview span{color:var(--red);}
+  .lab-panel{
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow:auto;
+    border-left:1px solid var(--rule);
+    background:rgba(242,240,234,.96);
+    padding:28px 22px 36px;
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size:13px;
+    line-height:1.3;
+  }
+  .lab-panel h2{
+    margin:0 0 18px;
+    font:700 14px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  .control-group{
+    border-top:1px solid var(--rule);
+    padding-top:16px;
+    margin-top:18px;
+  }
+  .control-group h3{
+    margin:0 0 10px;
+    color:var(--red);
+    font:700 12px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .lab-panel label{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:8px;
+    margin-top:12px;
+  }
+  .lab-panel output{
+    color:var(--red);
+    font-variant-numeric:tabular-nums;
+  }
+  .lab-panel input{
+    grid-column:1 / -1;
+    width:100%;
+    accent-color:var(--red);
+  }
+  .lab-code{
+    display:block;
+    margin-top:18px;
+    padding:12px;
+    border-radius:8px;
+    background:rgba(26,25,23,.08);
+    color:#3A3833;
+    white-space:pre-wrap;
+    font-family:"SFMono-Regular", Consolas, monospace;
+    font-size:12px;
+  }
+  .copy-css{
+    margin-top:10px;
+    width:100%;
+    border:1px solid rgba(26,25,23,.18);
+    border-radius:6px;
+    background:var(--paper);
+    color:var(--red);
+    font:700 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    padding:10px;
+    cursor:pointer;
+  }
+  @media (max-width:920px){
+    .lab-shell{display:block;}
+    .lab-panel{position:relative; height:auto; border-left:0; border-top:1px solid var(--rule);}
+    .lab-main{padding:36px 20px 70px;}
+    .sample-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="lab-shell">
+  <main class="lab-main">
+    <section class="lab-section">
+      <div class="eyebrow">Type Lab</div>
+      <h1 class="lab-title">I like hats, which<br>is useful,<br>because the best<br>projects rarely<br>need just one.</h1>
+      <div class="body-copy">
+        <p>Zander Vera makes brands, identities, campaigns, objects, and digital things feel more inevitable than they probably were.</p>
+        <p class="muted">Creative director, brand builder, writer, musician. Founder of AGENCY689 and ZNDRCRTV.</p>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="eyebrow">Current Type Roles</div>
+      <div class="sample-grid">
+        <div class="type-stack">
+          <div class="title-preview">Traveler Guitar</div>
+          <div class="label">Title / H1</div>
+        </div>
+        <div class="body-copy">
+          <p>Traveler Guitar builds instruments for players who want to keep music within reach: on the road, backstage, in an apartment, in a hotel room, or anywhere a full-size guitar becomes too much object for the moment.</p>
+          <p>The brand had strong recognition in the travel-guitar space, but its growing product family needed a clearer system around it.</p>
+        </div>
+        <div>
+          <div class="label">Label / Eyebrow</div>
+          <div class="eyebrow" style="margin-top:10px;">— The Work</div>
+          <div class="meta">Role: Creative Director</div>
+        </div>
+        <div>
+          <div class="label">Footer Nav</div>
+          <nav class="bottom-nav" style="margin-top:12px;">
+            <a href="#">Home</a><span class="sep">|</span><a href="#">Work</a><span class="sep">|</span><a href="#">About</a><span class="sep">|</span><a href="#">Books</a><span class="sep">|</span><a href="#">Contact</a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="eyebrow">Work Cards</div>
+      <div class="sample-grid">
+        <div class="project-card">
+          <div class="project-media"></div>
+          <div>
+            <div class="project-title">Traveler Guitar</div>
+            <div class="project-desc">A master brand and product identity system for a guitar line made to go anywhere.</div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-media"></div>
+          <div>
+            <div class="project-title">Oxford Collection</div>
+            <div class="project-desc">A clearer house of brands for a hospitality group ready to scale.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="eyebrow">Buttons + Links</div>
+      <div class="button-row">
+        <a class="button" href="#">Read It On Amazon</a>
+        <a class="button secondary" href="#">Back To Work</a>
+      </div>
+      <div class="body-copy" style="margin-top:24px;">
+        <p>Some of it happened. Some of it didn't. They're poems. You were warned.</p>
+      </div>
+    </section>
+
+    <section class="lab-section">
+      <div class="eyebrow">Book Page</div>
+      <div class="sample-grid">
+        <div class="type-stack">
+          <div class="book-proof-preview">Part poetry collection. <span>Part art book.</span></div>
+          <div class="label">Book proof heading</div>
+        </div>
+        <div class="type-stack">
+          <div class="book-caption-preview">Inside: poems, drawings, small emotional hazards.</div>
+          <div class="label">Book image caption</div>
+        </div>
+        <div class="type-stack" style="grid-column:1 / -1;">
+          <div class="book-pull-preview">Some funny. Some heartbreaking. <span>Some we'll deny if anyone asks.</span></div>
+          <div class="label">Book pull quote</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="lab-panel" aria-label="Type controls">
+    <h2>Site Type Controls</h2>
+    <div class="control-group">
+      <h3>Body Copy</h3>
+      <label>
+        Body size
+        <output data-output-for="body-size"></output>
+        <input type="range" id="body-size" min="14" max="24" step="1" value="19">
+      </label>
+      <label>
+        Body line height
+        <output data-output-for="body-leading"></output>
+        <input type="range" id="body-leading" min="1" max="1.9" step=".05" value="1.30">
+      </label>
+    </div>
+
+    <div class="control-group">
+      <h3>Big Titles</h3>
+      <label>
+        Title size
+        <output data-output-for="title-size"></output>
+        <input type="range" id="title-size" min="3.5" max="9" step=".1" value="4.5">
+      </label>
+      <label>
+        Title line height
+        <output data-output-for="title-leading"></output>
+        <input type="range" id="title-leading" min=".62" max="1.05" step=".01" value=".80">
+      </label>
+      <label>
+        Letter spacing
+        <output data-output-for="title-tracking"></output>
+        <input type="range" id="title-tracking" min="-.14" max=".04" step=".001" value="-.120">
+      </label>
+      <label>
+        Word spacing
+        <output data-output-for="title-word-spacing"></output>
+        <input type="range" id="title-word-spacing" min="-.22" max=".08" step=".005" value=".025">
+      </label>
+    </div>
+
+    <div class="control-group">
+      <h3>Small Type</h3>
+      <label>
+        Labels / eyebrows
+        <output data-output-for="label-size"></output>
+        <input type="range" id="label-size" min="10" max="18" step="1" value="17">
+      </label>
+      <label>
+        Footer nav
+        <output data-output-for="nav-size"></output>
+        <input type="range" id="nav-size" min="11" max="22" step="1" value="17">
+      </label>
+    </div>
+
+    <div class="control-group">
+      <h3>Work + Commands</h3>
+      <label>
+        Project titles
+        <output data-output-for="project-title-size"></output>
+        <input type="range" id="project-title-size" min="14" max="34" step="1" value="23">
+      </label>
+      <label>
+        Buttons
+        <output data-output-for="button-size"></output>
+        <input type="range" id="button-size" min="10" max="22" step="1" value="16">
+      </label>
+    </div>
+
+    <div class="control-group">
+      <h3>Book Page</h3>
+      <label>
+        Proof heading size
+        <output data-output-for="book-proof-size"></output>
+        <input type="range" id="book-proof-size" min="3" max="7" step=".1" value="4.0">
+      </label>
+      <label>
+        Proof heading line height
+        <output data-output-for="book-proof-leading"></output>
+        <input type="range" id="book-proof-leading" min=".7" max="1.2" step=".01" value=".90">
+      </label>
+      <label>
+        Proof heading tracking
+        <output data-output-for="book-proof-tracking"></output>
+        <input type="range" id="book-proof-tracking" min="-.12" max=".08" step=".001" value="-.080">
+      </label>
+      <label>
+        Caption size
+        <output data-output-for="book-caption-size"></output>
+        <input type="range" id="book-caption-size" min="12" max="26" step="1" value="17">
+      </label>
+      <label>
+        Pull quote size
+        <output data-output-for="book-pull-size"></output>
+        <input type="range" id="book-pull-size" min="3" max="9" step=".1" value="4.0">
+      </label>
+      <label>
+        Pull quote line height
+        <output data-output-for="book-pull-leading"></output>
+        <input type="range" id="book-pull-leading" min=".7" max="1.2" step=".01" value=".90">
+      </label>
+      <label>
+        Pull quote tracking
+        <output data-output-for="book-pull-tracking"></output>
+        <input type="range" id="book-pull-tracking" min="-.12" max=".08" step=".001" value="-.080">
+      </label>
+    </div>
+
+    <code class="lab-code" id="lab-css"></code>
+    <button class="copy-css" id="copy-css" type="button">Copy CSS</button>
+  </aside>
+</div>
+
+<script>
+(() => {
+  const controls = document.querySelectorAll('.lab-panel input');
+  const cssReadout = document.querySelector('#lab-css');
+  const copyButton = document.querySelector('#copy-css');
+  const format = (id, value) => {
+    const num = Number(value);
+    if (id.includes('size')) return `${num.toFixed(id === 'title-size' || id === 'book-proof-size' || id === 'book-pull-size' ? 1 : 0)}${id === 'title-size' || id === 'book-proof-size' || id === 'book-pull-size' ? 'vw' : 'px'}`;
+    if (id.includes('tracking') || id.includes('word')) return `${num.toFixed(3)}em`;
+    return num.toFixed(2);
+  };
+  const update = () => {
+    controls.forEach((control) => {
+      document.documentElement.style.setProperty(`--${control.id}`, control.value);
+      const output = document.querySelector(`[data-output-for="${control.id}"]`);
+      if (output) output.textContent = format(control.id, control.value);
+    });
+    const values = Object.fromEntries([...controls].map((control) => [control.id, control.value]));
+    cssReadout.textContent = [
+      `body font-size: ${format('body-size', values['body-size'])};`,
+      `body line-height: ${format('body-leading', values['body-leading'])};`,
+      `title font-size: clamp(46px, ${format('title-size', values['title-size'])}, 92px);`,
+      `title line-height: ${format('title-leading', values['title-leading'])};`,
+      `title letter-spacing: ${format('title-tracking', values['title-tracking'])};`,
+      `title word-spacing: ${format('title-word-spacing', values['title-word-spacing'])};`,
+      `label font-size: ${format('label-size', values['label-size'])};`,
+      `nav font-size: ${format('nav-size', values['nav-size'])};`,
+      `project title font-size: ${format('project-title-size', values['project-title-size'])};`,
+      `button font-size: ${format('button-size', values['button-size'])};`,
+      `book proof heading font-size: clamp(34px, ${format('book-proof-size', values['book-proof-size'])}, 62px);`,
+      `book proof heading line-height: ${format('book-proof-leading', values['book-proof-leading'])};`,
+      `book proof heading letter-spacing: ${format('book-proof-tracking', values['book-proof-tracking'])};`,
+      `book caption font-size: ${format('book-caption-size', values['book-caption-size'])};`,
+      `book pull quote font-size: clamp(44px, ${format('book-pull-size', values['book-pull-size'])}, 86px);`,
+      `book pull quote line-height: ${format('book-pull-leading', values['book-pull-leading'])};`,
+      `book pull quote letter-spacing: ${format('book-pull-tracking', values['book-pull-tracking'])};`
+    ].join('\n');
+  };
+  controls.forEach((control) => control.addEventListener('input', update));
+  if (copyButton && cssReadout) {
+    copyButton.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(cssReadout.textContent);
+      copyButton.textContent = 'Copied';
+      window.setTimeout(() => { copyButton.textContent = 'Copy CSS'; }, 900);
+    });
+  }
+  update();
+})();
+</script>
+</body>
+</html>

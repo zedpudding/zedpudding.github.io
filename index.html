@@ -5,13 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zander Vera</title>
 <meta name="description" content="Zander Vera — Creative Director. Brand systems, poems, and other trouble.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
 <link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
 <link rel="preload" as="image" href="images/2-Cats-pico-half.png">
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
 <style>
+  @font-face{
+    font-family:'Wingman';
+    src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
   :root{
     --paper: #F2F0EA;
     --paper2: #E8E4D9;
@@ -26,13 +30,44 @@
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:'Atkinson Hyperlegible', Arial, sans-serif;
-    font-size:18px;
-    line-height:1.6;
+    font-family:'Wingman', sans-serif;
+    font-size:19px;
+    line-height:1.30;
     -webkit-font-smoothing:antialiased;
   }
   a{color:inherit;}
   ::selection{background:var(--red);color:#fff;}
+
+  .bottom-nav,
+  .eyebrow,
+  h1,
+  .hero-sign,
+  .work-index,
+  .work-name,
+  .book-title-pre,
+  .book-title-post,
+  .book-title,
+  .book a.buy,
+  .book-proof h2,
+  .book-caption,
+  .book-pull,
+  .about-lead,
+  .role-title,
+  .client-list h2,
+  .contact-lead,
+  .contact-list span.label,
+  .project-title,
+  .back-link,
+  .hero-deck,
+  .case-meta dt,
+  .section-note h2,
+  .logo-formula figcaption,
+  .campaign-title,
+  .ad-gallery-header h2,
+  .book-lightbox-button{
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+  }
 
   /* --- bottom bar: nav + cat --- */
   .bottom-bar{
@@ -93,9 +128,8 @@
     display:flex;
     flex-wrap:wrap;
     gap:0;
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
-    font-size:16px;
+    font-weight:400;
+    font-size:17px;
     letter-spacing:0;
     text-transform:uppercase;
     color:var(--red);
@@ -110,9 +144,8 @@
   main section + section{border-top:1px solid #DAD5C8;}
 
   .eyebrow{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
-    font-size:14px;
+    font-weight:400;
+    font-size:17px;
     letter-spacing:0;
     text-transform:uppercase;
     color:var(--red);
@@ -139,24 +172,24 @@
   }
   .hero-text{max-width:620px;}
   .hero h1{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
-    font-size:clamp(58px, 9vw, 104px);
-    line-height:.9;
-    letter-spacing:-.01em;
+    font-weight:400;
+    font-size:clamp(46px, 4.5vw, 92px);
+    line-height:.80;
+    letter-spacing:-.120em;
+    word-spacing:.025em;
+    text-transform:uppercase;
     margin:0 0 26px 0;
   }
   .hero-sub{
-    font-size:22px;
-    line-height:1.45;
+    font-size:19px;
+    line-height:1.30;
     color:#3A3833;
     margin:0 0 40px 0;
     max-width:34ch;
   }
   .hero-sign{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
-    font-size:18px;
+    font-weight:400;
+    font-size:19px;
     letter-spacing:0;
     text-transform:uppercase;
     color:var(--red);
@@ -198,12 +231,12 @@
     border-top:1px solid #DAD5C8;
   }
   .work-item:first-of-type{border-top:none; padding-top:0;}
-  .work-index{font-weight:700; font-size:20px; color:var(--red);}
-  .work-name{font-family:'Staatliches', Impact, sans-serif; font-weight:400; font-size:34px; margin:0 0 8px 0; line-height:1.05;}
-  .work-desc{font-size:16px; color:#3A3833; max-width:56ch;}
+  .work-index{font-weight:700; font-size:17px; color:var(--red);}
+  .work-name{font-family:'Wingman', sans-serif; font-weight:400; font-size:23px; margin:0 0 8px 0; line-height:1.05;}
+  .work-desc{font-size:19px; color:#3A3833; max-width:56ch;}
   .work-years{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-size:14px;
+    font-family:'Wingman', sans-serif;
+    font-size:17px;
     letter-spacing:0;
     color:var(--muted);
     white-space:nowrap;
@@ -224,7 +257,7 @@
     display:grid; grid-template-columns:auto minmax(0, 1fr); gap:52px; align-items:center;
   }
   .book-title-pre, .book-title-post{
-    font-family:'Staatliches', Impact, sans-serif;
+    font-family:'Wingman', sans-serif;
     font-weight:400;
     font-size:clamp(22px, 2.8vw, 30px);
     line-height:1.2;
@@ -233,22 +266,22 @@
   .book-title-pre{margin:14px 0 0 0;}
   .book-title-post{margin:0 0 26px 0;}
   .book-title{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
-    letter-spacing:-.01em;
-    font-size:clamp(52px, 7vw, 80px);
-    line-height:.9;
+    font-weight:400;
+    letter-spacing:-.120em;
+    word-spacing:.025em;
+    font-size:clamp(46px, 4.5vw, 92px);
+    line-height:.80;
     margin:2px 0;
     color:var(--ink);
+    text-transform:uppercase;
   }
-  .book-tag{font-style:italic; font-size:20px; line-height:1.5; margin:0 0 20px 0;}
-  .book p.desc{font-size:16px; color:#3A3833;}
+  .book-tag{font-style:italic; font-size:19px; line-height:1.30; margin:0 0 20px 0;}
+  .book p.desc{font-size:19px; color:#3A3833;}
   .book a.buy{
     display:inline-block;
     margin-top:20px;
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
-    font-size:14px;
+    font-weight:400;
+    font-size:16px;
     letter-spacing:0;
     text-transform:uppercase;
     text-decoration:none;
@@ -272,8 +305,7 @@
 
   /* --- about --- */
   .about-lead{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
+    font-weight:400;
     font-size:40px;
     line-height:.9;
     margin-bottom:52px;
@@ -281,18 +313,17 @@
   }
   .role{padding:30px 0; border-top:1px solid #DAD5C8; display:grid; grid-template-columns:170px 1fr; gap:24px;}
   .role:first-of-type{border-top:none; padding-top:0;}
-  .role-years{font-size:14px; color:var(--muted);}
-  .role-title{font-family:'Staatliches', Impact, sans-serif; font-weight:400; font-size:26px; margin-bottom:6px; line-height:1.1;}
-  .role-desc{font-size:16px; color:#3A3833; max-width:56ch;}
+  .role-years{font-size:17px; color:var(--muted);}
+  .role-title{font-family:'Wingman', sans-serif; font-weight:400; font-size:23px; margin-bottom:6px; line-height:1.1;}
+  .role-desc{font-size:19px; color:#3A3833; max-width:56ch;}
   @media (max-width:600px){
     .role{grid-template-columns:1fr; gap:8px;}
   }
-  .about-tail{margin-top:44px; font-size:17px; color:#3A3833; max-width:56ch;}
+  .about-tail{margin-top:44px; font-size:19px; color:#3A3833; max-width:56ch;}
 
   /* --- contact --- */
   .contact-lead{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
+    font-weight:400;
     font-size:clamp(38px,5vw,58px);
     line-height:.9;
     margin-bottom:46px;
@@ -305,20 +336,24 @@
     display:flex; justify-content:space-between; align-items:center;
   }
   .contact-list li:last-child{border-bottom:1px solid #DAD5C8;}
-  .contact-list a{text-decoration:none; color:var(--ink); font-weight:700; font-size:20px;}
+  .contact-list a{text-decoration:none; color:var(--ink); font-weight:700; font-size:19px;}
   .contact-list a:hover{color:var(--red);}
   .contact-list span.label{
-    font-family:'Staatliches', Impact, sans-serif;
-    color:var(--muted); letter-spacing:0; text-transform:uppercase; font-size:15px; font-weight:400;
+    font-family:'Wingman', sans-serif;
+    color:var(--muted);
+    letter-spacing:0;
+    text-transform:uppercase;
+    font-size:17px;
+    font-weight:400;
   }
 
   @media (max-width:600px){
-    body{font-size:16px;}
+    body{font-size:19px;}
     main section{padding:80px 0;}
     .book{padding:70px 20px;}
     .bottom-bar-inner{padding:30px 18px 12px; gap:12px;}
     .bottom-cat-wrap{width:86px; bottom:-24px;}
-    .bottom-nav{font-size:13px;}
+    .bottom-nav{font-size:17px;}
     .bottom-nav .sep{margin:0 6px;}
   }
 </style>

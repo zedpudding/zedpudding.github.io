@@ -5,13 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Work — Zander Vera</title>
 <meta name="description" content="Selected work by Zander Vera — brand transformation, identity systems, naming, digital, campaigns, products, places, and AI-assisted creative systems.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
 <link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
 <link rel="preload" as="image" href="images/2-Cats-pico-half.png">
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Staatliches&display=swap" rel="stylesheet">
 <style>
+  @font-face{
+    font-family:'Wingman';
+    src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
   :root{
     --paper: #F2F0EA;
     --paper2: #E8E4D9;
@@ -19,6 +23,10 @@
     --red: #8C2A2A;
     --muted: #8A8577;
     --max: 1680px;
+    --title-size: 4.5;
+    --title-leading: .80;
+    --title-tracking: -.120;
+    --title-word-spacing: .025;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -26,13 +34,44 @@
     margin:0;
     background:var(--paper);
     color:var(--ink);
-    font-family:'Atkinson Hyperlegible', Arial, sans-serif;
-    font-size:18px;
-    line-height:1.6;
+    font-family:'Wingman', sans-serif;
+    font-size:19px;
+    line-height:1.30;
     -webkit-font-smoothing:antialiased;
   }
   a{color:inherit;}
   ::selection{background:var(--red);color:#fff;}
+
+  .bottom-nav,
+  .eyebrow,
+  h1,
+  .hero-sign,
+  .work-index,
+  .work-name,
+  .book-title-pre,
+  .book-title-post,
+  .book-title,
+  .book a.buy,
+  .book-proof h2,
+  .book-caption,
+  .book-pull,
+  .about-lead,
+  .role-title,
+  .client-list h2,
+  .contact-lead,
+  .contact-list span.label,
+  .project-title,
+  .back-link,
+  .hero-deck,
+  .case-meta dt,
+  .section-note h2,
+  .logo-formula figcaption,
+  .campaign-title,
+  .ad-gallery-header h2,
+  .book-lightbox-button{
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+  }
 
   /* --- bottom bar: nav + cat --- */
   .bottom-bar{
@@ -85,9 +124,8 @@
     display:flex;
     flex-wrap:wrap;
     gap:0;
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
-    font-size:16px;
+    font-weight:400;
+    font-size:17px;
     letter-spacing:0;
     text-transform:uppercase;
     color:var(--red);
@@ -109,9 +147,8 @@
     max-width:1040px;
   }
   .eyebrow{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
-    font-size:14px;
+    font-weight:400;
+    font-size:17px;
     letter-spacing:0;
     text-transform:uppercase;
     color:var(--red);
@@ -119,13 +156,13 @@
   }
   .eyebrow .num{color:var(--muted); margin-right:8px;}
   .work-hero h1{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-weight:700;
-    font-size:clamp(46px, 7vw, 82px);
-    line-height:.9;
-    letter-spacing:-.01em;
+    font-weight:400;
+    font-size:clamp(46px, calc(var(--title-size) * 1vw), 92px);
+    line-height:var(--title-leading);
+    letter-spacing:calc(var(--title-tracking) * 1em);
+    word-spacing:calc(var(--title-word-spacing) * 1em);
     margin:18px 0 0 0;
-    max-width:13ch;
+    max-width:none;
     color:var(--ink);
     text-transform:uppercase;
   }
@@ -133,14 +170,14 @@
     margin:34px 0 0 0;
     max-width:62ch;
     color:#3A3833;
-    font-size:20px;
-    line-height:1.55;
+    font-size:19px;
+    line-height:1.30;
   }
   .work-hero p + p{
     margin-top:18px;
     color:var(--muted);
-    font-size:18px;
-    line-height:1.5;
+    font-size:19px;
+    line-height:1.30;
   }
 
   .work-grid{
@@ -159,19 +196,23 @@
     display:block;
     object-fit:cover;
     background:#fff;
+    border-radius:10px;
+  }
+  .project-media.align-right{
+    object-position:right center;
   }
   .project-caption{
     display:grid;
     grid-template-columns:minmax(130px, .5fr) minmax(0, 1fr);
     gap:20px;
     padding-top:14px;
-    font-size:15px;
-    line-height:1.35;
+    font-size:19px;
+    line-height:1.30;
     color:#5D594F;
   }
   .project-title{
-    font-family:'Staatliches', Impact, sans-serif;
-    font-size:20px;
+    font-family:'Wingman', sans-serif;
+    font-size:23px;
     line-height:1;
     color:var(--red);
     font-weight:700;
@@ -189,14 +230,14 @@
     main{padding:0 18px 96px;}
     .work-hero{padding:70px 0 48px;}
     .work-grid{grid-template-columns:1fr; gap:54px;}
-    .project-caption{grid-template-columns:112px 1fr; font-size:14px;}
-    .project-title{font-size:18px;}
+    .project-caption{grid-template-columns:112px 1fr;}
+    .project-title{font-size:23px;}
   }
   @media (max-width:600px){
-    body{font-size:16px;}
+    body{font-size:19px;}
     .bottom-bar-inner{padding:30px 18px 12px; gap:12px;}
     .bottom-cat-wrap{width:86px; bottom:-24px;}
-    .bottom-nav{font-size:13px;}
+    .bottom-nav{font-size:17px;}
     .bottom-nav .sep{margin:0 6px;}
   }
 </style>
@@ -207,9 +248,9 @@
 
   <header class="work-hero">
     <div class="eyebrow"><span class="num">—</span>The Work</div>
-    <h1>I like hats, which is useful, because the best projects rarely need just one.</h1>
+    <h1>I like hats, which<br>is useful,<br>because the best<br>projects rarely<br>need just one.</h1>
     <p>Zander Vera makes brands, identities, campaigns, objects, and digital things feel more inevitable than they probably were.</p>
-    <p>Creative director, brand builder, writer, musician, father. Founder of <a href="https://agency689.com/" target="_blank" rel="noopener noreferrer">Agency 689</a> and <a href="https://zndrcrtv.com/" target="_blank" rel="noopener noreferrer">ZNDR CRTV</a>.</p>
+    <p>Creative director, brand builder, writer, musician. Founder of <a href="https://agency689.com/" target="_blank" rel="noopener noreferrer">AGENCY689</a> and <a href="https://zndrcrtv.com/" target="_blank" rel="noopener noreferrer">ZNDRCRTV</a>.</p>
   </header>
 
   <section class="work-grid" aria-label="Selected work">
@@ -221,7 +262,7 @@
       </div>
     </a>
 
-    <a class="project" href="https://agency689.com/hotel-figueroa/">
+    <a class="project" href="hotel-figueroa.html">
       <img class="project-media" src="https://agency689.com/wp-content/uploads/2018/03/Hero-Figueroa-Brand-Book.jpg" alt="Hotel Figueroa brand book">
       <div class="project-caption">
         <div class="project-title">Hotel Figueroa</div>
@@ -229,31 +270,31 @@
       </div>
     </a>
 
-    <a class="project" href="https://agency689.com/sunset-marquis/">
-      <img class="project-media" src="https://agency689.com/wp-content/uploads/2017/04/sunset-VT.jpg" alt="Sunset Marquis brand work">
+    <a class="project" href="sunset-marquis.html">
+      <img class="project-media align-right" src="SM/awning-shake.jpg" alt="Sunset Marquis entrance and valet">
       <div class="project-caption">
         <div class="project-title">Sunset Marquis</div>
         <div class="project-desc">A legendary hotel brand moved forward without sanding off the thing people came for.</div>
       </div>
     </a>
 
-    <a class="project" href="https://zndrcrtv.com/overlook/">
+    <a class="project" href="overlook.html">
       <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/Overlook-Masthead.webp" alt="The Overlook identity">
       <div class="project-caption">
         <div class="project-title">The Overlook</div>
-        <div class="project-desc">Naming, identity, and environmental cues for a place that needed to read instantly.</div>
+        <div class="project-desc">Naming and identity for a hilltop Santa Clarita apartment community.</div>
       </div>
     </a>
 
-    <a class="project" href="https://agency689.com/killer-networking/">
-      <img class="project-media" src="https://agency689.com/wp-content/uploads/2017/05/Killer-header.jpg" alt="Killer Networks identity and packaging">
+    <a class="project" href="https://agency689.com/killer-networking/" target="_blank" rel="noopener noreferrer">
+      <img class="project-media" src="Killer/Killer-Fist.webp" alt="Killer Networks fist identity">
       <div class="project-caption">
         <div class="project-title">Killer Networks</div>
         <div class="project-desc">Networking hardware turned into a gaming brand with a simple enemy: lag.</div>
       </div>
     </a>
 
-    <a class="project" href="https://zndrcrtv.com/firefly-venues/">
+    <a class="project" href="https://zndrcrtv.com/firefly-venues/" target="_blank" rel="noopener noreferrer">
       <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/FireFly-Sweatshirt.webp" alt="FireFly Venues apparel identity">
       <div class="project-caption">
         <div class="project-title">FireFly Venues</div>
@@ -261,15 +302,15 @@
       </div>
     </a>
 
-    <a class="project" href="https://zndrcrtv.com/orbital-virtual-studios/">
-      <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/OVS-Truck.webp" alt="Orbital Virtual Studios vehicle identity">
+    <a class="project" href="https://zndrcrtv.com/orbital-virtual-studios/" target="_blank" rel="noopener noreferrer">
+      <img class="project-media" src="Orbital/OVS-Stage.webp" alt="Orbital Virtual Studios stage environment">
       <div class="project-caption">
         <div class="project-title">Orbital</div>
         <div class="project-desc">A virtual production brand built around movement, precision, and scale.</div>
       </div>
     </a>
 
-    <a class="project" href="https://zndrcrtv.com/grillhut/">
+    <a class="project" href="https://zndrcrtv.com/grillhut/" target="_blank" rel="noopener noreferrer">
       <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/GH-Brick.webp" alt="GrillHut environmental logo">
       <div class="project-caption">
         <div class="project-title">GrillHut</div>
@@ -277,7 +318,7 @@
       </div>
     </a>
 
-    <a class="project" href="https://agency689.com/oxford/">
+    <a class="project" href="https://agency689.com/oxford/" target="_blank" rel="noopener noreferrer">
       <img class="project-media" src="https://agency689.com/wp-content/uploads/2019/03/oxford-collection_brand-book-cover.jpg" alt="Oxford Collection brand book">
       <div class="project-caption">
         <div class="project-title">Oxford Collection</div>
