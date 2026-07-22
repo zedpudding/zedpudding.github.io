@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oxford Collection — Zander Vera</title>
+<meta name="description" content="Oxford Collection brand identity system, brand architecture, logos, and brand books by Zander Vera.">
+<link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-half.png">
+<style>
+  @font-face{
+    font-family:'Wingman';
+    src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
+  :root{
+    --paper:#F2F0EA;
+    --paper2:#E8E4D9;
+    --ink:#1A1917;
+    --red:#8C2A2A;
+    --muted:#8A8577;
+    --green:#4D6E56;
+    --orange:#C66E35;
+    --max:1680px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Wingman', sans-serif;
+    font-size:19px;
+    line-height:1.30;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--red);color:#fff;}
+
+  .bottom-nav,
+  h1,
+  .back-link,
+  .hero-deck,
+  .case-meta dt,
+  .section-note h2,
+  .scroller-header h2{
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+  }
+
+  .bottom-bar{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:50;
+    padding:0;
+    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
+    pointer-events:none;
+  }
+  .bottom-bar-inner{
+    width:min(100%, 1680px);
+    margin:0 auto;
+    display:flex;
+    align-items:flex-end;
+    gap:18px;
+    padding:40px 32px 18px;
+  }
+  .bottom-cat-wrap{
+    position:relative;
+    bottom:-34px;
+    width:121px;
+    display:block;
+    flex:0 0 auto;
+    pointer-events:none;
+  }
+  .bottom-cat,
+  .bottom-cat-wink,
+  .bottom-cat-closed,
+  .bottom-cat-half{
+    width:100%;
+    height:auto;
+    display:block;
+    mix-blend-mode:multiply;
+  }
+  .bottom-cat-wink,
+  .bottom-cat-closed,
+  .bottom-cat-half{
+    position:absolute;
+    inset:0;
+    opacity:0;
+  }
+  .bottom-cat-wrap.is-winking .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-winking .bottom-cat-wink{opacity:1;}
+  .bottom-cat-wrap.is-love-half .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-love-half .bottom-cat-half{opacity:1;}
+  .bottom-cat-wrap.is-loving .bottom-cat{opacity:0;}
+  .bottom-cat-wrap.is-loving .bottom-cat-closed{opacity:1;}
+  .bottom-nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    font-size:17px;
+    letter-spacing:0;
+    text-transform:uppercase;
+    color:var(--red);
+    padding-bottom:8px;
+    pointer-events:auto;
+  }
+  .bottom-nav a{text-decoration:none; opacity:.85; transition:opacity .15s;}
+  .bottom-nav a:hover,
+  .bottom-nav a.current{opacity:1;}
+  .bottom-nav .sep{margin:0 10px; opacity:.5;}
+
+  main{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 48px 28px;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top:34px;
+    font-size:17px;
+    line-height:1;
+    color:var(--red);
+    text-decoration:none;
+    text-transform:uppercase;
+  }
+  .back-link:hover{text-decoration:underline;}
+
+  .case-hero{padding:72px 0 48px;}
+  .hero-copy-grid{
+    display:grid;
+    grid-template-columns:minmax(0, .95fr) minmax(460px, 1.05fr);
+    gap:86px;
+    align-items:start;
+  }
+  h1{
+    font-size:clamp(46px, 4.5vw, 92px);
+    line-height:.80;
+    letter-spacing:-.120em;
+    word-spacing:.025em;
+    margin:0;
+    color:var(--ink);
+    text-transform:uppercase;
+  }
+  .hero-deck{
+    margin:16px 0 0;
+    max-width:70ch;
+    color:var(--muted);
+    font-size:19px;
+    line-height:1.30;
+  }
+  .case-copy{
+    margin:0;
+    max-width:35ch;
+    color:var(--ink);
+    font-size:clamp(28px, 2.85vw, 46px);
+    line-height:1.05;
+    letter-spacing:0;
+  }
+  .hero-logo-panel{
+    position:relative;
+    display:grid;
+    place-items:center;
+    min-height:560px;
+    margin:56px auto 0;
+    background:linear-gradient(135deg, #304F3E 0%, #789169 100%);
+    border-radius:10px;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center calc(38% + 75px);
+    z-index:0;
+    opacity:1;
+    filter:saturate(.96) contrast(1.02);
+  }
+  .case-summary{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:12px;
+    padding:0 0 178px;
+    align-items:start;
+  }
+  .case-meta{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+    margin:0;
+    padding:0;
+  }
+  .meta-label,
+  .meta-value,
+  .work-list{
+    color:var(--ink);
+    font-size:19px;
+    line-height:1.30;
+  }
+  .meta-label{margin-bottom:2px;}
+  .meta-value{margin:0;}
+  .work-list{
+    margin:0;
+    padding:0;
+    list-style:none;
+  }
+  .assignment-copy p{
+    margin:0;
+    max-width:84ch;
+    color:var(--ink);
+    font-size:19px;
+    line-height:1.30;
+  }
+  .assignment-copy p + p{margin-top:22px;}
+  .section-note{
+    display:grid;
+    grid-template-columns:.6fr 1.4fr;
+    gap:32px;
+    padding:54px 0;
+    border-top:1px solid #DAD5C8;
+  }
+  .section-note h2{
+    margin:0;
+    font-size:clamp(34px, 4vw, 62px);
+    line-height:.9;
+    letter-spacing:-.080em;
+    color:var(--red);
+    text-transform:uppercase;
+  }
+  .section-note p{
+    margin:0;
+    max-width:66ch;
+    color:#3A3833;
+  }
+  .logo-row{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:22px;
+    margin:0 0 110px;
+  }
+  .logo-card{
+    display:grid;
+    place-items:center;
+    min-height:0;
+    aspect-ratio:1.55 / 1;
+    padding:0;
+    background:#F7F7F6;
+    border-radius:0;
+    overflow:hidden;
+  }
+  .logo-card img{
+    width:100%;
+    max-width:none;
+    height:100%;
+    display:block;
+    object-fit:cover;
+  }
+  .feature-board{
+    margin:0 0 110px;
+    overflow:hidden;
+    border-radius:10px;
+    background:#fff;
+  }
+  .feature-board img{
+    width:100%;
+    display:block;
+    height:auto;
+  }
+  .website-scroller{
+    margin:0 0 112px;
+  }
+  .scroller-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+    margin:0 0 20px;
+  }
+  .scroller-header h2{
+    margin:0;
+    color:#3A3833;
+    font-size:24px;
+    line-height:1.2;
+  }
+  .scroller-controls{display:flex; gap:10px;}
+  .scroller-control{
+    appearance:none;
+    border:1px solid #DAD5C8;
+    background:var(--paper);
+    color:var(--red);
+    font-family:'Wingman', sans-serif;
+    font-size:24px;
+    line-height:1;
+    cursor:pointer;
+  }
+  .scroller-control{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+  }
+  .website-track{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    scroll-padding:0;
+    padding:0 0 18px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .website-track::-webkit-scrollbar{height:8px;}
+  .website-track::-webkit-scrollbar-track{background:#E4E0D5;}
+  .website-track::-webkit-scrollbar-thumb{background:#A02D2D; border-radius:999px;}
+  .website-panel{
+    flex:0 0 clamp(360px, 46vw, 760px);
+    margin:0;
+  }
+  .website-panel img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+  }
+
+  @media (max-width:760px){
+    main{padding:0 18px 28px;}
+    .case-hero{padding:52px 0 38px;}
+    .hero-copy-grid,
+    .case-summary,
+    .section-note{grid-template-columns:1fr; display:grid;}
+    .logo-row{grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px;}
+    .hero-logo-panel{min-height:360px; margin-top:36px;}
+    .case-meta{
+      border-bottom:1px solid #DAD5C8;
+      padding:0 0 28px;
+    }
+    .logo-row,
+    .feature-board{margin-bottom:70px;}
+    .logo-card{aspect-ratio:1.55 / 1;}
+    .website-scroller{margin-bottom:82px;}
+    .scroller-header{align-items:flex-end;}
+    .website-panel{flex-basis:78vw;}
+  }
+  @media (max-width:600px){
+    body{font-size:19px;}
+    .logo-row{grid-template-columns:1fr;}
+    .bottom-bar-inner{padding:30px 18px 12px; gap:12px;}
+    .bottom-cat-wrap{width:86px; bottom:-24px;}
+    .bottom-nav{font-size:17px;}
+    .bottom-nav .sep{margin:0 6px;}
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <a class="back-link" href="work.html">&larr; Work</a>
+
+  <section class="case-hero">
+    <div class="hero-copy-grid">
+      <div>
+        <h1>Oxford Collection</h1>
+        <p class="hero-deck">Brand identity system, brand architecture, primary logos, supporting marks, brand books</p>
+      </div>
+      <h2 class="case-copy">A unified hospitality brand system built to hold a growing West Coast portfolio.</h2>
+    </div>
+    <div class="hero-logo-panel">
+      <img class="hero-bg" src="Oxford/oxf-building.webp" alt="Oxford building brand application">
+    </div>
+  </section>
+
+  <section class="case-summary">
+    <div class="case-meta">
+      <div>
+        <div class="meta-label">Role:</div>
+        <p class="meta-value">Creative Director</p>
+        <p class="meta-value">AGENCY689 Inc.</p>
+      </div>
+      <div>
+        <div class="meta-label">Work:</div>
+        <ul class="work-list">
+          <li>Brand Identity System</li>
+          <li>Primary Logos + Supporting Marks</li>
+          <li>Brand Architecture</li>
+          <li>Typography + Color Standards</li>
+          <li>Comprehensive Brand Books</li>
+        </ul>
+      </div>
+    </div>
+    <div class="assignment-copy">
+      <p>Oxford Collection operates 16 hotels across the West Coast and needed a clearer identity system to strengthen recognition across the portfolio without flattening the personality of each property.</p>
+      <p>Four primary logos and supporting marks were developed to establish a clean brand hierarchy, giving the collection, hotel, suites, and future concepts enough structure to work together and enough flexibility to live on their own.</p>
+      <p>The result is a cohesive, scalable brand foundation built for long-term growth, property-level distinction, and more consistent guest-facing communication.</p>
+    </div>
+  </section>
+
+  <section class="section-note">
+    <h2>One family.<br>Clear rooms.</h2>
+    <p>The work was really about brand architecture: making sure guests, owners, and internal teams could understand which Oxford they were looking at and how each piece connected back to the larger collection.</p>
+  </section>
+
+  <div class="logo-row" aria-label="Oxford logo family">
+    <figure class="logo-card">
+      <img src="Oxford/logo-oxford-collection.webp" alt="Oxford Collection logo">
+    </figure>
+    <figure class="logo-card">
+      <img src="Oxford/logo-oxford-reserve.webp" alt="Oxford Reserve logo">
+    </figure>
+    <figure class="logo-card">
+      <img src="Oxford/logo-oxford-suites.webp" alt="Oxford Suites logo">
+    </figure>
+    <figure class="logo-card">
+      <img src="Oxford/logo-oxford-hotel.webp" alt="Oxford Hotel logo">
+    </figure>
+  </div>
+
+  <section class="section-note">
+    <h2>Built for<br>consistency.</h2>
+    <p>Comprehensive brand books defined logo usage, typography, colors, supporting marks, and practical rules for applying the identity across property collateral, campaigns, internal teams, and future growth.</p>
+  </section>
+
+  <figure class="feature-board">
+    <img src="Oxford/oxf-hotel-collateral.webp" alt="Oxford Hotel collateral system">
+  </figure>
+
+  <section class="website-scroller" aria-labelledby="brand-scroller-title">
+    <div class="scroller-header">
+      <h2 id="brand-scroller-title">Brand pieces</h2>
+      <div class="scroller-controls" aria-label="Oxford brand scroller controls">
+        <button class="scroller-control scroller-prev" type="button" aria-label="Scroll Oxford brand pieces left">&lsaquo;</button>
+        <button class="scroller-control scroller-next" type="button" aria-label="Scroll Oxford brand pieces right">&rsaquo;</button>
+      </div>
+    </div>
+    <div class="website-track" tabindex="0" aria-label="Oxford brand pieces">
+      <figure class="website-panel">
+        <img src="Oxford/oxf-suite-brand-book.webp" alt="Oxford Suites brand book presentation">
+      </figure>
+      <figure class="website-panel">
+        <img src="Oxford/oxf-brand-inside.webp" alt="Oxford brand book interior pages">
+      </figure>
+      <figure class="website-panel">
+        <img src="Oxford/oxf-reserve-book.webp" alt="Oxford Reserve brand book">
+      </figure>
+      <figure class="website-panel">
+        <img src="Oxford/oxf-reserve-print-ad.webp" alt="Oxford Reserve print advertisement">
+      </figure>
+      <figure class="website-panel">
+        <img src="Oxford/oxf-hotel-book.webp" alt="Oxford Hotel brand book">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="Oxford/oxf-suite-brand-book.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="Oxford/oxf-brand-inside.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="Oxford/oxf-reserve-book.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="Oxford/oxf-reserve-print-ad.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="Oxford/oxf-hotel-book.webp" alt="">
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+<div class="bottom-bar">
+  <div class="bottom-bar-inner">
+  <span class="bottom-cat-wrap">
+    <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
+    <img class="bottom-cat-wink" src="images/2-Cats-pico-wink.png" alt="" aria-hidden="true">
+    <img class="bottom-cat-closed" src="images/2-Cats-pico-closed.png" alt="" aria-hidden="true">
+    <img class="bottom-cat-half" src="images/2-Cats-pico-half.png" alt="" aria-hidden="true">
+  </span>
+  <nav class="bottom-nav" aria-label="Primary">
+    <a href="index.html">Home</a><span class="sep">|</span><a href="work.html" class="current">Work</a><span class="sep">|</span><a href="about.html">About</a><span class="sep">|</span><a href="book.html">Books</a><span class="sep">|</span><a href="contact.html">Contact</a>
+  </nav>
+  </div>
+</div>
+
+<script>
+(() => {
+  const scroller = document.querySelector('.website-scroller');
+  if (!scroller) return;
+  const track = scroller.querySelector('.website-track');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let isPaused = false;
+  let lastFrame = null;
+  let pauseTimer = null;
+  const scrollPages = (direction) => {
+    if (!track) return;
+    isPaused = true;
+    window.clearTimeout(pauseTimer);
+    track.scrollBy({left: direction * Math.max(320, track.clientWidth * .72), behavior:'smooth'});
+    pauseTimer = window.setTimeout(() => { isPaused = false; }, 1600);
+  };
+  const loopPoint = () => track ? track.scrollWidth / 2 : 0;
+  const normalize = () => {
+    const point = loopPoint();
+    if (!track || !point) return;
+    if (track.scrollLeft >= point) track.scrollLeft -= point;
+    if (track.scrollLeft < 0) track.scrollLeft += point;
+  };
+  const drift = (time) => {
+    if (!track || reduceMotion) return;
+    if (lastFrame === null) lastFrame = time;
+    const delta = time - lastFrame;
+    lastFrame = time;
+    if (!isPaused) {
+      track.scrollLeft += delta * 0.035;
+      normalize();
+    }
+    window.requestAnimationFrame(drift);
+  };
+  track?.addEventListener('focusin', () => { isPaused = true; });
+  track?.addEventListener('focusout', () => { isPaused = false; });
+  track?.addEventListener('scroll', normalize, {passive:true});
+  scroller.querySelector('.scroller-prev')?.addEventListener('click', () => scrollPages(-1));
+  scroller.querySelector('.scroller-next')?.addEventListener('click', () => scrollPages(1));
+  window.requestAnimationFrame(drift);
+})();
+
+(() => {
+  const cats = document.querySelectorAll('.bottom-cat-wrap');
+  if (!cats.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let lastMove = '';
+  let repeatCount = 0;
+  const nextDelay = () => 6500 + Math.random() * 10500;
+  const chooseMove = () => {
+    let move = Math.random() < 0.45 ? 'love' : 'wink';
+    if (move === lastMove) repeatCount += 1;
+    else repeatCount = 0;
+    if (repeatCount > 1 && Math.random() < 0.7) move = move === 'love' ? 'wink' : 'love';
+    repeatCount = move === lastMove ? repeatCount : 0;
+    lastMove = move;
+    return move;
+  };
+  const runLoveBlink = () => {
+    cats.forEach((cat) => cat.classList.add('is-love-half'));
+    window.setTimeout(() => {
+      cats.forEach((cat) => {
+        cat.classList.remove('is-love-half');
+        cat.classList.add('is-loving');
+      });
+    }, 180);
+    window.setTimeout(() => {
+      cats.forEach((cat) => {
+        cat.classList.remove('is-loving');
+        cat.classList.add('is-love-half');
+      });
+    }, 900);
+    window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-love-half')), 1120);
+    return 1120;
+  };
+  const runWink = () => {
+    cats.forEach((cat) => cat.classList.add('is-winking'));
+    window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-winking')), 420);
+    return 420;
+  };
+  const animateCat = () => {
+    const duration = chooseMove() === 'love' ? runLoveBlink() : runWink();
+    window.setTimeout(animateCat, duration + nextDelay());
+  };
+  window.setTimeout(animateCat, 2800 + Math.random() * 6000);
+})();
+</script>
+
+</body>
+</html>

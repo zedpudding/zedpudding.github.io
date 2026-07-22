@@ -80,6 +80,7 @@
     z-index:50;
     padding:0;
     background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
+    pointer-events:none;
   }
   .bottom-bar-inner{
     width:min(100%, 1680px);
@@ -130,6 +131,7 @@
     text-transform:uppercase;
     color:var(--red);
     padding-bottom:8px;
+    pointer-events:auto;
   }
   .bottom-nav a{text-decoration:none; opacity:.85; transition:opacity .15s;}
   .bottom-nav a:hover{opacity:1;}
@@ -198,6 +200,57 @@
     background:#fff;
     border-radius:10px;
   }
+  .project-media-frame{
+    position:relative;
+    display:block;
+    border-radius:10px;
+    overflow:hidden;
+    background:var(--paper);
+  }
+  .project-media-frame .project-media{
+    transition:filter .45s ease, opacity .45s ease, transform .45s ease;
+  }
+  .project-media-frame::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    border-radius:10px;
+    background:rgba(242, 240, 234, .18);
+    mix-blend-mode:multiply;
+    pointer-events:none;
+    transition:background .45s ease;
+  }
+  .project-media-frame::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    border:2px solid var(--red);
+    border-radius:10px;
+    pointer-events:none;
+    clip-path:polygon(0 0, 0 0, 0 0, 0 0);
+    transition:clip-path .5s cubic-bezier(.2,.76,.18,1);
+  }
+  .project .project-media{
+    filter:grayscale(1) contrast(1.12) brightness(1.08) sepia(.08);
+    opacity:.92;
+    mix-blend-mode:multiply;
+  }
+  .project:hover .project-media,
+  .project:focus-visible .project-media{
+    filter:grayscale(.18) contrast(1.04) brightness(1.02) sepia(.04);
+    opacity:1;
+    transform:scale(1.015);
+  }
+  .project:hover .project-media-frame::before,
+  .project:focus-visible .project-media-frame::before{
+    background:rgba(140, 42, 42, .08);
+  }
+  .project:hover .project-media-frame::after,
+  .project:focus-visible .project-media-frame::after{
+    clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
   .project-media.align-right{
     object-position:right center;
   }
@@ -255,7 +308,9 @@
 
   <section class="work-grid" aria-label="Selected work">
     <a class="project" href="traveler-guitar.html">
-      <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/TG-Redlands-Headstock.webp" alt="Traveler Guitar Redlands headstock branding">
+      <span class="project-media-frame">
+        <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/TG-Redlands-Headstock.webp" alt="Traveler Guitar Redlands headstock branding">
+      </span>
       <div class="project-caption">
         <div class="project-title">Traveler Guitar</div>
         <div class="project-desc">Master brand, product marks, digital, packaging, and the small details people actually hold.</div>
@@ -263,7 +318,9 @@
     </a>
 
     <a class="project" href="hotel-figueroa.html">
-      <img class="project-media" src="https://agency689.com/wp-content/uploads/2018/03/Hero-Figueroa-Brand-Book.jpg" alt="Hotel Figueroa brand book">
+      <span class="project-media-frame">
+        <img class="project-media" src="https://agency689.com/wp-content/uploads/2018/03/Hero-Figueroa-Brand-Book.jpg" alt="Hotel Figueroa brand book">
+      </span>
       <div class="project-caption">
         <div class="project-title">Hotel Figueroa</div>
         <div class="project-desc">A Los Angeles icon rebuilt as an identity system with memory, atmosphere, and bite.</div>
@@ -271,7 +328,9 @@
     </a>
 
     <a class="project" href="sunset-marquis.html">
-      <img class="project-media align-right" src="SM/awning-shake.jpg" alt="Sunset Marquis entrance and valet">
+      <span class="project-media-frame">
+        <img class="project-media align-right" src="SM/awning-shake.jpg" alt="Sunset Marquis entrance and valet">
+      </span>
       <div class="project-caption">
         <div class="project-title">Sunset Marquis</div>
         <div class="project-desc">A legendary hotel brand moved forward without sanding off the thing people came for.</div>
@@ -279,31 +338,39 @@
     </a>
 
     <a class="project" href="overlook.html">
-      <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/Overlook-Masthead.webp" alt="The Overlook identity">
+      <span class="project-media-frame">
+        <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/Overlook-Masthead.webp" alt="The Overlook identity">
+      </span>
       <div class="project-caption">
         <div class="project-title">The Overlook</div>
         <div class="project-desc">Naming and identity for a hilltop Santa Clarita apartment community.</div>
       </div>
     </a>
 
-    <a class="project" href="https://agency689.com/killer-networking/" target="_blank" rel="noopener noreferrer">
-      <img class="project-media" src="Killer/Killer-Fist.webp" alt="Killer Networks fist identity">
+    <a class="project" href="killer-networking.html">
+      <span class="project-media-frame">
+        <img class="project-media" src="Killer/Killer-Fist.webp" alt="Killer Networks fist identity">
+      </span>
       <div class="project-caption">
         <div class="project-title">Killer Networks</div>
         <div class="project-desc">Networking hardware turned into a gaming brand with a simple enemy: lag.</div>
       </div>
     </a>
 
-    <a class="project" href="https://zndrcrtv.com/firefly-venues/" target="_blank" rel="noopener noreferrer">
-      <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/FireFly-Sweatshirt.webp" alt="FireFly Venues apparel identity">
+    <a class="project" href="clink-hostels.html">
+      <span class="project-media-frame">
+        <img class="project-media" src="Clink/clink-hero.jpg" alt="Clink Hostels web redesign">
+      </span>
       <div class="project-caption">
-        <div class="project-title">FireFly Venues</div>
-        <div class="project-desc">A warm identity system for events, gatherings, web, and the stuff people keep.</div>
+        <div class="project-title">Clink Hostels</div>
+        <div class="project-desc">A hostel web experience rebuilt around social travel, clearer journeys, and easier booking.</div>
       </div>
     </a>
 
     <a class="project" href="https://zndrcrtv.com/orbital-virtual-studios/" target="_blank" rel="noopener noreferrer">
-      <img class="project-media" src="Orbital/OVS-Stage.webp" alt="Orbital Virtual Studios stage environment">
+      <span class="project-media-frame">
+        <img class="project-media" src="Orbital/OVS-Stage.webp" alt="Orbital Virtual Studios stage environment">
+      </span>
       <div class="project-caption">
         <div class="project-title">Orbital</div>
         <div class="project-desc">A virtual production brand built around movement, precision, and scale.</div>
@@ -311,15 +378,19 @@
     </a>
 
     <a class="project" href="https://zndrcrtv.com/grillhut/" target="_blank" rel="noopener noreferrer">
-      <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/GH-Brick.webp" alt="GrillHut environmental logo">
+      <span class="project-media-frame">
+        <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/GH-Brick.webp" alt="GrillHut environmental logo">
+      </span>
       <div class="project-caption">
         <div class="project-title">GrillHut</div>
         <div class="project-desc">A food brand with stronger signage, menus, and a more ownable visual attitude.</div>
       </div>
     </a>
 
-    <a class="project" href="https://agency689.com/oxford/" target="_blank" rel="noopener noreferrer">
-      <img class="project-media" src="https://agency689.com/wp-content/uploads/2019/03/oxford-collection_brand-book-cover.jpg" alt="Oxford Collection brand book">
+    <a class="project" href="oxford.html">
+      <span class="project-media-frame">
+        <img class="project-media" src="Oxford/oxf-reserve-logo.webp" alt="Oxford Reserve blue icon">
+      </span>
       <div class="project-caption">
         <div class="project-title">Oxford Collection</div>
         <div class="project-desc">A clearer house of brands for a hospitality group ready to scale.</div>
