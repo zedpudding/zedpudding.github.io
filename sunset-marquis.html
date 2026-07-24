@@ -68,70 +68,6 @@
     font-family:'Wingman', sans-serif;
     font-weight:400;
   }
-
-  .bottom-bar{
-    position:fixed;
-    left:0; right:0; bottom:0;
-    z-index:50;
-    padding:0;
-    background:linear-gradient(to top, var(--paper) 45%, transparent 100%);
-    pointer-events:none;
-  }
-  .bottom-bar-inner{
-    width:min(100%, 1680px);
-    margin:0 auto;
-    display:flex;
-    align-items:flex-end;
-    gap:18px;
-    padding:40px 32px 18px;
-  }
-  .bottom-cat-wrap{
-    position:relative;
-    bottom:-34px;
-    width:121px;
-    display:block;
-    flex:0 0 auto;
-    pointer-events:none;
-  }
-  .bottom-cat,
-  .bottom-cat-wink,
-  .bottom-cat-closed,
-  .bottom-cat-half{
-    width:100%;
-    height:auto;
-    display:block;
-    mix-blend-mode:multiply;
-  }
-  .bottom-cat-wink,
-  .bottom-cat-closed,
-  .bottom-cat-half{
-    position:absolute;
-    inset:0;
-    opacity:0;
-  }
-  .bottom-cat-wrap.is-winking .bottom-cat{opacity:0;}
-  .bottom-cat-wrap.is-winking .bottom-cat-wink{opacity:1;}
-  .bottom-cat-wrap.is-love-half .bottom-cat{opacity:0;}
-  .bottom-cat-wrap.is-love-half .bottom-cat-half{opacity:1;}
-  .bottom-cat-wrap.is-loving .bottom-cat{opacity:0;}
-  .bottom-cat-wrap.is-loving .bottom-cat-closed{opacity:1;}
-  .bottom-nav{
-    display:flex;
-    flex-wrap:wrap;
-    gap:0;
-    font-weight:400;
-    font-size:17px;
-    letter-spacing:0;
-    text-transform:uppercase;
-    color:var(--red);
-    padding-bottom:8px;
-    pointer-events:auto;
-  }
-  .bottom-nav a{text-decoration:none; opacity:.85; transition:opacity .15s;}
-  .bottom-nav a:hover,
-  .bottom-nav a.current{opacity:1;}
-  .bottom-nav .sep{margin:0 10px; opacity:.5;}
-
   main{
     max-width:var(--max);
     margin:0 auto;
@@ -791,10 +727,6 @@
   }
   @media (max-width:600px){
     body{font-size:19px;}
-    .bottom-bar-inner{padding:30px 18px 12px; gap:12px;}
-    .bottom-cat-wrap{width:86px; bottom:-24px;}
-    .bottom-nav{font-size:17px;}
-    .bottom-nav .sep{margin:0 6px;}
   }
   @media (prefers-reduced-motion:reduce){
     .cloud-photo{animation:none;}
@@ -807,6 +739,7 @@
     .product-strip-track{animation:none;}
   }
 </style>
+<link rel="stylesheet" href="footer.css">
 </head>
 <body>
 
@@ -964,134 +897,7 @@
   </div>
 </div>
 
-<div class="bottom-bar">
-  <div class="bottom-bar-inner">
-  <span class="bottom-cat-wrap">
-    <img class="bottom-cat" src="images/2-Cats-pico.png" alt="Illustration of a cat peeking up">
-    <img class="bottom-cat-wink" src="images/2-Cats-pico-wink.png" alt="" aria-hidden="true">
-    <img class="bottom-cat-closed" src="images/2-Cats-pico-closed.png" alt="" aria-hidden="true">
-    <img class="bottom-cat-half" src="images/2-Cats-pico-half.png" alt="" aria-hidden="true">
-  </span>
-  <nav class="bottom-nav" aria-label="Primary">
-    <a href="index.html">Home</a><span class="sep">|</span><a href="work.html" class="current">Work</a><span class="sep">|</span><a href="about.html">About</a><span class="sep">|</span><a href="book.html">Books</a><span class="sep">|</span><a href="contact.html">Contact</a>
-  </nav>
-  </div>
-</div>
-
-<script>
-(() => {
-  const sliders = document.querySelectorAll('.campaign-compare-frame');
-  sliders.forEach((slider) => {
-    const input = slider.querySelector('.campaign-compare-range');
-    if (!input) return;
-    const update = () => slider.style.setProperty('--compare', `${input.value}%`);
-    input.addEventListener('input', update);
-    update();
-  });
-})();
-
-(() => {
-  const gallery = document.querySelector('.ad-gallery');
-  if (!gallery) return;
-
-  const track = gallery.querySelector('.ad-gallery-track');
-  const thumbs = [...gallery.querySelectorAll('.ad-thumb')];
-  const lightbox = document.querySelector('.ad-lightbox');
-  const lightboxImage = lightbox?.querySelector('.lightbox-image');
-  const closeButton = lightbox?.querySelector('.lightbox-close');
-  const prevButton = lightbox?.querySelector('.lightbox-prev');
-  const nextButton = lightbox?.querySelector('.lightbox-next');
-  let activeIndex = 0;
-
-  const scrollGallery = (direction) => {
-    if (!track) return;
-    track.scrollBy({left: direction * Math.max(320, track.clientWidth * .72), behavior:'smooth'});
-  };
-
-  const showImage = (index) => {
-    if (!lightbox || !lightboxImage || !thumbs.length) return;
-    activeIndex = (index + thumbs.length) % thumbs.length;
-    const thumb = thumbs[activeIndex];
-    lightboxImage.src = thumb.dataset.full;
-    lightboxImage.alt = thumb.querySelector('img')?.alt || thumb.dataset.title || 'Sunset Marquis ad';
-  };
-
-  const openLightbox = (index) => {
-    if (!lightbox) return;
-    showImage(index);
-    lightbox.hidden = false;
-    document.body.style.overflow = 'hidden';
-    closeButton?.focus();
-  };
-
-  const closeLightbox = () => {
-    if (!lightbox || lightbox.hidden) return;
-    lightbox.hidden = true;
-    document.body.style.overflow = '';
-    thumbs[activeIndex]?.focus();
-  };
-
-  gallery.querySelector('.gallery-prev')?.addEventListener('click', () => scrollGallery(-1));
-  gallery.querySelector('.gallery-next')?.addEventListener('click', () => scrollGallery(1));
-  thumbs.forEach((thumb, index) => thumb.addEventListener('click', () => openLightbox(index)));
-  closeButton?.addEventListener('click', closeLightbox);
-  prevButton?.addEventListener('click', () => showImage(activeIndex - 1));
-  nextButton?.addEventListener('click', () => showImage(activeIndex + 1));
-  lightbox?.addEventListener('click', (event) => {
-    if (event.target === lightbox) closeLightbox();
-  });
-  window.addEventListener('keydown', (event) => {
-    if (!lightbox || lightbox.hidden) return;
-    if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowLeft') showImage(activeIndex - 1);
-    if (event.key === 'ArrowRight') showImage(activeIndex + 1);
-  });
-})();
-
-(() => {
-  const cats = document.querySelectorAll('.bottom-cat-wrap');
-  if (!cats.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let lastMove = '';
-  let repeatCount = 0;
-  const nextDelay = () => 6500 + Math.random() * 10500;
-  const chooseMove = () => {
-    let move = Math.random() < 0.45 ? 'love' : 'wink';
-    if (move === lastMove) repeatCount += 1;
-    else repeatCount = 0;
-    if (repeatCount > 1 && Math.random() < 0.7) move = move === 'love' ? 'wink' : 'love';
-    repeatCount = move === lastMove ? repeatCount : 0;
-    lastMove = move;
-    return move;
-  };
-  const runLoveBlink = () => {
-    cats.forEach((cat) => cat.classList.add('is-love-half'));
-    window.setTimeout(() => {
-      cats.forEach((cat) => {
-        cat.classList.remove('is-love-half');
-        cat.classList.add('is-loving');
-      });
-    }, 180);
-    window.setTimeout(() => {
-      cats.forEach((cat) => {
-        cat.classList.remove('is-loving');
-        cat.classList.add('is-love-half');
-      });
-    }, 900);
-    window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-love-half')), 1120);
-    return 1120;
-  };
-  const runWink = () => {
-    cats.forEach((cat) => cat.classList.add('is-winking'));
-    window.setTimeout(() => cats.forEach((cat) => cat.classList.remove('is-winking')), 420);
-    return 420;
-  };
-  const animateCat = () => {
-    const duration = chooseMove() === 'love' ? runLoveBlink() : runWink();
-    window.setTimeout(animateCat, duration + nextDelay());
-  };
-  window.setTimeout(animateCat, 2800 + Math.random() * 6000);
-})();
-</script>
+<script src="footer.js" defer></script>
 
 </body>
 </html>
