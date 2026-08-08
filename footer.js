@@ -80,3 +80,134 @@
   };
   window.setTimeout(animateCat, 2800 + Math.random() * 6000);
 })();
+
+(() => {
+  const clamp = (value) => Math.max(0, Math.min(100, value));
+
+  document.querySelectorAll('.campaign-compare-frame').forEach((frame) => {
+    if (frame.dataset.compareBound === 'true') return;
+    const range = frame.querySelector('.campaign-compare-range');
+    if (!range) return;
+    frame.dataset.compareBound = 'true';
+
+    const setCompare = (value) => {
+      const percent = clamp(Number(value));
+      frame.style.setProperty('--compare', `${percent}%`);
+      range.value = String(percent);
+    };
+
+    const setFromPointer = (event) => {
+      const rect = frame.getBoundingClientRect();
+      if (!rect.width) return;
+      setCompare(((event.clientX - rect.left) / rect.width) * 100);
+    };
+
+    range.addEventListener('input', () => setCompare(range.value));
+    range.addEventListener('change', () => setCompare(range.value));
+
+    frame.addEventListener('pointerdown', (event) => {
+      frame.setPointerCapture?.(event.pointerId);
+      setFromPointer(event);
+    });
+
+    frame.addEventListener('pointermove', (event) => {
+      if (event.buttons !== 1 && event.pressure === 0) return;
+      setFromPointer(event);
+    });
+
+    frame.addEventListener('pointerup', (event) => {
+      frame.releasePointerCapture?.(event.pointerId);
+    });
+
+    setCompare(range.value || 50);
+  });
+})();
+
+(() => {
+  const galleries = document.querySelectorAll('.ad-gallery');
+  const thumbs = Array.from(document.querySelectorAll('.ad-thumb[data-full]'));
+  const lightbox = document.querySelector('.ad-lightbox');
+  const lightboxImage = lightbox?.querySelector('.lightbox-image');
+  const closeButton = lightbox?.querySelector('.lightbox-close');
+  const prevButton = lightbox?.querySelector('.lightbox-prev');
+  const nextButton = lightbox?.querySelector('.lightbox-next');
+  let activeThumb = null;
+  let activeIndex = 0;
+
+  galleries.forEach((gallery) => {
+    if (gallery.dataset.galleryBound === 'true') return;
+    const track = gallery.querySelector('.ad-gallery-track');
+    const prev = gallery.querySelector('.gallery-prev');
+    const next = gallery.querySelector('.gallery-next');
+    const galleryThumbs = Array.from(gallery.querySelectorAll('.ad-thumb[data-full]'));
+    if (!track) return;
+    gallery.dataset.galleryBound = 'true';
+
+    const scrollStep = () => {
+      const firstThumb = galleryThumbs[0];
+      if (!firstThumb) return track.clientWidth * 0.8;
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+      return firstThumb.getBoundingClientRect().width + gap;
+    };
+
+    prev?.addEventListener('click', () => {
+      track.scrollBy({ left: -scrollStep(), behavior: 'smooth' });
+    });
+
+    next?.addEventListener('click', () => {
+      track.scrollBy({ left: scrollStep(), behavior: 'smooth' });
+    });
+  });
+
+  if (!lightbox || !lightboxImage || !thumbs.length) return;
+
+  const showAd = (index) => {
+    activeIndex = (index + thumbs.length) % thumbs.length;
+    const thumb = thumbs[activeIndex];
+    const thumbImage = thumb.querySelector('img');
+    activeThumb = thumb;
+    lightboxImage.src = thumb.dataset.full;
+    lightboxImage.alt = thumbImage?.alt || thumb.dataset.title || 'Gallery image';
+  };
+
+  const closeAd = () => {
+    lightbox.hidden = true;
+    lightboxImage.removeAttribute('src');
+    lightboxImage.alt = '';
+    document.body.style.overflow = '';
+    activeThumb?.focus();
+  };
+
+  const openAd = (thumb) => {
+    showAd(thumbs.indexOf(thumb));
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    closeButton?.focus();
+  };
+
+  const moveAd = (direction) => {
+    if (lightbox.hidden) return;
+    showAd(activeIndex + direction);
+  };
+
+  thumbs.forEach((thumb) => {
+    if (thumb.dataset.lightboxBound === 'true') return;
+    thumb.dataset.lightboxBound = 'true';
+    thumb.addEventListener('click', () => openAd(thumb));
+  });
+
+  closeButton?.addEventListener('click', closeAd);
+  prevButton?.addEventListener('click', () => moveAd(-1));
+  nextButton?.addEventListener('click', () => moveAd(1));
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeAd();
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (lightbox.hidden) return;
+    if (event.key === 'Escape') closeAd();
+    if (event.key === 'ArrowLeft') moveAd(-1);
+    if (event.key === 'ArrowRight') moveAd(1);
+  });
+})();
