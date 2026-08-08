@@ -2,17 +2,16 @@
   if (document.querySelector('.bottom-bar')) return;
 
   const path = window.location.pathname.split('/').pop() || 'index.html';
-  const workPages = new Set([
-    'work.html',
-    'traveler-guitar.html',
-    'sunset-marquis.html',
-    'hotel-figueroa.html',
-    'killer-networking.html',
-    'clink-hostels.html',
-    'oxford.html',
-    'overlook.html',
-    'fender.html'
-  ]);
+  const workCases = [
+    { href: 'traveler-guitar.html', label: 'Traveler Guitar' },
+    { href: 'hotel-figueroa.html', label: 'Hotel Figueroa' },
+    { href: 'sunset-marquis.html', label: 'Sunset Marquis' },
+    { href: 'overlook.html', label: 'The Overlook' },
+    { href: 'killer-networking.html', label: 'Killer Networks' },
+    { href: 'clink-hostels.html', label: 'Clink Hostels' },
+    { href: 'oxford.html', label: 'Oxford Collection' }
+  ];
+  const workPages = new Set(['work.html', ...workCases.map((page) => page.href)]);
   const links = [
     { href: 'work.html', label: 'Work', current: workPages.has(path) },
     { href: 'about.html', label: 'About', current: path === 'about.html' },
@@ -36,6 +35,23 @@
     </div>
   `;
   document.body.appendChild(bar);
+
+  const currentCaseIndex = workCases.findIndex((page) => page.href === path);
+  if (currentCaseIndex >= 0 && !document.querySelector('.work-case-nav')) {
+    const previous = workCases[(currentCaseIndex - 1 + workCases.length) % workCases.length];
+    const next = workCases[(currentCaseIndex + 1) % workCases.length];
+    const nav = document.createElement('nav');
+    nav.className = 'work-case-nav';
+    nav.setAttribute('aria-label', 'Work project navigation');
+    nav.innerHTML = `
+      <a class="work-case-nav-link work-case-nav-prev" href="${previous.href}" aria-label="Previous project: ${previous.label}">‹</a>
+      <a class="work-case-nav-link work-case-nav-grid" href="work.html" aria-label="All work">
+        <span aria-hidden="true"></span>
+      </a>
+      <a class="work-case-nav-link work-case-nav-next" href="${next.href}" aria-label="Next project: ${next.label}">›</a>
+    `;
+    document.body.appendChild(nav);
+  }
 
   const cats = bar.querySelectorAll('.bottom-cat-wrap');
   if (!cats.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
