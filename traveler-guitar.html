@@ -880,6 +880,88 @@
 
       setCompare(range.value || 50);
     });
+
+    const gallery = document.querySelector('.ad-gallery');
+    const track = gallery?.querySelector('.ad-gallery-track');
+    const prev = gallery?.querySelector('.gallery-prev');
+    const next = gallery?.querySelector('.gallery-next');
+    const thumbs = Array.from(gallery?.querySelectorAll('.ad-thumb[data-full]') || []);
+
+    if (gallery && track) {
+      const scrollStep = () => {
+        const firstThumb = thumbs[0];
+        if (!firstThumb) return track.clientWidth * 0.8;
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+        return firstThumb.getBoundingClientRect().width + gap;
+      };
+
+      prev?.addEventListener('click', () => {
+        track.scrollBy({ left: -scrollStep(), behavior: 'smooth' });
+      });
+
+      next?.addEventListener('click', () => {
+        track.scrollBy({ left: scrollStep(), behavior: 'smooth' });
+      });
+    }
+
+    const lightbox = document.querySelector('.ad-lightbox');
+    const lightboxImage = lightbox?.querySelector('.lightbox-image');
+    const closeButton = lightbox?.querySelector('.lightbox-close');
+    const prevButton = lightbox?.querySelector('.lightbox-prev');
+    const nextButton = lightbox?.querySelector('.lightbox-next');
+    let activeThumb = null;
+    let activeIndex = 0;
+
+    const showAd = (index) => {
+      if (!lightboxImage || !thumbs.length) return;
+      activeIndex = (index + thumbs.length) % thumbs.length;
+      const thumb = thumbs[activeIndex];
+      const thumbImage = thumb.querySelector('img');
+      activeThumb = thumb;
+      lightboxImage.src = thumb.dataset.full;
+      lightboxImage.alt = thumbImage?.alt || thumb.dataset.title || 'Traveler Guitar ad';
+    };
+
+    const closeAd = () => {
+      if (!lightbox || !lightboxImage) return;
+      lightbox.hidden = true;
+      lightboxImage.removeAttribute('src');
+      lightboxImage.alt = '';
+      document.body.style.overflow = '';
+      activeThumb?.focus();
+    };
+
+    const openAd = (thumb) => {
+      if (!lightbox || !lightboxImage) return;
+      showAd(thumbs.indexOf(thumb));
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+      closeButton?.focus();
+    };
+
+    const moveAd = (direction) => {
+      if (!lightbox || lightbox.hidden) return;
+      showAd(activeIndex + direction);
+    };
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => openAd(thumb));
+    });
+
+    closeButton?.addEventListener('click', closeAd);
+    prevButton?.addEventListener('click', () => moveAd(-1));
+    nextButton?.addEventListener('click', () => moveAd(1));
+    lightbox?.addEventListener('click', (event) => {
+      if (event.target === lightbox) closeAd();
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (!lightbox || lightbox.hidden) return;
+      if (event.key === 'Escape') closeAd();
+      if (event.key === 'ArrowLeft') moveAd(-1);
+      if (event.key === 'ArrowRight') moveAd(1);
+    });
   })();
 </script>
 <script src="footer.js" defer></script>
