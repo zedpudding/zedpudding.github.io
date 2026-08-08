@@ -124,6 +124,50 @@
 })();
 
 (() => {
+  document.querySelectorAll('.website-scroller').forEach((scroller) => {
+    if (scroller.dataset.scrollerBound === 'true') return;
+    const track = scroller.querySelector('.website-track');
+    const prev = scroller.querySelector('.scroller-prev');
+    const next = scroller.querySelector('.scroller-next');
+    const panels = Array.from(scroller.querySelectorAll('.website-panel'));
+    const visiblePanels = panels.filter((panel) => panel.getAttribute('aria-hidden') !== 'true');
+    const cyclePanels = visiblePanels.length || panels.length;
+    if (!track || !panels.length) return;
+    scroller.dataset.scrollerBound = 'true';
+
+    const panelStep = () => {
+      const firstPanel = panels[0];
+      if (!firstPanel) return track.clientWidth * 0.8;
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+      return firstPanel.getBoundingClientRect().width + gap;
+    };
+
+    const cycleWidth = () => panelStep() * cyclePanels;
+
+    const normalize = () => {
+      const width = cycleWidth();
+      if (!width || panels.length <= cyclePanels) return;
+      if (track.scrollLeft >= width) track.scrollLeft -= width;
+      if (track.scrollLeft < 0) track.scrollLeft += width;
+    };
+
+    const jump = (direction) => {
+      normalize();
+      if (direction < 0 && track.scrollLeft <= 2 && panels.length > cyclePanels) {
+        track.scrollLeft = cycleWidth();
+      }
+      track.scrollBy({ left: direction * panelStep(), behavior: 'smooth' });
+      window.setTimeout(normalize, 520);
+    };
+
+    prev?.addEventListener('click', () => jump(-1));
+    next?.addEventListener('click', () => jump(1));
+    track.addEventListener('scroll', () => window.requestAnimationFrame(normalize), { passive: true });
+  });
+})();
+
+(() => {
   const galleries = document.querySelectorAll('.ad-gallery');
   const thumbs = Array.from(document.querySelectorAll('.ad-thumb[data-full]'));
   const lightbox = document.querySelector('.ad-lightbox');
