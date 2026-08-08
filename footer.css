@@ -82,16 +82,12 @@
   opacity:.5;
 }
 .work-case-nav{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:112px;
-  z-index:45;
+  width:min(100% - 48px, var(--max, 1680px));
+  margin:72px auto 132px;
   display:flex;
   justify-content:center;
   align-items:center;
   gap:58px;
-  pointer-events:none;
 }
 .work-case-nav-link{
   width:48px;
@@ -102,7 +98,6 @@
   text-decoration:none;
   line-height:1;
   opacity:.72;
-  pointer-events:auto;
   transition:opacity .18s ease, transform .18s ease, background-color .18s ease;
 }
 .work-case-nav-link:hover,
@@ -167,7 +162,8 @@
     margin:0 4px;
   }
   .work-case-nav{
-    bottom:124px;
+    width:calc(100% - 36px);
+    margin:54px auto 124px;
     gap:38px;
   }
   .work-case-nav-link{
