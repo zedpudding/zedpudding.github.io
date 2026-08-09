@@ -1,4 +1,44 @@
 (() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const root = document.documentElement;
+  root.classList.add('page-transition-ready', 'page-enter');
+
+  const clearEnter = () => root.classList.remove('page-enter');
+  window.setTimeout(clearEnter, 420);
+
+  window.addEventListener('pageshow', (event) => {
+    root.classList.remove('page-exit');
+    if (event.persisted) {
+      root.classList.add('page-enter');
+      window.setTimeout(clearEnter, 420);
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    const link = event.target.closest('a[href]');
+    if (!link || link.target || link.hasAttribute('download')) return;
+
+    const url = new URL(link.href, window.location.href);
+    const isSamePageHash = url.origin === window.location.origin &&
+      url.pathname === window.location.pathname &&
+      url.search === window.location.search &&
+      url.hash;
+
+    if (url.origin !== window.location.origin || isSamePageHash || !/^https?:$/.test(url.protocol)) return;
+
+    event.preventDefault();
+    root.classList.remove('page-enter');
+    root.classList.add('page-exit');
+    window.setTimeout(() => {
+      window.location.href = url.href;
+    }, 240);
+  });
+})();
+
+(() => {
   if (document.querySelector('.bottom-bar')) return;
 
   const path = window.location.pathname.split('/').pop() || 'index.html';
