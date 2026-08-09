@@ -40,6 +40,7 @@
   if (currentCaseIndex >= 0 && !document.querySelector('.work-case-nav')) {
     const previous = workCases[(currentCaseIndex - 1 + workCases.length) % workCases.length];
     const next = workCases[(currentCaseIndex + 1) % workCases.length];
+    const pageMain = document.querySelector('main');
     const nav = document.createElement('nav');
     nav.className = 'work-case-nav';
     nav.setAttribute('aria-label', 'Work project navigation');
@@ -50,7 +51,12 @@
       </a>
       <a class="work-case-nav-link work-case-nav-next" href="${next.href}" aria-label="Next project: ${next.label}">›</a>
     `;
-    document.body.appendChild(nav);
+    if (pageMain) {
+      pageMain.classList.add('has-work-case-nav');
+      pageMain.appendChild(nav);
+    } else {
+      document.body.appendChild(nav);
+    }
   }
 
   const cats = bar.querySelectorAll('.bottom-cat-wrap');

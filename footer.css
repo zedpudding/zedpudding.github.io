@@ -81,9 +81,15 @@
   margin:0 8px;
   opacity:.5;
 }
+.has-work-case-nav{
+  padding-bottom:0;
+}
+.has-work-case-nav > :nth-last-child(2){
+  margin-bottom:18px !important;
+}
 .work-case-nav{
   width:min(100% - 48px, var(--max, 1680px));
-  margin:72px auto 132px;
+  margin:0 auto 88px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -163,7 +169,7 @@
   }
   .work-case-nav{
     width:calc(100% - 36px);
-    margin:54px auto 124px;
+    margin:0 auto 104px;
     gap:38px;
   }
   .work-case-nav-link{
