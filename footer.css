@@ -1,13 +1,13 @@
 @media (prefers-reduced-motion:no-preference){
-  .page-transition-ready body{
+  .page-transition-ready main{
     will-change:opacity, transform;
     transform-origin:center 45vh;
     backface-visibility:hidden;
   }
-  .page-transition-ready.page-enter body{
+  .page-transition-ready.page-enter main{
     animation:page-zoom-fade-in .38s cubic-bezier(.16,.72,.24,1) both;
   }
-  .page-transition-ready.page-exit body{
+  .page-transition-ready.page-exit main{
     animation:page-zoom-fade-out .24s cubic-bezier(.65,0,.35,1) both;
     pointer-events:none;
   }
