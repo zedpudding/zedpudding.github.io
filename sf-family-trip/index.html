@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>San Francisco Family Trip | Nov 22–26, 2026</title>
+<style>
+  :root{
+    --bg:#f4f1ea;
+    --paper:#fffdf8;
+    --ink:#171717;
+    --muted:#6f6a61;
+    --line:#ded8ce;
+    --accent:#d95f3b;
+    --accent2:#2f6f67;
+    --gold:#c99b46;
+    --shadow:0 12px 35px rgba(0,0,0,.08);
+    --radius:22px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 20% 0%, rgba(217,95,59,.08), transparent 28rem),
+      radial-gradient(circle at 100% 15%, rgba(47,111,103,.08), transparent 30rem),
+      var(--bg);
+    font-family:Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height:1.5;
+  }
+  a{color:inherit}
+  .wrap{width:min(1180px, calc(100% - 34px)); margin:auto}
+  header{
+    position:sticky; top:0; z-index:10;
+    background:rgba(244,241,234,.88);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(0,0,0,.06);
+  }
+  nav{
+    min-height:66px; display:flex; align-items:center; justify-content:space-between; gap:18px;
+  }
+  .brand{font-weight:900; letter-spacing:-.04em}
+  .navlinks{display:flex; gap:17px; flex-wrap:wrap; font-size:14px; color:var(--muted)}
+  .navlinks a{text-decoration:none}
+  .hero{padding:76px 0 48px}
+  .eyebrow{
+    display:inline-flex; gap:10px; align-items:center;
+    font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--accent2); margin-bottom:16px;
+  }
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--accent)}
+  h1{
+    font-size:clamp(50px, 9vw, 112px);
+    line-height:.86; letter-spacing:-.075em; margin:0 0 26px; max-width:900px;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.35fr .65fr; gap:28px; align-items:end}
+  .lede{font-size:clamp(18px,2vw,24px); color:#3d3934; max-width:760px; margin:0}
+  .trip-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:24px;
+  }
+  .trip-card .big{font-size:27px; font-weight:900; letter-spacing:-.035em}
+  .trip-card .small{color:var(--muted); font-size:14px; margin-top:5px}
+  .chips{display:flex; flex-wrap:wrap; gap:9px; margin-top:20px}
+  .chip{
+    padding:9px 12px; border:1px solid var(--line); border-radius:999px;
+    background:rgba(255,255,255,.6); font-size:13px; font-weight:750;
+  }
+  section{padding:42px 0}
+  .section-head{display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:22px}
+  h2{font-size:clamp(32px,5vw,58px); letter-spacing:-.055em; line-height:.95; margin:0}
+  .kicker{color:var(--accent); font-weight:850; font-size:13px; letter-spacing:.12em; text-transform:uppercase}
+  .muted{color:var(--muted)}
+  .days{display:grid; gap:16px}
+  .day{
+    display:grid; grid-template-columns:135px 1fr auto; gap:22px; align-items:start;
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px; box-shadow:0 5px 20px rgba(0,0,0,.04)
+  }
+  .date{font-weight:900; font-size:18px; letter-spacing:-.02em}
+  .date span{display:block;color:var(--muted);font-size:13px;font-weight:700;margin-top:2px}
+  .day h3{margin:0 0 8px;font-size:25px;letter-spacing:-.035em}
+  .day p{margin:0;color:#555047}
+  .status{
+    border-radius:999px; padding:7px 10px; font-size:12px; font-weight:850; white-space:nowrap;
+    background:#edf3f1; color:var(--accent2)
+  }
+  .status.book{background:#fff0e9;color:#a33d21}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px; box-shadow:0 5px 20px rgba(0,0,0,.04)
+  }
+  .card h3{font-size:24px;letter-spacing:-.035em;margin:0 0 10px}
+  .card p{color:#555047}
+  .candidate{border-top:1px solid var(--line);padding-top:17px;margin-top:17px}
+  .candidate:first-of-type{border-top:0;padding-top:0}
+  .candidate strong{display:block;font-size:18px}
+  .btn{
+    display:inline-block; margin-top:12px; background:var(--ink); color:white; text-decoration:none;
+    border-radius:999px; padding:11px 15px; font-size:14px; font-weight:800
+  }
+  .btn.alt{background:var(--accent2)}
+  .checklist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .check{
+    background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:18px
+  }
+  .check .top{display:flex;justify-content:space-between;gap:12px;align-items:start}
+  .check .num{
+    width:31px;height:31px;border-radius:50%;display:grid;place-items:center;
+    font-size:12px;font-weight:900;background:#efe9df;color:#514b42
+  }
+  .check h4{margin:0 0 7px;font-size:17px}
+  .check p{margin:0;color:var(--muted);font-size:14px}
+  .note{
+    background:#171717;color:#fff;border-radius:var(--radius);padding:30px;
+    display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center
+  }
+  .note h3{font-size:30px;letter-spacing:-.04em;margin:0 0 7px}
+  .note p{margin:0;color:#cfcac2}
+  footer{padding:55px 0 70px;color:var(--muted);font-size:13px}
+  @media(max-width:800px){
+    .hero-grid,.grid-2,.note{grid-template-columns:1fr}
+    .day{grid-template-columns:1fr}
+    .checklist{grid-template-columns:1fr}
+    .navlinks{display:none}
+    .hero{padding-top:48px}
+    h1{font-size:60px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="brand">SF FAMILY TRIP</div>
+      <div class="navlinks">
+        <a href="#plan">The Plan</a>
+        <a href="#muir">Muir Woods</a>
+        <a href="#book">Book It</a>
+        <a href="#notes">Notes</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="eyebrow"><span class="dot"></span> November 22–26, 2026</div>
+    <div class="hero-grid">
+      <div>
+        <h1>San Francisco.<br>Four of us.<br>No car.</h1>
+        <p class="lede">A 3-day family attack plan built around giant redwoods, Alcatraz, Chinatown, cable cars, weird arcade machines, great food, and getting around without turning the vacation into a transportation project.</p>
+        <div class="chips">
+          <span class="chip">2 adults</span>
+          <span class="chip">Boys: 12 + 10</span>
+          <span class="chip">Hyatt Regency SF</span>
+          <span class="chip">No rental car</span>
+          <span class="chip">Thanksgiving week</span>
+        </div>
+      </div>
+      <div class="trip-card">
+        <div class="kicker">Home Base</div>
+        <div class="big">Hyatt Regency<br>San Francisco</div>
+        <div class="small">Embarcadero / Ferry Building area</div>
+        <div style="height:16px"></div>
+        <div class="kicker">Trip style</div>
+        <div class="small">Walk + ferry + cable car + Muni + one organized Muir Woods excursion.</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="plan">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Working itinerary</div>
+          <h2>The plan so far.</h2>
+        </div>
+        <div class="muted">We’ll update this as things get booked.</div>
+      </div>
+
+      <div class="days">
+        <article class="day">
+          <div class="date">SUN 11/22 <span>Arrival day</span></div>
+          <div>
+            <h3>Land. Check in. Wander.</h3>
+            <p>Ferry Building, Embarcadero, dinner nearby. Nothing ticketed. Keep this day loose in case travel goes sideways.</p>
+          </div>
+          <div class="status">EASY DAY</div>
+        </article>
+
+        <article class="day">
+          <div class="date">MON 11/23 <span>Big SF day</span></div>
+          <div>
+            <h3>Alcatraz + Fisherman’s Wharf</h3>
+            <p>Morning Alcatraz ferry and cellhouse audio tour. Then Pier 39 / sea lions, Musée Mécanique, North Beach, dinner, and a cable car if everyone still has legs.</p>
+          </div>
+          <div class="status book">BOOK</div>
+        </article>
+
+        <article class="day">
+          <div class="date">TUE 11/24 <span>Redwood day</span></div>
+          <div>
+            <h3>Muir Woods + Sausalito + ferry home</h3>
+            <p>Small-group Sprinter-style tour is the target. Muir Woods in the morning, stay behind in Sausalito, lunch and wander, then ferry back across the Bay to the Ferry Building.</p>
+          </div>
+          <div class="status book">CHOOSING TOUR</div>
+        </article>
+
+        <article class="day">
+          <div class="date">WED 11/25 <span>City day</span></div>
+          <div>
+            <h3>Cable car + Chinatown + Exploratorium</h3>
+            <p>California Street cable car, Cable Car Museum, Chinatown food crawl + fortune cookies, then downhill to the Exploratorium for the afternoon.</p>
+          </div>
+          <div class="status">PLANNED</div>
+        </article>
+
+        <article class="day">
+          <div class="date">THU 11/26 <span>Thanksgiving</span></div>
+          <div>
+            <h3>Breakfast + head home</h3>
+            <p>Keep Thanksgiving intentionally simple. Most major attractions run limited schedules or close, so this is a departure / easy waterfront morning.</p>
+          </div>
+          <div class="status">TRAVEL DAY</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="muir">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Current decision</div>
+          <h2>Muir Woods tour.</h2>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>What we want</h3>
+          <p><strong>Small group, preferably a Mercedes Sprinter.</strong> Hotel or near-hotel pickup. Muir Woods admission. Time in Sausalito. Most importantly: the ability to <strong>stay in Sausalito and ferry back ourselves</strong> rather than riding the van back into the city.</p>
+          <div class="candidate">
+            <strong>Why the ferry matters</strong>
+            <p>The Sausalito → San Francisco ferry turns transportation into part of the trip and drops us right near the Hyatt / Ferry Building.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Leading candidate</h3>
+          <div class="candidate">
+            <strong>Viator: Muir Woods + Sausalito Tour</strong>
+            <p>Small-group listing we found. This is currently the front-runner. Before purchasing, confirm exact operator, vehicle size, pickup point, and that we can remain in Sausalito for a later ferry.</p>
+            <a class="btn alt" target="_blank" rel="noopener" href="https://www.viator.com/tours/San-Francisco/Muir-Woods-and-Sausalito-Tour/d651-152424P1">Open Viator Tour</a>
+          </div>
+          <div class="candidate">
+            <strong>Still comparing</strong>
+            <p>Gray Line, Dylan’s Tours, and Extranomical are also on the list. We’ll keep only the strongest options here once verified for Nov. 24.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Priority list</div>
+          <h2>Book these first.</h2>
+        </div>
+      </div>
+
+      <div class="checklist">
+        <div class="check">
+          <div class="top"><div><h4>Alcatraz</h4><p>Mon 11/23, morning departure preferred.</p></div><div class="num">01</div></div>
+        </div>
+        <div class="check">
+          <div class="top"><div><h4>Muir Woods</h4><p>Tue 11/24. Small group + Sausalito ferry freedom.</p></div><div class="num">02</div></div>
+        </div>
+        <div class="check">
+          <div class="top"><div><h4>Exploratorium</h4><p>Wed 11/25. Add Tactile Dome if available.</p></div><div class="num">03</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="notes">
+    <div class="wrap">
+      <div class="note">
+        <div>
+          <h3>Family rule: don’t over-schedule it.</h3>
+          <p>One major anchor each day, with room for food, wandering, arcade games, cable cars and the unexpected stuff that ends up being the best part.</p>
+        </div>
+        <div style="font-size:52px">🌉</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>San Francisco Family Trip</strong> · Working plan · Updated Aug. 29, 2026<br>
+    This page is intentionally a living document. We can add bookings, confirmation numbers, restaurant picks, maps, costs and daily timing as the trip comes together.
+  </div>
+</footer>
+</body>
+</html>
