@@ -63,7 +63,7 @@
   .section-note h2,
   .logo-formula figcaption,
   .campaign-title,
-  .ad-gallery-header h2,
+  .scroller-title,
   .book-lightbox-button{
     font-family:'Wingman', sans-serif;
     font-weight:400;
@@ -486,28 +486,30 @@
     display:block;
     border-radius:10px;
   }
-  .ad-gallery{
+  .website-scroller{
+    width:100%;
     margin:0 0 112px;
   }
-  .ad-gallery-header{
+  .scroller-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:24px;
+    width:100%;
     margin:0 0 20px;
   }
-  .ad-gallery h2{
+  .scroller-title{
     margin:0;
     color:#3A3833;
     font-size:24px;
     line-height:1.2;
     font-weight:400;
   }
-  .gallery-controls{
+  .scroller-controls{
     display:flex;
     gap:10px;
   }
-  .gallery-control,
+  .scroller-control,
   .lightbox-button{
     appearance:none;
     border:1px solid #DAD5C8;
@@ -518,32 +520,27 @@
     line-height:1;
     cursor:pointer;
   }
-  .gallery-control{
+  .scroller-control{
     width:42px;
     height:42px;
     border-radius:50%;
   }
-  .ad-gallery-track{
+  .website-track{
     display:flex;
-    gap:24px;
+    gap:12px;
     overflow-x:auto;
-    scroll-snap-type:x mandatory;
     scroll-padding:0;
     padding:0 0 18px;
     -webkit-overflow-scrolling:touch;
   }
-  .ad-gallery-track::-webkit-scrollbar{height:8px;}
-  .ad-gallery-track::-webkit-scrollbar-track{background:#E4E0D5;}
-  .ad-gallery-track::-webkit-scrollbar-thumb{background:#A02D2D; border-radius:999px;}
-  .ad-thumb{
+  .website-track::-webkit-scrollbar{height:8px;}
+  .website-track::-webkit-scrollbar-track{background:#E4E0D5;}
+  .website-track::-webkit-scrollbar-thumb{background:#A02D2D; border-radius:999px;}
+  .website-panel{
     flex:0 0 clamp(260px, 28vw, 430px);
-    border:0;
-    padding:0;
-    background:transparent;
-    cursor:zoom-in;
-    scroll-snap-align:start;
+    margin:0;
   }
-  .ad-thumb img{
+  .website-panel img{
     width:100%;
     display:block;
     height:auto;
@@ -629,9 +626,11 @@
     .campaign-compare-labels{font-size:17px; left:12px; right:12px; bottom:12px;}
     .campaign-compare-handle::before{width:38px; height:38px;}
     .polaroid-wall{margin-bottom:84px;}
-    .ad-gallery{margin-bottom:82px;}
-    .ad-gallery-header{align-items:flex-end;}
-    .ad-thumb{flex-basis:78vw;}
+    .website-scroller{margin-bottom:82px;}
+    .scroller-header{
+      align-items:flex-end;
+    }
+    .website-panel{flex-basis:78vw;}
     .ad-lightbox{padding:18px;}
     .lightbox-frame{width:100%;}
     .lightbox-close{top:8px; right:8px;}
@@ -652,7 +651,8 @@
     .product-strip-track{animation:none;}
   }
 </style>
-<link rel="stylesheet" href="footer.css?v=20260809-pagetransition2">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="footer.css?v=20260905-work-subnav-button">
 </head>
 <body>
 
@@ -745,33 +745,47 @@
     </div>
   </div>
 
-  <section class="ad-gallery" aria-labelledby="ad-gallery-title">
-    <div class="ad-gallery-header">
-      <h2 id="ad-gallery-title">Ads</h2>
-      <div class="gallery-controls" aria-label="Ad gallery controls">
-        <button class="gallery-control gallery-prev" type="button" aria-label="Scroll ads left">‹</button>
-        <button class="gallery-control gallery-next" type="button" aria-label="Scroll ads right">›</button>
-      </div>
+  <section class="website-scroller" aria-labelledby="ad-gallery-title">
+    <div class="scroller-header">
+      <h2 class="scroller-title" id="ad-gallery-title">Ads</h2>
     </div>
-    <div class="ad-gallery-track" tabindex="0" aria-label="Traveler Guitar ad gallery">
-      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-12-a744e402.webp" data-title="Traveler Guitar ad">
+    <div class="website-track" tabindex="0" aria-label="Traveler Guitar ad gallery">
+      <figure class="website-panel">
         <img src="TG/Ads/TG-Ads-Vert-12-a744e402.webp" alt="Traveler Guitar vertical ad">
-      </button>
-      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-2-bc142c20.webp" data-title="Traveler Guitar ad">
+      </figure>
+      <figure class="website-panel">
         <img src="TG/Ads/TG-Ads-Vert-2-bc142c20.webp" alt="Traveler Guitar vertical ad">
-      </button>
-      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-4-cba69261.webp" data-title="Traveler Guitar ad">
+      </figure>
+      <figure class="website-panel">
         <img src="TG/Ads/TG-Ads-Vert-4-cba69261.webp" alt="Traveler Guitar vertical ad">
-      </button>
-      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-5-2b86c034.webp" data-title="Traveler Guitar ad">
+      </figure>
+      <figure class="website-panel">
         <img src="TG/Ads/TG-Ads-Vert-5-2b86c034.webp" alt="Traveler Guitar vertical ad">
-      </button>
-      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-6-19733e1f.webp" data-title="Traveler Guitar ad">
+      </figure>
+      <figure class="website-panel">
         <img src="TG/Ads/TG-Ads-Vert-6-19733e1f.webp" alt="Traveler Guitar vertical ad">
-      </button>
-      <button class="ad-thumb" type="button" data-full="TG/Ads/TG-Ads-Vert-9-005d96ff.webp" data-title="Traveler Guitar ad">
+      </figure>
+      <figure class="website-panel">
         <img src="TG/Ads/TG-Ads-Vert-9-005d96ff.webp" alt="Traveler Guitar vertical ad">
-      </button>
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="TG/Ads/TG-Ads-Vert-12-a744e402.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="TG/Ads/TG-Ads-Vert-2-bc142c20.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="TG/Ads/TG-Ads-Vert-4-cba69261.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="TG/Ads/TG-Ads-Vert-5-2b86c034.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="TG/Ads/TG-Ads-Vert-6-19733e1f.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="TG/Ads/TG-Ads-Vert-9-005d96ff.webp" alt="">
+      </figure>
     </div>
   </section>
 
@@ -841,7 +855,48 @@
   </div>
 </div>
 
-<script src="footer.js?v=20260809-pagetransition2" defer></script>
+<script>
+  (() => {
+    const clamp = (value) => Math.max(0, Math.min(100, value));
+
+    document.querySelectorAll('.campaign-compare-frame').forEach((frame) => {
+      const range = frame.querySelector('.campaign-compare-range');
+      if (!range) return;
+
+      const setCompare = (value) => {
+        const percent = clamp(Number(value));
+        frame.style.setProperty('--compare', `${percent}%`);
+        range.value = String(percent);
+      };
+
+      const setFromPointer = (event) => {
+        const rect = frame.getBoundingClientRect();
+        if (!rect.width) return;
+        setCompare(((event.clientX - rect.left) / rect.width) * 100);
+      };
+
+      range.addEventListener('input', () => setCompare(range.value));
+      range.addEventListener('change', () => setCompare(range.value));
+
+      frame.addEventListener('pointerdown', (event) => {
+        frame.setPointerCapture?.(event.pointerId);
+        setFromPointer(event);
+      });
+
+      frame.addEventListener('pointermove', (event) => {
+        if (event.buttons !== 1 && event.pressure === 0) return;
+        setFromPointer(event);
+      });
+
+      frame.addEventListener('pointerup', (event) => {
+        frame.releasePointerCapture?.(event.pointerId);
+      });
+
+      setCompare(range.value || 50);
+    });
+  })();
+</script>
+<script src="footer.js?v=20260905-work-subnav-button" defer></script>
 
 </body>
 </html>

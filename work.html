@@ -119,7 +119,7 @@
   .work-grid{
     display:grid;
     grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:68px 24px;
+    gap:86px 24px;
   }
   .project{
     display:block;
@@ -189,24 +189,22 @@
     object-position:right center;
   }
   .project-caption{
-    display:grid;
-    grid-template-columns:minmax(130px, .5fr) minmax(0, 1fr);
-    gap:20px;
-    padding-top:14px;
-    font-size:19px;
-    line-height:1.30;
+    display:block;
+    padding:22px 6px 0;
     color:#5D594F;
   }
   .project-title{
     font-family:'Wingman', sans-serif;
     font-size:23px;
-    line-height:1;
+    line-height:1.08;
     color:var(--red);
     font-weight:700;
     text-transform:uppercase;
   }
   .project-desc{
-    max-width:430px;
+    max-width:34ch;
+    margin-top:14px;
+    color:#676257;
   }
   .project:hover .project-title{text-decoration:underline;}
 
@@ -217,14 +215,14 @@
     main{padding:0 18px 96px;}
     .work-hero{padding:70px 0 48px;}
     .work-grid{grid-template-columns:1fr; gap:54px;}
-    .project-caption{grid-template-columns:112px 1fr;}
     .project-title{font-size:23px;}
   }
   @media (max-width:600px){
     body{font-size:19px;}
   }
 </style>
-<link rel="stylesheet" href="footer.css?v=20260809-pagetransition2">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="footer.css?v=20260905-work-subnav-button">
 </head>
 <body>
 
@@ -234,7 +232,7 @@
     <div class="eyebrow"><span class="num">—</span>The Work</div>
     <h1>I like hats, which<br>is useful,<br>because the best<br>projects rarely<br>need just one.</h1>
     <p>Zander Vera makes brands, identities, campaigns, objects, and digital things feel more inevitable than they probably were.</p>
-    <p>Creative director, brand builder, writer, musician. Founder of <a href="https://agency689.com/" target="_blank" rel="noopener noreferrer">AGENCY689</a> and <a href="https://zndrcrtv.com/" target="_blank" rel="noopener noreferrer">ZNDRCRTV</a>.</p>
+    <p>Creative director, brand builder, writer, musician. Founder of <a href="https://www.agency689.com/" target="_blank" rel="noopener noreferrer">AGENCY689</a> and <a href="https://zndrcrtv.com/" target="_blank" rel="noopener noreferrer">ZNDRCRTV</a>.</p>
   </header>
 
   <section class="work-grid" aria-label="Selected work">
@@ -250,7 +248,7 @@
 
     <a class="project" href="hotel-figueroa.html">
       <span class="project-media-frame">
-        <img class="project-media" src="https://agency689.com/wp-content/uploads/2018/03/Hero-Figueroa-Brand-Book.jpg" alt="Hotel Figueroa brand book">
+        <img class="project-media" src="Hote%20Fig/Hero-Figueroa-Brand-Book.jpg" alt="Hotel Figueroa brand book">
       </span>
       <div class="project-caption">
         <div class="project-title">Hotel Figueroa</div>
@@ -288,6 +286,26 @@
       </div>
     </a>
 
+    <a class="project" href="xbox.html">
+      <span class="project-media-frame">
+        <img class="project-media" src="XBOX/work-XBOX-box.png" alt="XBOX Elite gaming program identity">
+      </span>
+      <div class="project-caption">
+        <div class="project-title">XBOX</div>
+        <div class="project-desc">Elite gaming strategy built around hardcore players and the Elite Controller launch.</div>
+      </div>
+    </a>
+
+    <a class="project" href="amd.html">
+      <span class="project-media-frame">
+        <img class="project-media" src="AMD/comic-book-spread-green.jpg" alt="AMD comic campaign spread">
+      </span>
+      <div class="project-caption">
+        <div class="project-title">AMD</div>
+        <div class="project-desc">A chipset story turned into a Comic-Con comic world with custom art and massive print production.</div>
+      </div>
+    </a>
+
     <a class="project" href="clink-hostels.html">
       <span class="project-media-frame">
         <img class="project-media" src="Clink/clink-hero.jpg" alt="Clink Hostels web redesign">
@@ -308,13 +326,23 @@
       </div>
     </a>
 
-    <a class="project" href="https://zndrcrtv.com/grillhut/" target="_blank" rel="noopener noreferrer">
+    <a class="project" href="raleigh-studios.html">
       <span class="project-media-frame">
-        <img class="project-media" src="https://zndrcrtv.com/wp-content/uploads/2026/02/GH-Brick.webp" alt="GrillHut environmental logo">
+        <img class="project-media" src="Raleigh/work-raleigh-studios-box.jpg" alt="Raleigh Studios entrance signage">
       </span>
       <div class="project-caption">
-        <div class="project-title">GrillHut</div>
-        <div class="project-desc">A food brand with stronger signage, menus, and a more ownable visual attitude.</div>
+        <div class="project-title">Raleigh Studios</div>
+        <div class="project-desc">A historic movie studio brand rebuilt for a larger entertainment footprint.</div>
+      </div>
+    </a>
+
+    <a class="project" href="coastal-corridor-alliance.html">
+      <span class="project-media-frame">
+        <img class="project-media" src="CCA/cca-work-logo.webp" alt="Coastal Corridor Alliance identity">
+      </span>
+      <div class="project-caption">
+        <div class="project-title">Coastal Corridor Alliance</div>
+        <div class="project-desc">A conservation rebrand built around wetlands, wildlife, and a larger connected mission.</div>
       </div>
     </a>
 
@@ -331,7 +359,7 @@
 
 </main>
 
-<script src="footer.js?v=20260809-pagetransition2" defer></script>
+<script src="footer.js?v=20260905-work-subnav-button" defer></script>
 
 </body>
 </html>

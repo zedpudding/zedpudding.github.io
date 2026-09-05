@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XBOX — Zander Vera</title>
+<meta name="description" content="XBOX Elite gaming program strategy work by Zander Vera — launch strategy, campaign systems, apparel concepts, and gaming brand direction.">
+<link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-half.png">
+<style>
+  @font-face{
+    font-family:'Wingman';
+    src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
+  :root{
+    --paper: #f4f3f2;
+    --paper2: #E8E4D9;
+    --ink: #1A1917;
+    --red: #8C2A2A;
+    --muted: #8A8577;
+    --max: 1680px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Wingman', sans-serif;
+    font-size:19px;
+    line-height:1.30;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--red);color:#fff;}
+
+  .bottom-nav,
+  .eyebrow,
+  h1,
+  .hero-sign,
+  .work-index,
+  .work-name,
+  .book-title-pre,
+  .book-title-post,
+  .book-title,
+  .book a.buy,
+  .book-proof h2,
+  .book-caption,
+  .book-pull,
+  .about-lead,
+  .role-title,
+  .client-list h2,
+  .contact-lead,
+  .contact-list span.label,
+  .project-title,
+  .back-link,
+  .hero-deck,
+  .case-meta dt,
+  .section-note h2,
+  .campaign-title,
+  .book-lightbox-button{
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+  }
+  main{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 48px 28px;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top:34px;
+    font-family:'Wingman', sans-serif;
+    font-size:17px;
+    line-height:1;
+    color:var(--red);
+    text-decoration:none;
+    text-transform:uppercase;
+  }
+  .back-link:hover{text-decoration:underline;}
+
+  .case-hero{
+    padding:72px 0 48px;
+  }
+  h1{
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+    font-size:clamp(46px, 4.5vw, 92px);
+    line-height:.80;
+    letter-spacing:-.120em;
+    word-spacing:.025em;
+    margin:0;
+    color:var(--ink);
+    text-transform:uppercase;
+  }
+  .hero-copy-grid{
+    display:grid;
+    grid-template-columns:minmax(0, .95fr) minmax(460px, 1.05fr);
+    gap:86px;
+    align-items:start;
+  }
+  .hero-deck{
+    margin:16px 0 0;
+    max-width:70ch;
+    color:var(--muted);
+    font-size:19px;
+    line-height:1.30;
+  }
+  .hero-logo-panel{
+    position:relative;
+    display:grid;
+    place-items:center;
+    min-height:560px;
+    margin:56px auto 0;
+    background:#107C10;
+    border-radius:10px;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .hero-logo-panel::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:
+      radial-gradient(ellipse at 50% 48%, rgba(16,124,16,.44) 0%, rgba(16,124,16,.18) 28%, transparent 56%),
+      linear-gradient(90deg, rgba(14,13,12,.60) 0%, rgba(14,13,12,.08) 50%, rgba(14,13,12,.60) 100%);
+    pointer-events:none;
+  }
+  .hero-logo-panel::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:3;
+    background:linear-gradient(180deg, rgba(255,255,255,.02) 0%, rgba(255,255,255,.08) 100%);
+    pointer-events:none;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    z-index:0;
+    opacity:.78;
+    filter:contrast(1.05) saturate(.98);
+  }
+  .hero-mark{
+    position:relative;
+    z-index:4;
+    display:block;
+    width:min(48vw, 640px);
+    height:auto;
+    object-fit:contain;
+    filter:drop-shadow(0 18px 26px rgba(0,0,0,.34));
+  }
+  .xbox-logo-panel .hero-mark{
+    width:min(34vw, 420px);
+  }
+  .case-copy{
+    margin:0;
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+    max-width:34ch;
+    color:var(--ink);
+    font-size:clamp(28px, 2.85vw, 46px);
+    line-height:1.05;
+    letter-spacing:0;
+    font-kerning:normal;
+  }
+  .case-meta{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+    margin:0;
+    padding:0;
+    border-top:0;
+    border-right:0;
+  }
+  .meta-label{
+    font-family:'Wingman', sans-serif;
+    color:var(--ink);
+    font-size:19px;
+    line-height:1.30;
+    text-transform:none;
+    margin-bottom:2px;
+  }
+  .meta-value{
+    margin:0;
+    color:var(--ink);
+    font-size:19px;
+    line-height:1.30;
+  }
+  .case-summary{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:12px;
+    padding:0 20px 178px;
+    align-items:start;
+  }
+  .assignment-copy p{
+    margin:0;
+    max-width:84ch;
+    color:var(--ink);
+    font-size:19px;
+    line-height:1.30;
+  }
+  .assignment-copy p + p{margin-top:22px;}
+  .work-list{
+    margin:0;
+    padding:0;
+    list-style:none;
+    color:var(--ink);
+    font-size:19px;
+    line-height:1.30;
+    letter-spacing:0;
+    text-transform:none;
+  }
+  .work-list li{margin:0;}
+  .image-pair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:0 0 110px;
+    align-items:stretch;
+  }
+  .image-pair img{
+    width:100%;
+    display:block;
+    object-fit:cover;
+    background:#fff;
+    border-radius:10px;
+    aspect-ratio:1.72/1;
+  }
+  .commercial-video{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    align-items:center;
+    margin:0 0 110px;
+  }
+  .commercial-video > img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+    background:#fff;
+  }
+  .brand-board{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    margin:0 0 112px;
+  }
+  .brand-board img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+    background:#fff;
+  }
+  .commercial-frame{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    border-radius:10px;
+    background:#0E0D0C;
+  }
+  .commercial-frame iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+  }
+  .commercial-copy h2{
+    margin:0;
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+    font-size:clamp(34px, 4vw, 62px);
+    line-height:.9;
+    letter-spacing:-.080em;
+    color:var(--red);
+    text-transform:uppercase;
+  }
+  .commercial-copy p{
+    margin:22px 0 0;
+    max-width:64ch;
+    color:#3A3833;
+  }
+  .section-note{
+    display:grid;
+    grid-template-columns:.6fr 1.4fr;
+    gap:32px;
+    padding:54px 0;
+    border-top:1px solid #DAD5C8;
+  }
+  .section-note h2{
+    margin:0;
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+    font-size:clamp(34px, 4vw, 62px);
+    line-height:.9;
+    letter-spacing:-.080em;
+    color:var(--red);
+    text-transform:uppercase;
+  }
+  .section-note p{
+    margin:0;
+    max-width:64ch;
+    color:#3A3833;
+  }
+  .lineup-panel{
+    margin:0 0 36px;
+    overflow:hidden;
+  }
+  .lineup-panel img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+  }
+  .print-ads{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:12px;
+    margin:0 0 112px;
+  }
+  .print-ads img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+    background:#fff;
+  }
+  @media (max-width:760px){
+    main{padding:0 18px 28px;}
+    .case-hero{padding:52px 0 38px;}
+    .hero-copy-grid,
+    .case-summary,
+    .commercial-video,
+    .section-note{grid-template-columns:1fr; display:grid;}
+    .hero-logo-panel{min-height:360px; margin-top:36px;}
+    .hero-mark{width:min(76vw, 460px);}
+    .xbox-logo-panel .hero-mark{width:min(70vw, 340px);}
+    .case-meta{
+      grid-template-columns:1fr;
+      border-right:0;
+      border-bottom:1px solid #DAD5C8;
+      padding:0 0 28px;
+    }
+    .image-pair{grid-template-columns:1fr; gap:18px;}
+    .commercial-video{margin-bottom:70px;}
+    .lineup-panel{
+      overflow-x:auto;
+      padding-bottom:8px;
+    }
+    .lineup-panel img{
+      width:1120px;
+      max-width:none;
+    }
+    .print-ads{
+      grid-template-columns:1fr;
+      gap:18px;
+      margin-bottom:82px;
+    }
+  }
+  @media (max-width:600px){
+    body{font-size:19px;}
+  }
+</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="footer.css?v=20260905-work-subnav-button">
+</head>
+<body>
+
+<main>
+  <a class="back-link" href="work.html">← Work</a>
+
+  <section class="case-hero">
+    <div class="hero-copy-grid">
+      <div>
+        <h1>XBOX</h1>
+        <p class="hero-deck">Elite gaming program strategy, launch planning, apparel concepts, campaign direction, and gaming brand systems</p>
+      </div>
+      <h2 class="case-copy">Strategy for an Elite gaming program built around hardcore players and the Elite Controller launch.</h2>
+    </div>
+    <div class="hero-logo-panel xbox-logo-panel">
+      <img class="hero-bg" src="XBOX/Hero-XBOX-Book.jpg" alt="" aria-hidden="true">
+      <img class="hero-mark" src="XBOX/XBOX-logo.png" alt="XBOX logo">
+    </div>
+  </section>
+
+  <section class="case-summary">
+    <div class="case-meta">
+      <div>
+        <div class="meta-label">Role:</div>
+        <p class="meta-value">Creative Director</p>
+        <p class="meta-value">Agency689 Inc.</p>
+      </div>
+      <div>
+        <div class="meta-label">Work:</div>
+        <ul class="work-list">
+          <li>Gaming program strategy</li>
+          <li>Elite Controller launch planning</li>
+          <li>Campaign platform thinking</li>
+          <li>Apparel concept direction</li>
+          <li>Badge and team identity concepts</li>
+          <li>Presentation system</li>
+          <li>Future growth planning</li>
+        </ul>
+      </div>
+    </div>
+    <div class="assignment-copy">
+      <p>Agency689 was tapped for strategy work on Xbox’s new Elite gaming program, centered around the launch of the Elite Controller and aimed squarely at hardcore players.</p>
+      <p>The work looked beyond a single hardware launch. It explored how software updates, controller features, team identity, apparel, and campaign language could work together as a broader Elite platform.</p>
+      <p>The goal was to help Xbox speak to serious gamers with a system that felt earned: competitive, direct, and connected to the culture around performance, gear, and belonging.</p>
+    </div>
+  </section>
+
+  <section class="commercial-video" aria-label="XBOX Elite gaming program work">
+    <img src="XBOX/work-XBOX-jersey-box-green.jpg" alt="XBOX Elite jersey concept">
+    <div class="commercial-copy">
+      <h2>More than a controller launch.</h2>
+      <p>The Elite Controller gave the program a physical center, but the opportunity was bigger than hardware. Xbox needed a way to frame Elite as a mindset and a community for players who care deeply about performance.</p>
+      <p>The strategy connected product, software, team identity, and apparel into a launch platform that could grow after the first wave of attention.</p>
+    </div>
+  </section>
+
+  <section class="section-note">
+    <h2>Built for elite players.</h2>
+    <p>The work had to respect gaming culture without dressing it up from the outside. Everything centered on performance, commitment, and the visual language of a team that serious players would actually want to join.</p>
+  </section>
+
+  <section class="print-ads" aria-label="XBOX Elite brand applications">
+    <img src="XBOX/xbox-elite-controller-features.png" alt="XBOX Elite controller feature diagram">
+    <img src="XBOX/work-XBOX-box.png" alt="XBOX Elite brand application">
+  </section>
+</main>
+
+<script src="footer.js?v=20260905-work-subnav-button" defer></script>
+
+</body>
+</html>

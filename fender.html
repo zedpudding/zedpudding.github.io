@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Fender — Zander Vera</title>
+<meta name="description" content="A focused landing page for Fender: musician, creative director, MI experience, NAMM history, and entertainment brand work by Zander Vera.">
+<link rel="preload" as="image" href="Fender/live-stage-blue.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-half.png">
+<style>
+  @font-face{
+    font-family:'Wingman';
+    src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
+  :root{
+    --paper:#f4f3f2;
+    --ink:#1A1917;
+    --red:#8C2A2A;
+    --blue:#0B5D9B;
+    --muted:#8A8577;
+    --line:#DAD5C8;
+    --max:1680px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Wingman', sans-serif;
+    font-size:19px;
+    line-height:1.30;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;}
+  ::selection{background:var(--red);color:#fff;}
+
+  .bottom-nav,
+  .back-link,
+  h1,
+  h2,
+  .hero-kicker,
+  .hero-deck,
+  .section-kicker,
+  .stat,
+  .mini-label,
+  .button-link{
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+  }
+  main{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 48px 36px;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top:34px;
+    font-size:17px;
+    line-height:1;
+    color:var(--red);
+    text-decoration:none;
+    text-transform:uppercase;
+  }
+  .back-link:hover{text-decoration:underline;}
+
+  .hero{
+    min-height:calc(100vh - 44px);
+    display:grid;
+    grid-template-columns:minmax(0, .92fr) minmax(560px, 1.08fr);
+    gap:44px;
+    align-items:stretch;
+    padding:70px 0 86px;
+  }
+  .hero-copy{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-height:680px;
+  }
+  .hero-kicker,
+  .section-kicker,
+  .mini-label{
+    color:var(--red);
+    text-transform:uppercase;
+    font-size:17px;
+    line-height:1;
+  }
+  h1{
+    margin:22px 0 20px;
+    max-width:9ch;
+    font-size:clamp(68px, 9.6vw, 174px);
+    line-height:.74;
+    letter-spacing:-.12em;
+    text-transform:uppercase;
+  }
+  .hero-deck{
+    max-width:46ch;
+    margin:0;
+    color:#3A3833;
+    font-size:clamp(24px, 2.4vw, 42px);
+    line-height:1.04;
+  }
+  .hero-meta{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:12px;
+    margin-top:56px;
+    border-top:1px solid var(--line);
+    padding-top:20px;
+  }
+  .hero-meta p{
+    margin:0;
+    color:#3A3833;
+    font-size:19px;
+    line-height:1.25;
+  }
+  .hero-image{
+    position:relative;
+    min-height:680px;
+    border-radius:10px;
+    overflow:hidden;
+    background:#111;
+    isolation:isolate;
+  }
+  .hero-image img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    filter:saturate(.85) contrast(1.08);
+  }
+  .hero-image::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(26,25,23,.08) 0%, rgba(26,25,23,.5) 100%);
+    pointer-events:none;
+  }
+  .hero-caption{
+    position:absolute;
+    z-index:2;
+    left:28px;
+    bottom:26px;
+    max-width:38ch;
+    margin:0;
+    color:#fff;
+    font-size:19px;
+  }
+
+  .intro-grid,
+  .split-section,
+  .proof-grid{
+    display:grid;
+    grid-template-columns:.62fr 1.38fr;
+    gap:42px;
+    padding:54px 0;
+    border-top:1px solid var(--line);
+  }
+  .intro-grid h2,
+  .split-section h2{
+    margin:0;
+    color:var(--red);
+    font-size:clamp(38px, 4.7vw, 82px);
+    line-height:.9;
+    letter-spacing:-.08em;
+    text-transform:uppercase;
+  }
+  .copy-stack p{
+    margin:0;
+    max-width:78ch;
+    color:#3A3833;
+  }
+  .copy-stack p + p{margin-top:22px;}
+  .button-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:30px;
+  }
+  .button-link{
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+    padding:11px 16px 9px;
+    border:1px solid var(--red);
+    color:var(--red);
+    text-decoration:none;
+    text-transform:uppercase;
+    font-size:17px;
+    line-height:1;
+  }
+  .button-link:hover{
+    background:var(--red);
+    color:#fff;
+  }
+
+  .photo-band{
+    display:grid;
+    grid-template-columns:1.05fr .95fr .8fr;
+    gap:12px;
+    margin:0 0 96px;
+  }
+  .photo-band figure,
+  .music-wall figure,
+  .proof-card{
+    margin:0;
+    overflow:hidden;
+    border-radius:10px;
+    background:#fff;
+  }
+  .photo-band figure{
+    position:relative;
+    min-height:clamp(340px, 30vw, 540px);
+  }
+  .photo-band img,
+  .music-wall img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+  }
+  .photo-band figcaption{
+    position:absolute;
+    left:18px;
+    bottom:16px;
+    z-index:1;
+    max-width:26ch;
+    padding:9px 10px 7px;
+    background:var(--paper);
+    color:var(--red);
+    font-size:17px;
+    line-height:1;
+    text-transform:uppercase;
+  }
+  .photo-band figure::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, transparent 45%, rgba(26,25,23,.34) 100%);
+    pointer-events:none;
+  }
+  .photo-band figure:nth-child(2) img{object-position:center bottom;}
+
+  .music-wall{
+    display:grid;
+    grid-template-columns:1.1fr .9fr .9fr;
+    grid-auto-rows:clamp(220px, 20vw, 360px);
+    gap:12px;
+    margin:0 0 110px;
+  }
+  .music-wall figure:first-child{
+    grid-row:span 2;
+  }
+  .music-wall figure:nth-child(4){
+    grid-column:span 2;
+  }
+
+  .proof-grid{
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap:12px;
+  }
+  .proof-card{
+    min-height:360px;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    border:1px solid rgba(218,213,200,.7);
+  }
+  .proof-card img{
+    width:100%;
+    height:210px;
+    display:block;
+    object-fit:cover;
+    border-bottom:1px solid rgba(218,213,200,.7);
+  }
+  .proof-card-body{
+    padding:24px;
+  }
+  .stat{
+    margin:0;
+    color:var(--blue);
+    font-size:clamp(42px, 4vw, 72px);
+    line-height:.86;
+    letter-spacing:-.06em;
+    text-transform:uppercase;
+  }
+  .proof-card p{
+    margin:22px 0 0;
+    color:#3A3833;
+    font-size:19px;
+    line-height:1.25;
+  }
+
+  .placeholder-grid{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:12px;
+    margin:0 0 110px;
+  }
+  .placeholder{
+    min-height:360px;
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    border:1px dashed rgba(140,42,42,.45);
+    background:
+      linear-gradient(135deg, rgba(140,42,42,.08) 0 25%, transparent 25% 50%, rgba(11,93,155,.08) 50% 75%, transparent 75%),
+      #F6F4EF;
+    background-size:42px 42px;
+    border-radius:10px;
+  }
+  .placeholder p{
+    margin:0;
+    color:#3A3833;
+  }
+  .placeholder .mini-label{color:var(--blue);}
+
+  .closing{
+    position:relative;
+    margin:0 0 110px;
+    padding:78px clamp(28px, 7vw, 132px);
+    border-radius:10px;
+    overflow:hidden;
+    background:#111;
+    color:#fff;
+  }
+  .closing img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:.32;
+    filter:saturate(.75) contrast(1.08);
+  }
+  .closing-content{
+    position:relative;
+    z-index:1;
+    max-width:980px;
+  }
+  .closing h2{
+    margin:0 0 28px;
+    font-size:clamp(42px, 5.6vw, 96px);
+    line-height:.86;
+    letter-spacing:-.08em;
+    text-transform:uppercase;
+  }
+  .closing p{
+    margin:0;
+    max-width:70ch;
+    font-size:22px;
+    line-height:1.26;
+  }
+
+  @media (max-width:980px){
+    .hero,
+    .intro-grid,
+    .split-section{
+      grid-template-columns:1fr;
+    }
+    .hero-copy{min-height:auto;}
+    .hero-image{min-height:520px;}
+    .hero-meta{grid-template-columns:1fr;}
+    .proof-grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
+    .placeholder-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    main{padding:0 18px 28px;}
+    .hero{padding:52px 0 70px; gap:28px;}
+    .hero-image{min-height:420px;}
+    .photo-band,
+    .music-wall{
+      grid-template-columns:1fr;
+      margin-bottom:70px;
+    }
+    .photo-band figure{min-height:300px;}
+    .music-wall{
+      grid-auto-rows:260px;
+    }
+    .music-wall figure:first-child,
+    .music-wall figure:nth-child(4){
+      grid-row:auto;
+      grid-column:auto;
+    }
+    .proof-grid{grid-template-columns:1fr;}
+    .closing{margin-bottom:84px; padding:46px 24px;}
+  }
+  @media (max-width:600px){
+    body{font-size:19px;}
+  }
+</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="footer.css?v=20260905-work-subnav-button">
+</head>
+<body>
+
+<main>
+  <a class="back-link" href="work.html">&larr; Work</a>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <div>
+        <div class="hero-kicker">For Fender</div>
+        <h1>Built for people who build sound.</h1>
+        <p class="hero-deck">Creative direction, brand systems, web work, and music industry fluency from someone who has been on both sides of the stage.</p>
+      </div>
+      <div class="hero-meta" aria-label="Page focus">
+        <p>Musician and songwriter with decades of guitar culture in the bloodstream.</p>
+        <p>MI and entertainment work across Traveler Guitar, NAMM, venues, artists, and music-driven brands.</p>
+        <p>Longtime Fender fan with personal archive photos coming in next.</p>
+      </div>
+    </div>
+    <figure class="hero-image">
+      <img src="Fender/live-stage-blue.png" alt="Zander Vera performing live with acoustic guitar">
+      <figcaption class="hero-caption">Live at the Sunset Marquis, where music, hospitality, brand, and audience all overlap.</figcaption>
+    </figure>
+  </section>
+
+  <section class="intro-grid">
+    <h2>I know the player.</h2>
+    <div class="copy-stack">
+      <p>I am not coming at Fender as a tourist. I have played in bands, written songs, hauled gear, built sets, tuned in bad lighting, chased tone, played to empty rooms, played to full ones, and cared way too much about the way an instrument feels before the first chord even lands.</p>
+      <p>That matters because the best music brands do not only sell specs. They sell identity, confidence, memory, possibility, and a little bit of beautiful trouble. Fender sits right in the middle of that.</p>
+    </div>
+  </section>
+
+  <div class="photo-band" aria-label="Relevant music industry work">
+    <figure>
+      <img src="TG/TG-collateral.webp" alt="Traveler Guitar collateral system">
+      <figcaption>Traveler identity system</figcaption>
+    </figure>
+    <figure>
+      <img src="TG/guitar-lineup-opt.png" alt="Traveler Guitar product family lineup">
+      <figcaption>Product family work</figcaption>
+    </figure>
+    <figure>
+      <img src="TG/Ads/New/SonicBloom-FullPage.jpg" alt="Traveler Guitar Sonic Bloom campaign ad">
+      <figcaption>Player-first campaigns</figcaption>
+    </figure>
+  </div>
+
+  <section class="split-section">
+    <h2>MI is not abstract to me.</h2>
+    <div class="copy-stack">
+      <p>At Agency689, I helped shape Traveler Guitar work across brand, web, campaign, product storytelling, and the kind of messaging that has to speak to real players fast. Musical instrument work asks for a strange mix: technical clarity, emotional pull, retail awareness, and respect for the player who already knows when the marketing is faking it.</p>
+      <p>That same muscle shows up in entertainment and hospitality brands connected to music culture: Sunset Marquis, Live at Sunset Marquis, artist-facing experiences, and brands built around stages, audiences, and the rituals around performance.</p>
+      <div class="button-row">
+        <a class="button-link" href="traveler-guitar.html">Traveler Guitar</a>
+        <a class="button-link" href="sunset-marquis.html">Sunset Marquis</a>
+        <a class="button-link" href="work.html">Selected Work</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="split-section">
+    <h2>NAMM is part of the map.</h2>
+    <div class="copy-stack">
+      <p>Back in the day, I worked as a web designer at NAMM. Since then, NAMM has been a recurring part of my professional and personal life: show floors, demos, dealer energy, product launches, artist sightings, late nights, loud rooms, and the weird little details that make the music products industry its own ecosystem.</p>
+      <p>I understand the difference between a brand story built for a player, a retailer, a manufacturer, a press moment, and a community that cares deeply about authenticity. Fender has to move through all of those worlds at once.</p>
+    </div>
+  </section>
+
+  <section class="proof-grid" aria-label="Experience snapshot">
+    <article class="proof-card">
+      <img src="Fender/live-marquis-wide.png" alt="Zander Vera performing with band at Live at Sunset Marquis">
+      <div class="proof-card-body">
+        <p class="stat">Player</p>
+        <p>Decades of guitar, songwriting, band life, stage time, and music-first instincts.</p>
+      </div>
+    </article>
+    <article class="proof-card">
+      <img src="TG/TG-logo-build.png" alt="Traveler Guitar logo system build">
+      <div class="proof-card-body">
+        <p class="stat">MI</p>
+        <p>Traveler Guitar brand, web, campaign, and product storytelling experience.</p>
+      </div>
+    </article>
+    <article class="proof-card">
+      <img src="Fender/fender-selfie.png" alt="Zander Vera at Fender booth">
+      <div class="proof-card-body">
+        <p class="stat">NAMM</p>
+        <p>Former NAMM web designer plus years of industry show-floor context.</p>
+      </div>
+    </article>
+    <article class="proof-card">
+      <img src="Fender/player-black-tele.png" alt="Guitarist playing a black electric guitar live">
+      <div class="proof-card-body">
+        <p class="stat">Brand</p>
+        <p>Creative direction across identity systems, websites, campaigns, content, and launch materials.</p>
+      </div>
+    </article>
+  </section>
+
+  <div class="music-wall" aria-label="Music and guitar photo wall">
+    <figure>
+      <img src="Fender/band-couch.png" alt="Band portrait on a couch">
+    </figure>
+    <figure>
+      <img src="Fender/thursday-stage.png" alt="Guitarists performing on stage">
+    </figure>
+    <figure>
+      <img src="Fender/solo-nyc.png" alt="Solo performance with electric guitar">
+    </figure>
+    <figure>
+      <img src="Fender/white-guitar-portrait.png" alt="Portrait holding a white electric guitar">
+    </figure>
+  </div>
+
+  <section class="intro-grid">
+    <h2>Fender fan archive.</h2>
+    <div class="copy-stack">
+      <p>This section is built to hold the personal Fender material: guitars, amps, NAMM photos, old booth shots, favorite instruments, and the bits of proof that make the fandom feel lived-in instead of claimed.</p>
+      <p>For now, the blanks are intentional placeholders so the page can keep moving while the real Fender images are gathered.</p>
+    </div>
+  </section>
+
+  <div class="placeholder-grid" aria-label="Fender placeholder image slots">
+    <div class="placeholder">
+      <span class="mini-label">Placeholder</span>
+      <p>Fender guitars I have owned, played, chased, or regretted selling.</p>
+    </div>
+    <div class="placeholder">
+      <span class="mini-label">Placeholder</span>
+      <p>NAMM / Fender booth photos, past and present.</p>
+    </div>
+    <div class="placeholder">
+      <span class="mini-label">Placeholder</span>
+      <p>Personal amp, pedal, studio, and writing-room artifacts.</p>
+    </div>
+  </div>
+
+  <section class="closing">
+    <img src="Fender/live-marquis-wide.png" alt="">
+    <div class="closing-content">
+      <h2>What I would bring.</h2>
+      <p>A musician's empathy, a creative director's discipline, a web designer's hands-on fluency, and a real understanding of the music industry audience: players, dealers, artists, collectors, beginners, obsessives, and the people still standing in front of an amp looking for the sound in their head.</p>
+      <div class="button-row">
+        <a class="button-link" href="contact.html">Contact</a>
+        <a class="button-link" href="traveler-guitar.html">Relevant Work</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="footer.js?v=20260905-work-subnav-button" defer></script>
+
+</body>
+</html>

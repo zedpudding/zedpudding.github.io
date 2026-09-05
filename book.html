@@ -102,14 +102,14 @@
     color:var(--ink);
   }
   .book-title-pre{margin:14px 0 0 0;}
-  .book-title-post{margin:0 0 26px 0;}
+  .book-title-post{margin:-17px 0 26px 0;}
   .book-title{
     font-weight:400;
     letter-spacing:-.120em;
     word-spacing:.025em;
     font-size:clamp(46px, 4.5vw, 92px);
     line-height:.80;
-    margin:2px 0;
+    margin:2px 0 2px clamp(-12px, -.65vw, -6px);
     color:var(--ink);
     text-transform:uppercase;
   }
@@ -174,6 +174,9 @@
     cursor:zoom-in;
     display:block;
   }
+  .downhill-thumb:not([data-full]){
+    cursor:default;
+  }
   .downhill-art-grid img{
     width:100%;
     height:auto;
@@ -227,18 +230,32 @@
     top:-18px;
     right:-18px;
   }
+  .book-lightbox-prev,
+  .book-lightbox-next{
+    top:50%;
+    transform:translateY(-50%);
+  }
+  .book-lightbox-prev{left:-68px;}
+  .book-lightbox-next{right:-68px;}
   .book a.buy{
-    display:inline-block;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:58px;
     margin-top:20px;
     font-weight:400;
     font-size:16px;
+    line-height:1;
     letter-spacing:0;
     text-transform:uppercase;
     text-decoration:none;
     color:var(--paper);
     background:var(--red);
-    padding:13px 24px;
+    padding:0 24px;
     border-radius:2px;
+  }
+  .book a.buy span{
+    transform:translateY(2px);
   }
   .book-cover{
     width:100%;
@@ -246,7 +263,6 @@
     height:auto;
     display:block;
     margin:0 auto;
-    filter:drop-shadow(0 20px 30px rgba(26,25,23,.35));
   }
   .book-interior{
     display:block;
@@ -288,6 +304,8 @@
     .book-lightbox{padding:18px;}
     .book-lightbox-frame{width:100%;}
     .book-lightbox-close{top:8px; right:8px;}
+    .book-lightbox-prev{left:8px;}
+    .book-lightbox-next{right:8px;}
     .book-interior-wrap{margin-top:48px;}
     .book-pull{margin-top:58px;}
   }
@@ -295,7 +313,8 @@
     body{font-size:19px;}
   }
 </style>
-<link rel="stylesheet" href="footer.css?v=20260809-pagetransition2">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="footer.css?v=20260905-work-subnav-button">
 </head>
 <body>
 
@@ -311,7 +330,7 @@
           <div class="book-title-post">from here</div>
           <p class="book-tag">Some of it happened. Some of it didn't. They're poems.<br>You were warned.</p>
           <p class="desc">A hundred-plus pages of poems, sketches, and observations about love, family, music, growing older, questionable choices, and finding humor where it probably shouldn't exist. Independently published, July 2026 — because apparently branding other people wasn't enough. He wanted a cover of his own.</p>
-          <a class="buy" href="https://www.amazon.com/its-all-downhill-here-Unfiltered/dp/B0H858FKWX/" target="_blank" rel="noopener">Read it on Amazon →</a>
+          <a class="buy" href="https://www.amazon.com/its-all-downhill-here-Unfiltered/dp/B0H858FKWX/" target="_blank" rel="noopener"><span>Get it on Amazon →</span></a>
         </div>
       </div>
       <div class="book-proof">
@@ -320,17 +339,17 @@
       </div>
       <div class="downhill-art" aria-label="Selected pages and artwork from the book">
         <div class="downhill-art-grid">
-          <button class="downhill-thumb" type="button" data-full="books/downhill/contents.png"><img src="books/downhill/contents.png" alt="Contents page artwork from it's all downhill from here"></button>
+          <button class="downhill-thumb" type="button" data-full="books/downhill/contents.png?v=20260905-transparent-edge"><img src="books/downhill/contents.png?v=20260905-transparent-edge" alt="Contents page artwork from it's all downhill from here"></button>
           <button class="downhill-thumb" type="button" data-full="books/downhill/tootsie.png"><img src="books/downhill/tootsie.png" alt="Tootsie poem page from it's all downhill from here"></button>
           <button class="downhill-thumb" type="button" data-full="books/downhill/casually-unkind.png"><img src="books/downhill/casually-unkind.png" alt="Casually unkind poem page from it's all downhill from here"></button>
           <button class="downhill-thumb" type="button" data-full="books/downhill/shhh.png"><img src="books/downhill/shhh.png" alt="Shhh poem page from it's all downhill from here"></button>
-          <button class="downhill-thumb wide" type="button" data-full="books/downhill/mouse-trap-3.png"><img src="books/downhill/mouse-trap-3.png" alt="Mouse trap illustration from it's all downhill from here"></button>
+          <figure class="downhill-thumb wide"><img src="books/downhill/mouse-trap-3.png" alt="Mouse trap illustration from it's all downhill from here"></figure>
           <button class="downhill-thumb" type="button" data-full="books/downhill/crossed-fingers.png"><img src="books/downhill/crossed-fingers.png" alt="Crossed fingers page from it's all downhill from here"></button>
           <button class="downhill-thumb" type="button" data-full="books/downhill/yellow-butterflies.png"><img src="books/downhill/yellow-butterflies.png" alt="Yellow butterflies page from it's all downhill from here"></button>
         </div>
       </div>
       <figure class="book-interior-wrap">
-        <img class="book-interior" src="images/Downhill-inside-opt.jpg" alt="Interior spread from 'it's all downhill from here'">
+        <img class="book-interior" src="books/downhill/Downhill-inside-Clean.png" alt="Interior spread from 'it's all downhill from here'">
         <figcaption class="book-caption">Inside: poems, drawings, small emotional hazards.</figcaption>
       </figure>
       <div class="book-pull">Some funny. Some heartbreaking. <span>Some we'll deny if anyone asks.</span></div>
@@ -341,11 +360,13 @@
 <div class="book-lightbox" hidden role="dialog" aria-modal="true" aria-label="Book page viewer">
   <div class="book-lightbox-frame">
     <button class="book-lightbox-button book-lightbox-close" type="button" aria-label="Close viewer">×</button>
+    <button class="book-lightbox-button book-lightbox-prev" type="button" aria-label="Previous page">‹</button>
     <img class="book-lightbox-image" src="" alt="">
+    <button class="book-lightbox-button book-lightbox-next" type="button" aria-label="Next page">›</button>
   </div>
 </div>
 
-<script src="footer.js?v=20260809-pagetransition2" defer></script>
+<script src="footer.js?v=20260905-work-subnav-button" defer></script>
 
 </body>
 </html>

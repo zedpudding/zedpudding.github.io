@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coastal Corridor Alliance — Zander Vera</title>
+<meta name="description" content="Coastal Corridor Alliance rebrand work by Zander Vera — identity strategy, logo development, conservation messaging, and brand applications.">
+<link rel="preload" as="image" href="images/2-Cats-pico-wink.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-closed.png">
+<link rel="preload" as="image" href="images/2-Cats-pico-half.png">
+<style>
+  @font-face{
+    font-family:'Wingman';
+    src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
+  :root{
+    --paper: #f4f3f2;
+    --paper2: #E8E4D9;
+    --ink: #1A1917;
+    --red: #8C2A2A;
+    --muted: #8A8577;
+    --max: 1680px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Wingman', sans-serif;
+    font-size:19px;
+    line-height:1.30;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--red);color:#fff;}
+
+  .bottom-nav,
+  .eyebrow,
+  h1,
+  .hero-sign,
+  .work-index,
+  .work-name,
+  .book-title-pre,
+  .book-title-post,
+  .book-title,
+  .book a.buy,
+  .book-proof h2,
+  .book-caption,
+  .book-pull,
+  .about-lead,
+  .role-title,
+  .client-list h2,
+  .contact-lead,
+  .contact-list span.label,
+  .project-title,
+  .back-link,
+  .hero-deck,
+  .case-meta dt,
+  .section-note h2,
+  .campaign-title,
+  .book-lightbox-button{
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+  }
+  main{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 48px 28px;
+  }
+  .back-link{
+    display:inline-block;
+    margin-top:34px;
+    font-family:'Wingman', sans-serif;
+    font-size:17px;
+    line-height:1;
+    color:var(--red);
+    text-decoration:none;
+    text-transform:uppercase;
+  }
+  .back-link:hover{text-decoration:underline;}
+
+  .case-hero{
+    padding:72px 0 48px;
+  }
+  h1{
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+    font-size:clamp(46px, 4.5vw, 92px);
+    line-height:.80;
+    letter-spacing:-.120em;
+    word-spacing:.025em;
+    margin:0;
+    color:var(--ink);
+    text-transform:uppercase;
+  }
+  .hero-copy-grid{
+    display:grid;
+    grid-template-columns:minmax(0, .95fr) minmax(460px, 1.05fr);
+    gap:86px;
+    align-items:start;
+  }
+  .hero-deck{
+    margin:16px 0 0;
+    max-width:70ch;
+    color:var(--muted);
+    font-size:19px;
+    line-height:1.30;
+  }
+  .hero-logo-panel{
+    position:relative;
+    display:grid;
+    place-items:center;
+    min-height:560px;
+    margin:56px auto 0;
+    background:#91b9c1;
+    border-radius:10px;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .hero-logo-panel::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:
+      radial-gradient(ellipse at 50% 48%, rgba(248,248,248,.72) 0%, rgba(248,248,248,.28) 32%, transparent 58%),
+      linear-gradient(90deg, rgba(145,185,193,.78) 0%, rgba(145,185,193,.10) 50%, rgba(145,185,193,.78) 100%);
+    pointer-events:none;
+  }
+  .hero-logo-panel::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:3;
+    background:linear-gradient(180deg, rgba(255,255,255,.02) 0%, rgba(255,255,255,.08) 100%);
+    pointer-events:none;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    z-index:0;
+    opacity:.76;
+    filter:contrast(1.02) saturate(.92);
+  }
+  .hero-mark{
+    position:relative;
+    z-index:4;
+    display:block;
+    width:min(48vw, 640px);
+    height:auto;
+    object-fit:contain;
+    filter:drop-shadow(0 18px 26px rgba(0,0,0,.20));
+  }
+  .cca-logo-panel .hero-mark{
+    width:min(48vw, 620px);
+  }
+  .case-copy{
+    margin:0;
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+    max-width:34ch;
+    color:var(--ink);
+    font-size:clamp(28px, 2.85vw, 46px);
+    line-height:1.05;
+    letter-spacing:0;
+    font-kerning:normal;
+  }
+  .case-meta{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+    margin:0;
+    padding:0;
+    border-top:0;
+    border-right:0;
+  }
+  .meta-label{
+    font-family:'Wingman', sans-serif;
+    color:var(--ink);
+    font-size:19px;
+    line-height:1.30;
+    text-transform:none;
+    margin-bottom:2px;
+  }
+  .meta-value{
+    margin:0;
+    color:var(--ink);
+    font-size:19px;
+    line-height:1.30;
+  }
+  .case-summary{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:12px;
+    padding:0 20px 178px;
+    align-items:start;
+  }
+  .assignment-copy p{
+    margin:0;
+    max-width:84ch;
+    color:var(--ink);
+    font-size:19px;
+    line-height:1.30;
+  }
+  .assignment-copy p + p{margin-top:22px;}
+  .work-list{
+    margin:0;
+    padding:0;
+    list-style:none;
+    color:var(--ink);
+    font-size:19px;
+    line-height:1.30;
+    letter-spacing:0;
+    text-transform:none;
+  }
+  .work-list li{margin:0;}
+  .story-split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:0 0 70px;
+    align-items:stretch;
+  }
+  .story-split.logo-left{
+    grid-template-columns:.82fr 1.18fr;
+  }
+  .story-plate,
+  .story-card{
+    min-height:520px;
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .story-plate{
+    display:grid;
+    place-items:center;
+    padding:56px;
+    background:#e4e5e6;
+  }
+  .story-plate.soft-blue{background:rgba(145,185,193,.19);}
+  .story-plate.silver{background:#ced4d8;}
+  .story-plate img{
+    width:min(100%, 620px);
+    height:auto;
+    display:block;
+  }
+  .story-card{
+    display:flex;
+    align-items:center;
+    padding:64px;
+    background:#f8f8f8;
+  }
+  .story-card.tinted{background:#ced4d8;}
+  .story-card-inner{max-width:74ch;}
+  .story-kicker{
+    margin:0 0 12px;
+    color:var(--muted);
+    font-size:19px;
+    line-height:1.30;
+  }
+  .story-card h2,
+  .copy-band h2{
+    margin:0;
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+    font-size:clamp(34px, 4vw, 62px);
+    line-height:.9;
+    letter-spacing:-.080em;
+    color:var(--ink);
+    text-transform:uppercase;
+  }
+  .story-card h2 span{color:#5f9aa3;}
+  .story-card p,
+  .copy-band p{
+    margin:22px 0 0;
+    color:#3A3833;
+    font-size:19px;
+    line-height:1.30;
+  }
+  .wide-visual{
+    margin:0 0 18px;
+  }
+  .wide-visual img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+    background:#fff;
+  }
+  .copy-band{
+    margin:0 0 82px;
+    padding:46px 12px 12px;
+    background:transparent;
+  }
+  .copy-band p{max-width:96ch;}
+  .collateral-pair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:0 0 82px;
+  }
+  .collateral-pair img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+    background:#fff;
+  }
+  .image-pair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:0 0 110px;
+    align-items:stretch;
+  }
+  .image-pair img{
+    width:100%;
+    display:block;
+    object-fit:cover;
+    background:#fff;
+    border-radius:10px;
+    aspect-ratio:1.72/1;
+  }
+  .commercial-video{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    align-items:center;
+    margin:0 0 110px;
+  }
+  .commercial-video > img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+    background:#fff;
+  }
+  .brand-board{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    margin:0 0 112px;
+  }
+  .brand-board img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+    background:#fff;
+  }
+  .commercial-frame{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    border-radius:10px;
+    background:#0E0D0C;
+  }
+  .commercial-frame iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+  }
+  .commercial-copy h2{
+    margin:0;
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+    font-size:clamp(34px, 4vw, 62px);
+    line-height:.9;
+    letter-spacing:-.080em;
+    color:var(--red);
+    text-transform:uppercase;
+  }
+  .commercial-copy p{
+    margin:22px 0 0;
+    max-width:64ch;
+    color:#3A3833;
+  }
+  .section-note{
+    display:grid;
+    grid-template-columns:.6fr 1.4fr;
+    gap:32px;
+    padding:54px 0;
+  }
+  .section-note h2{
+    margin:0;
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+    font-size:clamp(34px, 4vw, 62px);
+    line-height:.9;
+    letter-spacing:-.080em;
+    color:var(--red);
+    text-transform:uppercase;
+  }
+  .section-note p{
+    margin:0;
+    max-width:64ch;
+    color:#3A3833;
+  }
+  .lineup-panel{
+    margin:0 0 36px;
+    overflow:hidden;
+  }
+  .lineup-panel img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+  }
+  .print-ads{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:12px;
+    margin:0 0 112px;
+  }
+  .commerce-copy{
+    display:grid;
+    grid-template-columns:.7fr 1.3fr;
+    gap:32px;
+    padding:54px 0;
+    margin:0 0 24px;
+  }
+  .commerce-copy h2{
+    margin:0;
+    font-family:'Wingman', sans-serif;
+    font-weight:400;
+    font-size:clamp(34px, 4vw, 62px);
+    line-height:.9;
+    letter-spacing:-.080em;
+    color:var(--red);
+    text-transform:uppercase;
+  }
+  .commerce-copy p{
+    margin:0;
+    max-width:76ch;
+    color:#3A3833;
+  }
+  .print-ads img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+    background:#fff;
+  }
+  .website-scroller{
+    width:100%;
+    margin:0 0 112px;
+  }
+  .scroller-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+    width:100%;
+    margin:0 0 20px;
+  }
+  .scroller-title{
+    margin:0;
+    color:#3A3833;
+    font-size:24px;
+    line-height:1.2;
+    font-weight:400;
+  }
+  .scroller-controls{
+    display:flex;
+    gap:10px;
+  }
+  .scroller-control{
+    appearance:none;
+    width:42px;
+    height:42px;
+    border:1px solid #DAD5C8;
+    border-radius:50%;
+    background:var(--paper);
+    color:var(--red);
+    font-family:'Wingman', sans-serif;
+    font-size:24px;
+    line-height:1;
+    cursor:pointer;
+  }
+  .website-track{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    scroll-padding:0;
+    padding:0 0 18px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .website-track::-webkit-scrollbar{height:8px;}
+  .website-track::-webkit-scrollbar-track{background:#E4E0D5;}
+  .website-track::-webkit-scrollbar-thumb{background:#A02D2D; border-radius:999px;}
+  .website-panel{
+    flex:0 0 clamp(320px, 42vw, 700px);
+  }
+  .website-panel img{
+    width:100%;
+    display:block;
+    height:auto;
+    border-radius:10px;
+    background:#fff;
+  }
+  @media (max-width:760px){
+    main{padding:0 18px 28px;}
+    .case-hero{padding:52px 0 38px;}
+    .hero-copy-grid,
+    .story-split,
+    .story-split.logo-left,
+    .case-summary,
+    .commercial-video,
+    .commerce-copy,
+    .section-note,
+    .collateral-pair{grid-template-columns:1fr; display:grid;}
+    .hero-logo-panel{min-height:360px; margin-top:36px;}
+    .hero-mark{width:min(76vw, 460px);}
+    .cca-logo-panel .hero-mark{width:min(78vw, 460px);}
+    .case-meta{
+      grid-template-columns:1fr;
+      border-right:0;
+      padding:0 0 28px;
+    }
+    .image-pair{grid-template-columns:1fr; gap:18px;}
+    .story-plate,
+    .story-card{min-height:auto;}
+    .story-plate,
+    .story-card,
+    .copy-band{padding:34px 24px;}
+    .commercial-video{margin-bottom:70px;}
+    .lineup-panel{
+      overflow-x:auto;
+      padding-bottom:8px;
+    }
+    .lineup-panel img{
+      width:1120px;
+      max-width:none;
+    }
+    .website-scroller{margin-bottom:82px;}
+    .scroller-header{
+      width:100%;
+      align-items:flex-end;
+    }
+    .website-track{padding:0 0 18px;}
+    .website-panel{flex-basis:78vw;}
+    .print-ads{
+      grid-template-columns:1fr;
+      gap:18px;
+      margin-bottom:82px;
+    }
+  }
+  @media (max-width:600px){
+    body{font-size:19px;}
+  }
+</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="footer.css?v=20260905-work-subnav-button">
+</head>
+<body>
+
+<main>
+  <a class="back-link" href="work.html">← Work</a>
+
+  <section class="case-hero">
+    <div class="hero-copy-grid">
+      <div>
+        <h1>Coastal Corridor Alliance</h1>
+        <p class="hero-deck">Rebrand strategy, conservation identity, logo development, website direction, apparel, and campaign applications</p>
+      </div>
+      <h2 class="case-copy">A conservation rebrand built around land, wildlife, and a larger connected mission.</h2>
+    </div>
+    <div class="hero-logo-panel cca-logo-panel">
+      <img class="hero-bg" src="CCA/cca-hero-landscape.jpg" alt="" aria-hidden="true">
+      <img class="hero-mark" src="CCA/cca-work-logo.webp" alt="Coastal Corridor Alliance logo">
+    </div>
+  </section>
+
+  <section class="story-split" aria-label="Coastal Corridor Alliance identity introduction">
+    <div class="story-plate soft-blue">
+      <img src="CCA/square-cca-tern-logo.png" alt="Coastal Corridor Alliance tern identity mark">
+    </div>
+    <div class="story-card">
+      <div class="story-card-inner">
+        <p class="story-kicker">Reimagining the identity</p>
+        <h2><span>From Banning Ranch Conservancy</span><br>to Coastal Corridor Alliance</h2>
+        <p>The organization’s evolution presented a clear challenge: craft a fresh logo and identity that could hold a larger mission. The change was more than a name. It brought new land areas and teams together to protect the Santa Ana River Corridor wetlands under one unified brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wide-visual">
+    <img src="CCA/least-tern-study.jpg" alt="Least tern visual study for Coastal Corridor Alliance">
+  </div>
+
+  <section class="copy-band">
+    <h2>Making the most of the least tern.</h2>
+    <p>The least tern became the heart of the identity exploration. Research photography revealed the bird’s swift, blade-like wings, black-and-white contrast, black tips, and eye mask. That study informed the illustration process and helped refine the mark into something dynamic, recognizable, and connected to the local ecology.</p>
+  </section>
+
+  <div class="wide-visual">
+    <img src="CCA/least-tern-colors.jpg" alt="Coastal Corridor Alliance color palette study">
+  </div>
+
+  <section class="copy-band">
+    <h2>The palette of nature.</h2>
+    <p>The Coastal Corridor Alliance team brought deep knowledge of the local flora and fauna. A board member’s paintings of the wetlands became especially important, capturing the landscape from the bluffs to the waterways. Those colors shaped the system, giving the logo and supporting materials a palette drawn directly from the place itself.</p>
+  </section>
+
+  <section class="story-split logo-left" aria-label="Coastal Corridor Alliance logo system">
+    <div class="story-plate silver">
+      <img src="CCA/square-cca-logo.png" alt="Coastal Corridor Alliance CCA logo">
+    </div>
+    <div class="story-card tinted">
+      <div class="story-card-inner">
+        <h2>Introducing the CCA logo.</h2>
+        <p>The final mark combines the bird, landscape, and a clean acronym system. Hurme Geometric gave the CCA letterforms a clear, functional structure, while the larger visual system supported monochrome versions, embroidery, social media, color guidelines, and practical day-to-day use.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="collateral-pair" aria-label="Coastal Corridor Alliance brand book collateral">
+    <img src="CCA/cca-brand-book-2.jpg" alt="Coastal Corridor Alliance brand book spread">
+    <img src="CCA/cca-brand-book-1.jpg" alt="Coastal Corridor Alliance brand guide collateral">
+  </section>
+
+  <section class="section-note">
+    <h2>Conservation with a clearer center.</h2>
+    <p>The finished system gave the alliance a more unified voice and a visual structure that could support awareness, fundraising, community education, apparel, and ongoing conservation work.</p>
+  </section>
+
+  <div class="brand-board">
+    <img src="CCA/cca-sunset.jpg" alt="Coastal Corridor Alliance sunset landscape">
+  </div>
+
+  <section class="commerce-copy">
+    <h2>Commerce connected to the cause.</h2>
+    <p>We also built the Coastal Corridor Alliance shop as a working Shopify site. That meant connecting print-on-demand vendors, creating the art for the product line, setting up the merch catalog, and tying the finished store into the live site so awareness, fundraising, and community support could move through one connected system.</p>
+  </section>
+
+  <section class="website-scroller" aria-label="Coastal Corridor Alliance wildlife campaign panels">
+    <div class="scroller-header">
+      <h2 class="scroller-title">Field notes</h2>
+    </div>
+    <div class="website-track" tabindex="0" aria-label="Coastal Corridor Alliance wildlife campaign panels">
+      <figure class="website-panel">
+        <img src="CCA/work-womens.webp" alt="Coastal Corridor Alliance apparel application">
+      </figure>
+      <figure class="website-panel">
+        <img src="CCA/cca-work-who.webp" alt="Coastal Corridor Alliance messaging application">
+      </figure>
+      <figure class="website-panel">
+        <img src="CCA/cca-work-logo.webp" alt="Coastal Corridor Alliance logo application">
+      </figure>
+      <figure class="website-panel">
+        <img src="CCA/cca-work-weasel.webp" alt="Coastal Corridor Alliance weasel campaign panel">
+      </figure>
+      <figure class="website-panel">
+        <img src="CCA/cca-work-snake.webp" alt="Coastal Corridor Alliance snake campaign panel">
+      </figure>
+      <figure class="website-panel">
+        <img src="CCA/cca-work-bee.webp" alt="Coastal Corridor Alliance bee campaign panel">
+      </figure>
+      <figure class="website-panel">
+        <img src="CCA/cca-work-crab.webp" alt="Coastal Corridor Alliance crab campaign panel">
+      </figure>
+      <figure class="website-panel">
+        <img src="CCA/cca-work-fox.webp" alt="Coastal Corridor Alliance fox campaign panel">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="CCA/work-womens.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="CCA/cca-work-who.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="CCA/cca-work-logo.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="CCA/cca-work-weasel.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="CCA/cca-work-snake.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="CCA/cca-work-bee.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="CCA/cca-work-crab.webp" alt="">
+      </figure>
+      <figure class="website-panel" aria-hidden="true">
+        <img src="CCA/cca-work-fox.webp" alt="">
+      </figure>
+    </div>
+  </section>
+</main>
+
+<script src="footer.js?v=20260905-work-subnav-button" defer></script>
+
+</body>
+</html>

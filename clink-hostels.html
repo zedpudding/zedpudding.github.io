@@ -178,7 +178,7 @@
     min-height:680px;
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
+    justify-content:flex-end;
     overflow:hidden;
     border-radius:10px;
     padding:78px clamp(28px, 7vw, 148px) 0;
@@ -340,6 +340,7 @@
     margin:0 calc(clamp(28px, 7vw, 148px) * -1) -2px;
   }
   .website-scroller{
+    width:100%;
     margin:0 0 112px;
   }
   .scroller-header{
@@ -347,7 +348,8 @@
     justify-content:flex-end;
     align-items:center;
     gap:24px;
-    margin:0 0 10px;
+    width:100%;
+    margin:0 0 20px;
   }
   .scroller-title{
     margin:0;
@@ -454,13 +456,16 @@
       margin-bottom:82px;
     }
     .scroller-header{align-items:flex-end;}
+    .scroller-header{width:calc(100% - 36px);}
+    .website-track{padding:0 18px 18px;}
     .website-panel{flex-basis:78vw;}
   }
   @media (max-width:600px){
     body{font-size:19px;}
   }
 </style>
-<link rel="stylesheet" href="footer.css?v=20260809-pagetransition2">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="footer.css?v=20260905-work-subnav-button">
 </head>
 <body>
 
@@ -539,12 +544,6 @@
   </section>
 
   <section class="website-scroller" aria-label="Clink Hostels website page examples">
-    <div class="scroller-header">
-      <div class="scroller-controls" aria-label="Website page scroller controls">
-        <button class="scroller-control scroller-prev" type="button" aria-label="Scroll website pages left">‹</button>
-        <button class="scroller-control scroller-next" type="button" aria-label="Scroll website pages right">›</button>
-      </div>
-    </div>
     <div class="website-track" tabindex="0" aria-label="Clink Hostels website page examples">
       <figure class="website-panel">
         <img src="Clink/ws-panel_0008_city-tips.jpg" alt="Clink Hostels city tips page design">
@@ -604,7 +603,7 @@
   </section>
 </main>
 
-<script src="footer.js?v=20260809-pagetransition2" defer></script>
+<script src="footer.js?v=20260905-work-subnav-button" defer></script>
 
 </body>
 </html>

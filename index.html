@@ -138,14 +138,35 @@
     pointer-events:none;
   }
   @media (max-width:760px){
-    .hero{min-height:auto; padding:90px 0 8px; flex-direction:column; align-items:stretch;}
+    .hero{
+      min-height:calc(100svh - 38px);
+      padding:52px 0 0;
+      display:flex;
+      flex-direction:column;
+      overflow:visible;
+    }
+    .hero-inner{
+      padding:0 clamp(34px, 12vw, 74px);
+    }
+    .hero h1{
+      font-size:clamp(38px, 9.2vw, 54px);
+      margin-bottom:22px;
+    }
+    .hero-sub{
+      margin-bottom:30px;
+    }
+    .hero-sign{
+      max-width:12ch;
+      line-height:1.2;
+    }
     .hero-portrait{
       position:static;
       display:block;
+      width:clamp(240px, 68vw, 320px);
       height:auto;
-      width:300px;
-      max-width:86vw;
-      margin:34px auto -8px;
+      max-width:none;
+      max-height:none;
+      margin:auto auto 0;
       transform:none;
     }
   }
@@ -189,18 +210,18 @@
     font-family:'Wingman', sans-serif;
     font-weight:400;
     font-size:clamp(22px, 2.8vw, 30px);
-    line-height:1.2;
+    line-height:1;
     color:var(--ink);
   }
-  .book-title-pre{margin:14px 0 0 0;}
-  .book-title-post{margin:0 0 26px 0;}
+  .book-title-pre{margin:0 0 6px 0;}
+  .book-title-post{margin:-6px 0 26px 0;}
   .book-title{
     font-weight:400;
     letter-spacing:-.120em;
     word-spacing:.025em;
     font-size:clamp(46px, 4.5vw, 92px);
-    line-height:.80;
-    margin:2px 0;
+    line-height:.78;
+    margin:0;
     color:var(--ink);
     text-transform:uppercase;
   }
@@ -282,9 +303,10 @@
     .book{padding:54px 20px 70px;}
   }
 </style>
-<link rel="stylesheet" href="footer.css?v=20260809-pagetransition2">
+<link rel="stylesheet" href="site.css?v=20260816-mobile-footer-tight">
+<link rel="stylesheet" href="footer.css?v=20260905-work-subnav-button">
 </head>
-<body>
+<body class="home-page">
 
 <section class="hero" id="top">
   <div class="hero-inner">
@@ -297,27 +319,7 @@
   <img class="hero-portrait" src="images/zander-clean-lines.png" alt="Clean line portrait illustration of Zander Vera">
 </section>
 
-<main>
-
-  <section id="book" style="padding:0; border-top:none;">
-    <div class="book">
-      <div class="book-inner">
-        <img class="book-cover" src="images/cover.png" alt="Cover of 'it's all downhill from here' by Zander Vera">
-        <div>
-          <div class="book-title-pre">it's all</div>
-          <div class="book-title">downhill</div>
-          <div class="book-title-post">from here</div>
-          <p class="book-tag">Some of it happened. Some of it didn't. They're poems.<br>You were warned.</p>
-          <p class="desc">Part poetry collection. Part art book. Stories, sketches, and observations about love, family, music, growing older, questionable choices, and finding humor where it probably shouldn't exist.</p>
-          <a class="buy" href="https://www.amazon.com/its-all-downhill-here-Unfiltered/dp/B0H858FKWX/" target="_blank" rel="noopener">Read it on Amazon →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<script src="footer.js?v=20260809-pagetransition2" defer></script>
+<script src="footer.js?v=20260905-work-subnav-button" defer></script>
 
 </body>
 </html>

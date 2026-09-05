@@ -1,0 +1,132 @@
+@font-face{
+  font-family:'Wingman';
+  src:url('fonts/TAYWingman.woff2') format('woff2'), url('fonts/TAYWingman.woff') format('woff');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+:root{
+  --font-site:'Wingman', sans-serif;
+  --paper:#f6f6f6;
+  --type-ratio:1.25;
+  --type-body:21px;
+  --type-body-mobile:18px;
+  --type-body-leading:1.30;
+  --type-small:17px;
+  --type-caption:17px;
+  --type-card-title:26px;
+  --type-h5:26px;
+  --type-h4:33px;
+  --type-h3:41px;
+  --type-h2:51px;
+  --type-h1:64px;
+}
+
+body{
+  font-family:var(--font-site);
+  font-size:var(--type-body);
+  line-height:var(--type-body-leading);
+}
+
+button,
+input,
+textarea,
+select{
+  font-family:var(--font-site);
+}
+
+p,
+li,
+dd,
+.hero-sub,
+.hero-deck,
+.work-hero p,
+.work-hero p + p,
+.project-caption,
+.project-desc,
+.work-desc,
+.book-tag,
+.book p.desc,
+.book-proof p,
+.role-desc,
+.about-tail,
+.contact-note,
+.meta-label,
+.meta-value,
+.work-list,
+.assignment-copy p,
+.section-note p,
+.showcase-copy p,
+.think-copy p,
+.campaign-caption,
+.ad-gallery-header p{
+  font-size:var(--type-body);
+  line-height:var(--type-body-leading);
+}
+
+.eyebrow,
+.back-link,
+.case-kicker,
+.work-index,
+.role-years,
+.campaign-compare-labels{
+  font-size:var(--type-small);
+}
+
+.work-name,
+.project-title,
+.role-title,
+.campaign-title{
+  font-size:var(--type-card-title);
+}
+
+.work-grid .project-caption{
+  font-size:19px;
+  line-height:1.35;
+}
+
+.work-grid .project-desc{
+  font-size:19px;
+  line-height:1.35;
+}
+
+@media (max-width:600px){
+  body{
+    font-size:var(--type-body-mobile);
+  }
+
+  p,
+  li,
+  dd,
+  .hero-sub,
+  .hero-deck,
+  .work-hero p,
+  .work-hero p + p,
+  .project-caption,
+  .project-desc,
+  .work-desc,
+  .book-tag,
+  .book p.desc,
+  .book-proof p,
+  .role-desc,
+  .about-tail,
+  .contact-note,
+  .meta-label,
+  .meta-value,
+  .work-list,
+  .assignment-copy p,
+  .section-note p,
+  .showcase-copy p,
+  .think-copy p,
+  .campaign-caption,
+  .ad-gallery-header p{
+    font-size:var(--type-body-mobile);
+  }
+
+  .work-grid .project-caption,
+  .work-grid .project-desc{
+    font-size:17px;
+    line-height:1.35;
+  }
+}
