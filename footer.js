@@ -284,35 +284,31 @@
     track.addEventListener('scroll', () => window.requestAnimationFrame(normalize), { passive: true });
 
     let paused = false;
-    let last = performance.now();
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const speed = reduceMotion ? 18 : 42;
+    const step = reduceMotion ? 1 : 2;
 
-    track.addEventListener('pointerdown', () => { paused = true; });
+    track.addEventListener('pointerdown', () => {
+      paused = true;
+      window.setTimeout(() => { paused = false; }, 2200);
+    });
     track.addEventListener('pointerup', () => {
       paused = false;
-      last = performance.now();
     });
     track.addEventListener('pointerleave', () => {
       paused = false;
-      last = performance.now();
     });
     track.addEventListener('pointercancel', () => {
       paused = false;
-      last = performance.now();
     });
 
-    const tick = (now) => {
-      const delta = Math.min(now - last, 80);
-      last = now;
+    const tick = () => {
       if (!paused && panelStep() > 0 && track.scrollWidth > track.clientWidth) {
-        track.scrollLeft += (speed * delta) / 1000;
+        track.scrollLeft += step;
         normalize();
       }
-      window.requestAnimationFrame(tick);
     };
 
-    window.requestAnimationFrame(tick);
+    window.setInterval(tick, 30);
   });
 })();
 
@@ -354,37 +350,33 @@
     });
 
     let paused = false;
-    let last = performance.now();
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const speed = reduceMotion ? 18 : 42;
+    const step = reduceMotion ? 1 : 2;
 
-    track.addEventListener('pointerdown', () => { paused = true; });
+    track.addEventListener('pointerdown', () => {
+      paused = true;
+      window.setTimeout(() => { paused = false; }, 2200);
+    });
     track.addEventListener('pointerup', () => {
       paused = false;
-      last = performance.now();
     });
     track.addEventListener('pointerleave', () => {
       paused = false;
-      last = performance.now();
     });
     track.addEventListener('pointercancel', () => {
       paused = false;
-      last = performance.now();
     });
 
-    const tick = (now) => {
-      const delta = Math.min(now - last, 80);
-      last = now;
+    const tick = () => {
       if (!paused && scrollStep() > 0 && track.scrollWidth > track.clientWidth) {
-        track.scrollLeft += (speed * delta) / 1000;
+        track.scrollLeft += step;
         if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 1) {
           track.scrollLeft = 0;
         }
       }
-      window.requestAnimationFrame(tick);
     };
 
-    window.requestAnimationFrame(tick);
+    window.setInterval(tick, 30);
   });
 
   if (!lightbox || !lightboxImage || !thumbs.length) return;
