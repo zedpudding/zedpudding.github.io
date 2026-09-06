@@ -92,6 +92,7 @@
       <nav class="bottom-nav" aria-label="Primary">
         ${navLinks}
       </nav>
+      ${path === 'index.html' ? '<p class="bottom-craft">Creative direction, brand systems, campaigns, and identity crafting.</p>' : ''}
     </div>
   `;
   document.body.appendChild(bar);
