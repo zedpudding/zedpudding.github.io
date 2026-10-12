@@ -167,3 +167,7 @@ header{position:sticky;top:0}
 @media(min-width:1700px){.hero-copy{padding-top:100px}}
 @media(max-width:900px){.hero{height:760px;min-height:0}.hero-photo{object-position:60% top}.hero-copy{padding-top:70px}}
 @media(max-width:580px){.hero{height:740px}.hero-photo{object-position:65% top}.hero-copy{padding-top:45px}}
+
+/* Black backing only beneath the header's initial position; retain white section gutters. */
+body{background:linear-gradient(to bottom,#111 0 104px,#fff 104px 100%)}
+@media(max-width:900px){body{background:linear-gradient(to bottom,#111 0 85px,#fff 85px 100%)}}
