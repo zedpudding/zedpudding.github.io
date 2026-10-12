@@ -155,3 +155,6 @@ header a:focus-visible,header button:focus-visible{outline-color:#fff}
 header{position:fixed;top:0;left:0;right:0;z-index:100}
 html{scroll-padding-top:110px}
 @media(max-width:900px){html{scroll-padding-top:91px}header nav{max-height:calc(100svh - 85px);overflow-y:auto}}
+
+/* On mobile, imagery introduces each paired content section. */
+@media(max-width:580px){.faculty-photo .faculty-image{grid-row:1}.faculty-photo .faculty-copy{grid-row:2}.visit-building{grid-row:1;grid-column:1}.visit-calendar{grid-row:2;grid-column:1}.recording-visual{grid-row:1}.recording-copy{grid-row:2}}
