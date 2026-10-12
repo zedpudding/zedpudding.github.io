@@ -171,3 +171,11 @@ header{position:sticky;top:0}
 /* Black backing only beneath the header's initial position; retain white section gutters. */
 body{background:linear-gradient(to bottom,#111 0 104px,#fff 104px 100%)}
 @media(max-width:900px){body{background:linear-gradient(to bottom,#111 0 85px,#fff 85px 100%)}}
+
+/* Keep assistance with the hero and program discovery in its own strip. */
+.hero-bottom .aid-copy{text-align:left}
+.hero-bottom .aid-copy p{font-size:14px;margin-bottom:6px}
+.hero-bottom .aid-link{font-size:16px;white-space:nowrap}
+.program-title-strip h2{font-weight:300}
+.program-title-strip h2 strong{font-weight:650}
+@media(max-width:580px){.hero-bottom{gap:10px}.hero-bottom .aid-copy p{font-size:13px}.hero-bottom .aid-link{font-size:14px;gap:10px}.hero-bottom .aid-copy span{max-width:none}}
