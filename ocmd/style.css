@@ -158,3 +158,12 @@ html{scroll-padding-top:110px}
 
 /* On mobile, imagery introduces each paired content section. */
 @media(max-width:580px){.faculty-photo .faculty-image{grid-row:1}.faculty-photo .faculty-copy{grid-row:2}.visit-building{grid-row:1;grid-column:1}.visit-calendar{grid-row:2;grid-column:1}.recording-visual{grid-row:1}.recording-copy{grid-row:2}}
+
+/* Reserve header space so navigation never obscures the hero on arrival. */
+header{position:sticky;top:0}
+.hero{height:calc(100svh - 104px);min-height:650px;max-height:940px}
+.hero-photo{object-position:center top}
+.hero-copy{padding-top:7%}
+@media(min-width:1700px){.hero-copy{padding-top:100px}}
+@media(max-width:900px){.hero{height:760px;min-height:0}.hero-photo{object-position:60% top}.hero-copy{padding-top:70px}}
+@media(max-width:580px){.hero{height:740px}.hero-photo{object-position:65% top}.hero-copy{padding-top:45px}}
