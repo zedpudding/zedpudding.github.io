@@ -221,3 +221,11 @@ body{background:linear-gradient(to bottom,#111 0 104px,#fff 104px 100%)}
 .social-concept--dance .social-concept-photo{object-position:48% center}
 .social-concept--childhood .social-concept-photo{object-position:center}
 @media(prefers-reduced-motion:reduce){.social-concept-photo{transition:none}}
+
+/* Program names remain visible before the detail panel opens. */
+.tile-reveal{text-align:left;color:#fff;background:linear-gradient(180deg,transparent 45%,#111b 100%)}
+.program-preview-title{position:absolute;left:clamp(22px,2.1vw,36px);right:clamp(22px,2.1vw,36px);bottom:28px;font-size:clamp(25px,2.35vw,38px);font-weight:400;line-height:1.12;text-wrap:balance;transition:opacity .2s ease}
+.program-tile.is-open .program-preview-title,.program-tile:focus-within .program-preview-title{opacity:0}
+@media(hover:hover){.program-tile:hover .program-preview-title{opacity:0}}
+@media(max-width:900px){.program-preview-title{font-size:25px}}
+@media(max-width:580px){.program-preview-title{font-size:30px}}
